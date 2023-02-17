@@ -1,0 +1,30 @@
+import Header from "./header/Header";
+import styles from "./Layout.module.scss";
+import { Outlet } from "react-router-dom";
+import background from "@assets/images/auth/background.jpg";
+import logo from "@assets/images/auth/logo.png";
+
+export function Layout() {
+  return (
+    <div className={styles.wrapper}>
+      <Outlet />
+      <Header></Header>
+    </div>
+  );
+}
+
+export function LayoutAuth() {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.background__content}>
+        <img className={styles.background} src={background} alt="HypeFans" />
+      </div>
+      <div className={styles.content}>
+        <div className={styles.logo__content}>
+          <img draggable={false} className={styles.logo} src={logo} alt="HypeFans" />
+        </div>
+        <Outlet />
+      </div>
+    </div>
+  );
+}

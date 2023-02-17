@@ -1,9 +1,17 @@
+@import '@assets/styles/colors.module';
+
+
+
 .header {
   background-color: #ffff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   gap: 15px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   .header__item {
     padding: 10px;

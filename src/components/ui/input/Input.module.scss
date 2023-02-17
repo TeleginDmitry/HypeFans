@@ -1,0 +1,34 @@
+$input-color: rgba(0, 0, 0, 0.3);
+$text-color: rgba(0, 0, 0, 1);
+$wrong-color: rgba(214, 10, 10, 0.5);
+
+%rigth-border {
+    border: 1px solid $input-color;
+}
+
+%wrong-border {
+    border: 1px solid $wrong-color;
+}
+
+.input {
+    width: 100%;
+    border-radius: 8px;
+    padding: 25px;
+    font-size: 18px;
+    color: $text-color;
+
+    @extend %rigth-border;
+}
+
+.input::placeholder {
+    color: $input-color;
+}
+
+.input.wrong {
+    @extend %wrong-border;
+    color: $wrong-color;
+}
+.input.wrong::placeholder {
+    color: $wrong-color;
+}
+

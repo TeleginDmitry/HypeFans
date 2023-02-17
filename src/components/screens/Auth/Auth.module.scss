@@ -1,0 +1,48 @@
+@import '@assets/styles/colors.module';
+
+.wrapper {
+    max-width: 630px;
+    width: 100%;
+    background-color: $color-form;
+    padding: 30px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.titles {
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: 700;
+}
+.question {
+    font-size: 20px;
+}
+.question__style {
+    color: $color-link;
+}
+
+.form {
+    
+}
+.form__item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.form__text {
+    font-size: 24px;
+}
+.button__conteiner {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,14 @@
+
+$color-button: rgba(251, 87, 52, 1);
+
+
+.button {
+    padding: 15px 0;
+    border-radius: 8px;
+    background-color: $color-button;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 18px;
+    max-width: 260px;
+    width: 100%;
+}

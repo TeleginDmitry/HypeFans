@@ -1,0 +1,38 @@
+@import '@assets/styles/colors.module';
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+.title {
+    font-weight: 500   ;
+    font-size: 24px;
+}
+.list {
+    display: flex;
+    gap: 30px;
+}
+.list__item {
+    height: 80px;
+    cursor: pointer;
+}
+.list__img {
+   
+}
+
+.agreement__conteiner {
+    margin-top: 18px;
+}
+.agreement {
+    text-align: center;
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 14px;
+    max-width: 390px;
+}
+.agreement__style {
+    color: $color-link;
+}

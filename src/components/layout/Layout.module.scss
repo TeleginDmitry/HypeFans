@@ -1,0 +1,42 @@
+@import '@assets/styles/mixins.module';
+
+
+
+
+.wrapper {
+  background-color: $wrapper-color;
+  height: 100vh;
+  padding: 0 20px;
+}
+
+
+.background__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  
+}
+.background {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+.content {
+  display: flex;
+  height: 100vh;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+  z-index: 5;
+}
+.logo__content {
+  height: 250px;
+}
+.logo {
+  height: 100%;
+  user-select: none;
+}
