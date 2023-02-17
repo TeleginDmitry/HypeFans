@@ -1,0 +1,26 @@
+.header {
+  background-color: #ffff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  .header__item {
+    padding: 10px;
+    cursor: pointer;
+    
+
+    svg {
+      height: 35px;
+      * {
+        transition: all .2s;
+        stroke: $stroke;
+        stroke-opacity: 1;
+      }
+    }
+
+    &:hover svg * {
+      stroke: $stroke-active;
+    }
+  }
+}
