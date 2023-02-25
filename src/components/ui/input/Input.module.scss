@@ -32,3 +32,10 @@ $wrong-color: rgba(214, 10, 10, 0.5);
     color: $wrong-color;
 }
 
+@media (max-width: 768px) {
+    .input {
+        padding: 15px;
+        font-size: 16px;
+    }
+}
+

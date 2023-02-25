@@ -4,17 +4,24 @@
 
 .header {
   background-color: #ffff;
-  padding: 10px;
+  padding: 7px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 15px;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 100;
+
+  @media (max-width: 425px) {
+    border-radius: 24px 24px 0px 0px;
+    background-color: #F8F1F0;
+    gap: 5px;
+  }
 
   .header__item {
-    padding: 10px;
+    padding: 7px;
     cursor: pointer;
     
 
@@ -24,6 +31,15 @@
         transition: all .2s;
         stroke: $stroke;
         stroke-opacity: 1;
+        stroke-width: 4px;
+      }
+
+      @media (max-width: 425px) {
+        height: 30px;
+        * {
+          stroke: #111111;
+          stroke-width: 3px;
+        }
       }
     }
 

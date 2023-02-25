@@ -20,7 +20,7 @@
     cursor: pointer;
 }
 .list__img {
-   
+   height: 100%;
 }
 
 .agreement__conteiner {
@@ -35,4 +35,18 @@
 }
 .agreement__style {
     color: $color-link;
+}
+
+
+@media (max-height: 800px) {
+    .list__item{
+        height: 50px;
+    }
+    .agreement__conteiner  {
+        margin-top: 0px;
+        display: none;
+    }
+    .title {
+        font-size: 16px;
+    }
 }

@@ -1,0 +1,101 @@
+.wrapper {
+  padding: 20px;
+  position: relative;
+  border-bottom: 1px solid #00000033;
+
+  @media (max-width: 425px) {
+    padding: 20px 0px;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+  .container {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    .user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      @media (max-width: 425px) {
+        padding: 0 14px;
+      }
+      .user__container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .logo__container {
+          max-width: 37px;
+          max-height: 37px;
+          .logo {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .user__texts {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .user__name {
+            font-size: 18px;
+            font-weight: 700;
+          }
+          .user__prefix {
+            font-size: 16px;
+          }
+        }
+      }
+      .time__container {
+        margin-right: 20px;
+        .time {
+        }
+      }
+      .point__container {
+        position: absolute;
+        top: 50%;
+        right: -7px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        transform: translate(0, -50%);
+        cursor: pointer;
+        padding: 7px;
+        @media (max-width: 425px) {
+          right: 3px;
+        }
+        .point {
+          padding: 2px;
+          background-color: #00000099;
+          border-radius: 50%;
+        }
+      }
+    }
+    .content {
+      display: flex;
+      gap: 15px;
+      flex-direction: column;
+      .description__container {
+        @media (max-width: 425px) {
+          padding: 0 14px;
+        }
+        .description {
+          line-height: 21px;
+          font-size: 15px;
+        }
+      }
+
+      .images__container {
+        .image {
+          width: 100%;
+        }
+      }
+    }
+    .info {
+    }
+    .comments {
+    }
+  }
+}

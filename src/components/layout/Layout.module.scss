@@ -5,8 +5,11 @@
 
 .wrapper {
   background-color: $wrapper-color;
-  height: 100vh;
-  padding: 0 20px;
+  padding: 0px 20px 86px 20px;
+  @media (max-width: 425px) {
+    background-color: #ffffff;
+    padding: 0px 0 66px 0px;
+  }
 }
 
 
@@ -39,4 +42,11 @@
 .logo {
   height: 100%;
   user-select: none;
+}
+
+
+@media (max-width: 768px) {
+  .logo__content {
+    display: none;
+  }
 }

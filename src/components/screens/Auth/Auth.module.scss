@@ -1,4 +1,4 @@
-@import '@assets/styles/colors.module';
+@import "@assets/styles/colors.module";
 
 .wrapper {
     max-width: 630px;
@@ -12,7 +12,7 @@
 }
 
 .titles {
-    display:flex;
+    display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
@@ -30,13 +30,11 @@
 }
 
 .form {
-    
 }
 .form__item {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
 }
 .form__text {
     font-size: 24px;
@@ -45,4 +43,51 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+.form__input_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form__wrapper {
+}
+.form__hide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 767px) {
+    .wrapper {
+        max-width: 500px;
+        gap: 15px;
+    }
+    .question {
+        display: none;
+    }
+    .form__wrapper {
+        display: none;
+    }
+    .form__text {
+        font-size: 16px;
+    }
+    .other {
+        display: none;
+    }
+}
+.form__conteiner_logo {
+    display: flex;
+    justify-content: center;
+    
+}
+.form__logo {
+    height: 200px;
+}
+
+@media (min-width: 768px) {
+    .form__hide {
+        display: none;
+    }
 }
