@@ -28,8 +28,27 @@
     }
   }
 
+  .avatar__myStory {
+
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      left: 0px;
+      bottom: 0px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 0, 0, 0.20);
+    }
+  }
+
   .prefix__container {
     .prefix {
+    }
+    .prefix__myStory {
+      color: rgba(0, 0, 0, 0.7);
     }
   }
 }

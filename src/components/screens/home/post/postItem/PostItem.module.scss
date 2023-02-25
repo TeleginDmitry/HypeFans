@@ -6,28 +6,35 @@
   @media (max-width: 425px) {
     padding: 20px 0px;
   }
+
   &:last-child {
     border-bottom: none;
   }
+
   .container {
     display: flex;
     gap: 15px;
     flex-direction: column;
+
     .user {
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: relative;
+
       @media (max-width: 425px) {
         padding: 0 14px;
       }
+
       .user__container {
         display: flex;
         align-items: center;
         gap: 10px;
+
         .logo__container {
           max-width: 37px;
           max-height: 37px;
+
           .logo {
             width: 100%;
             height: 100%;
@@ -43,16 +50,19 @@
             font-size: 18px;
             font-weight: 700;
           }
+
           .user__prefix {
             font-size: 16px;
           }
         }
       }
+
       .time__container {
         margin-right: 20px;
-        .time {
-        }
+
+        .time {}
       }
+
       .point__container {
         position: absolute;
         top: 50%;
@@ -63,9 +73,11 @@
         transform: translate(0, -50%);
         cursor: pointer;
         padding: 7px;
+
         @media (max-width: 425px) {
           right: 3px;
         }
+
         .point {
           padding: 2px;
           background-color: #00000099;
@@ -73,14 +85,17 @@
         }
       }
     }
+
     .content {
       display: flex;
       gap: 15px;
       flex-direction: column;
+
       .description__container {
         @media (max-width: 425px) {
           padding: 0 14px;
         }
+
         .description {
           line-height: 21px;
           font-size: 15px;
@@ -93,9 +108,44 @@
         }
       }
     }
-    .info {
+
+    .action {
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: 425px) {
+        padding: 0 14px;
+      }
+
+      .action__block {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .action__svg {
+
+          width: 32px;
+          cursor: pointer;
+        }
+      }
     }
-    .comments {
+
+    .info {
+
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      @media (max-width: 425px) {
+        padding: 0 14px;
+      }
+
+      .info__likes {}
+
+      .info__comments {
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.6);
+      }
     }
   }
 }

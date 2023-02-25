@@ -1,162 +1,176 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { AuthService } from '../../services/Auth.service'
-import { UserService } from '../../services/User.service'
-import { AuthResponse, AuthSignup, AuthVerify, AuthLogin } from '../../shared/interfaces/auth.interface'
-import { IUser } from '../../shared/interfaces/user.interface'
+import { createSlice, createAsyncThunk, PayloadAction, AnyAction } from "@reduxjs/toolkit";
+import { AuthService } from "../../services/Auth.service";
+import { UserService } from "../../services/User.service";
+import {
+  AuthResponse,
+  AuthSignup,
+  AuthVerify,
+  AuthLogin,
+} from "../../shared/interfaces/auth.interface";
+import { IUser } from "../../shared/interfaces/user.interface";
 
-export const loginThunk = createAsyncThunk<AuthResponse, AuthLogin, {}>(
-	'auth/loginThunk',
-	async ({ email, password }, { rejectWithValue }) => {
-		try {
-			const response = await AuthService.login({
-				email,
-				password,
-			})
 
-			return response
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
 
-export const signupThunk = createAsyncThunk<AuthResponse, AuthSignup, {}>(
-	'auth/signupThunk',
-	async ({ email, username, password }, { rejectWithValue }) => {
-		try {
-			const response = await AuthService.signup({
-				email,
-				password,
-				username,
-			})
+interface MyKnownError {
+	message: string
+	// ...
+  }
 
-			return response
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
+export const loginThunk = createAsyncThunk<AuthResponse, AuthLogin, {rejectValue: MyKnownError}>(
+  "auth/loginThunk",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.login({
+        email,
+        password,
+      });
 
-export const verifyThunk = createAsyncThunk<AuthVerify, void, {}>(
-	'auth/verifyThunk',
-	async (_, { rejectWithValue }) => {
-		try {
-			const access = localStorage.getItem('access')
+      return response.data as AuthResponse;
+    } catch (err: any) {
+		return rejectWithValue({message: err.message});
+    }
+  }
+);
 
-			if (!access) throw new Error('Отсутствует access токен')
-				
-			const response = await AuthService.verify(access)
-			return response
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
+export const signupThunk = createAsyncThunk<AuthResponse, AuthSignup, {rejectValue: MyKnownError}>(
+  "auth/signupThunk",
+  async ({ email, username, password }, { rejectWithValue }) => {
+    try {
+      const response = await AuthService.signup({
+        email,
+        password,
+        username,
+      });
 
-export const getUserThunk = createAsyncThunk<IUser, {id: number}, {}>(
-	'auth/getUserThunk',
-	async ({id}, { rejectWithValue }) => {
-		try {
+      return response.data as AuthResponse;
+    } catch (err: any) {
+      return rejectWithValue({message: err.message});
+    }
+  }
+);
 
-			const response = await UserService.getUser(id)
-			if (response?.data) return response
-			
+export const verifyThunk = createAsyncThunk<AuthVerify, void, {rejectValue: MyKnownError}>(
+  "auth/verifyThunk",
+  async (_, { rejectWithValue }) => {
+    try {
+      const access = localStorage.getItem("access");
 
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
+      if (!access) throw new Error("Отсутствует access токен");
 
-export const logoutThunk = createAsyncThunk(
-	'auth/logoutThunk',
-	async function (_, { rejectWithValue }) {
-		try {
-			const refresh = localStorage.getItem('refresh')
+      const response = await AuthService.verify(access);
+      return response.data as AuthVerify;
+    } catch (err: any) {
+		return rejectWithValue({message: err.message});
+    }
+  }
+);
 
-			if (!refresh) throw new Error('Отсутствует refresh токен')
+export const getUserThunk = createAsyncThunk<IUser, { id: number }, {rejectValue: MyKnownError}>(
+  "auth/getUserThunk",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await UserService.getUser(id);
 
-			const response = await AuthService.logout(refresh)
+      return response.data as IUser;
+    } catch (err: any) {
+		return rejectWithValue({message: err.message});
+    }
+  }
+);
 
-			if (response?.data?.status) {
-				localStorage.removeItem('refresh')
-				localStorage.removeItem('access')
-			}
-		} catch (e) {
-			return rejectWithValue(e)
-		}
-	}
-)
+export const logoutThunk = createAsyncThunk<void, void, {rejectValue: MyKnownError}>(
+  "auth/logoutThunk",
+  async function (_, { rejectWithValue }) {
+    try {
+      const refresh = localStorage.getItem("refresh");
 
-function isPendingAction(action: any) {
-	return action.type.endsWith('pending')
+      if (!refresh) throw new Error("Отсутствует refresh токен");
+
+      const response = await AuthService.logout(refresh);
+
+      if (response?.data?.status) {
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("access");
+      }
+    } catch (err: any) {
+		return rejectWithValue({message: err.message});
+    }
+  }
+);
+
+function isPendingAction(action: AnyAction) {
+  return action.type.endsWith("pending");
 }
 
-const initialState = {
-	user: {},
-	error: null,
-	pending: false,
-	isAuth: false,
+
+type userState = {
+	user: IUser | null,
+  	error: string | null,
+  	pending: boolean,
+  	isAuth: boolean,
+	prefix: string
 }
+
+const initialState: userState = {
+  user: null,
+  error: null,
+  pending: false,
+  isAuth: false,
+  prefix: ''
+};
 
 const AuthSlice = createSlice({
-	name: 'auth',
-	initialState,
-	reducers: {},
+  name: "auth",
+  initialState,
+  reducers: {},
 
-	extraReducers: builder => {
-		// builder.addCase(register.fulfilled, (state, { payload }) => {
-		// 	state.pending = false
-		// 	state.error = {}
-		// })
-		// builder.addCase(register.rejected, (state, { payload }) => {
-		// 	state.error = payload?.detail
-		// 	state.pending = false
-		// 	state.isAuth = false
-		// 	state.user = {}
-		// })
+  extraReducers: (builder) => {
+    builder.addCase(signupThunk.fulfilled, (state, { payload }) => {
+    	state.pending = false
+    	state.error = null
+    })
+    builder.addCase(signupThunk.rejected, (state, { payload }: PayloadAction<any>) => {
+    	state.error = payload.message
+    	state.pending = false
+    	state.user = null
+    })
 
-		// builder.addCase(login.fulfilled, (state, { payload }) => {
-		// 	state.pending = false
-		// 	state.error = {}
-		// 	state.error = {}
-		// })
-		// builder.addCase(login.rejected, (state, { payload }) => {
-		// 	state.error = payload.detail
-		// 	state.pending = false
-		// 	state.isAuth = false
-		// 	state.user = {}
-		// })
-		// builder.addCase(logout.fulfilled, (state, { payload }) => {
-		// 	state.pending = false
-		// 	state.isAuth = false
-		// 	state.user = {}
-		// 	state.error = {}
-		// })
-		// builder.addCase(logout.rejected, (state, { payload }) => {
-		// 	state.error = payload?.detail
-		// 	state.pending = false
-		// 	state.isAuth = false
-		// })
-		// builder.addCase(getUser.fulfilled, (state, { payload }) => {
-		// 	state.user = payload.data
-		// 	state.isAuth = true
-		// 	state.pending = false
-		// 	state.error = {}
-		// })
-		// builder.addCase(getUser.rejected, (state, { payload }) => {
-		// 	state.error = payload?.detail
-		// 	state.pending = false
-		// 	state.isAuth = false
-		// })
+    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
+    	state.pending = false
+    	state.error = null
+    })
+    builder.addCase(loginThunk.rejected, (state,  {payload}: PayloadAction<any>) => {
+    	state.error = payload.message
+    	state.pending = false
+    	state.user = null
+    })
+    builder.addCase(logoutThunk.fulfilled, (state, { payload }) => {
+    	state.pending = false
+    	state.user = null
+    	state.error = null
+    })
+    builder.addCase(logoutThunk.rejected, (state, {payload}: PayloadAction<any>) => {
+    	state.error = payload.message
+    	state.pending = false
+		
+    })
+    builder.addCase(getUserThunk.fulfilled, (state, { payload }: PayloadAction<IUser>) => {
+    	state.user = payload
+    	state.isAuth = true
+    	state.pending = false
+    	state.error = null
+    })
+    builder.addCase(getUserThunk.rejected, (state, { payload }: PayloadAction<any>) => {
+    	state.error = payload.message
+    	state.pending = false
+    })
 
-		builder.addMatcher(isPendingAction, state => {
-			state.pending = true
-		})
-	},
-})
+    builder.addMatcher(isPendingAction, (state) => {
+      state.pending = true;
+    });
+  },
+});
 
-export const {  } = AuthSlice.actions
+export const {} = AuthSlice.actions;
 
-export default AuthSlice.reducer
+export default AuthSlice.reducer;

@@ -6,4 +6,5 @@ export interface IUser {
   date_joined: string
   background: string
   avatar: string
+  prefix: string
 }

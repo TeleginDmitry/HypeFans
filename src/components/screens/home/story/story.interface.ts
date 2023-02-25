@@ -1,7 +1,11 @@
 
 export interface IStory {
   id: number
-  prefix: string
+  user: {
+    id: number
+    prefix: string
+  }
   avatar: string
+  isMyStory?: boolean
 }
 
