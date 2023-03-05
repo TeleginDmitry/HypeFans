@@ -1,5 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage, LoginPage, RegistrPage, CreationNewObject, Settings } from "../pages/index";
+import {
+  HomePage,
+  LoginPage,
+  RegistrPage,
+  CreationNewObject,
+  Settings,
+  Profile,
+} from "../pages/index";
 import { Layout } from "../components/layout/Layout";
 import { AuthLayout } from "../components/layout/AuthLayout";
 
@@ -13,12 +20,16 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/create',
+        path: "/create",
         element: <CreationNewObject />,
       },
       {
-        path: '/settings',
+        path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

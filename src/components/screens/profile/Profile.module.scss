@@ -1,0 +1,17 @@
+@import '@assets/styles/variables.module';
+@import '@assets/styles/colors.module';
+
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    
+    .content {
+      background-color: $backgroundWhite;
+      display: flex;
+      flex-direction: column;
+      max-width: 1100px;
+      width: 100%;
+      border-radius: $borderRadius;
+    }
+}
