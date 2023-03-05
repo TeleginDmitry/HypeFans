@@ -1,11 +1,8 @@
 .wrapper {
-  padding: 20px;
+  padding: 20px 0;
   position: relative;
   border-bottom: 1px solid #00000033;
 
-  @media (max-width: 425px) {
-    padding: 20px 0px;
-  }
 
   &:last-child {
     border-bottom: none;

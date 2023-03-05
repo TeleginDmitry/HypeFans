@@ -4,9 +4,15 @@
   padding: 0px 20px 0 10px;
   align-items: center;
   transition: all .3s;
+  height: 57px;
 
   &__active {
     box-shadow: 0 1px 0 0 #00000033;
+  }
+
+  @media (min-width: 425px) {
+      display: none;
+    
   }
 
   .header__block {
@@ -32,7 +38,7 @@
         }
       }
       .input {
-        padding: 20px 0;
+        height: 100%;
         width: 100%;
         font-size: 17px;
       }

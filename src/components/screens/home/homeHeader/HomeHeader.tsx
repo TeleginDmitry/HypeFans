@@ -69,8 +69,8 @@ export default function HomeHeader() {
 					)}
 				</AnimatePresence>
 			</div>
-			<div className={styles.search__container}>
-				<Search onClick={handlerClickSearch} className={styles.search}></Search>
+			<div onClick={handlerClickSearch} className={styles.search__container}>
+				<Search className={styles.search}></Search>
 			</div>
 		</div>
 	)

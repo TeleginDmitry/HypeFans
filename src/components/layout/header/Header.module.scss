@@ -1,6 +1,4 @@
-@import '@assets/styles/colors.module';
-
-
+@import "@assets/styles/colors.module";
 
 .header {
   background-color: #ffff;
@@ -8,43 +6,51 @@
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
-  position: fixed;
-  bottom: 0;
+  position: absolute;
   left: 0;
   right: 0;
   z-index: 100;
 
   @media (max-width: 425px) {
     border-radius: 24px 24px 0px 0px;
-    background-color: #F8F1F0;
+    background-color: #f8f1f0;
     gap: 5px;
+    position: fixed;
+    bottom: 0;
+  }
+  @media (min-width: 425px) {
+    top: 0;
   }
 
   .header__item {
-    padding: 7px;
     cursor: pointer;
-    
+    max-width: 40px;
+    .active {
+      svg {
+        * {
+          stroke: $stroke-active;
+        }
+      }
+    }
 
     svg {
-      height: 35px;
+      height: 30px;
+
       * {
-        transition: all .2s;
+        transition: all 0.2s;
         stroke: $stroke;
         stroke-opacity: 1;
         stroke-width: 4px;
       }
 
       @media (max-width: 425px) {
-        height: 30px;
+        width: 100%;
+        padding: 3px;
         * {
           stroke: #111111;
           stroke-width: 3px;
         }
       }
-    }
-
-    &:hover svg * {
-      stroke: $stroke-active;
     }
   }
 }

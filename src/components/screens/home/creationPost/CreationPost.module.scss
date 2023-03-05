@@ -1,0 +1,86 @@
+$backgroundInput: #f8f1f0;
+
+$maxWidthContent: 400px;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  transition: all .3s;
+  &__active {
+    box-shadow: 0 1px 0 0 #00000033;
+  }
+  .content {
+    flex: 0 1 $maxWidthContent;
+    .creation {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      .logo__container {
+        .logo {
+          width: 70px;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .creation__container {
+        flex: 1 1 100%;
+        .creation__input {
+          width: 100%;
+          padding: 12px 15px;
+          font-size: 16px;
+          border-radius: 32px;
+          background-color: $backgroundInput;
+
+          @media (max-width: 425px) {
+            background-color: transparent;
+            border: 1px solid #0000004D;
+          }
+
+          &::placeholder {
+            color: #000000;
+          }
+        }
+      }
+    }
+
+    .search {
+      margin-left: 25px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .clear__container {
+        cursor: pointer;
+        padding: 5px;
+        .clear {
+          width: 30px;
+          height: 30px;
+        }
+      }
+      .search__container {
+        flex: 1 1 100%;
+        .search__input {
+          width: 100%;
+          padding: 12px 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .toggle__container {
+    cursor: pointer;
+    padding: 5px;
+    @media (max-width: 425px) {
+      display: none;
+      width: 0px;
+    }
+
+    .toggle {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}

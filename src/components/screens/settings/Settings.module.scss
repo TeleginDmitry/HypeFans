@@ -1,0 +1,39 @@
+// @import "@assets/styles/variables.module";
+@import "@assets/styles/colors.module";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 100%;
+
+  .content {
+    background-color: $backgroundWhite;
+    height: 100%;
+    .choosing {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+      width: 100%;
+      .choosing__first {
+        .choosing__navigation {
+          .choosing__back {
+
+          }
+          .choosing__title {
+
+          }
+          .choosing__settings {
+            
+          }
+        }
+        .choosing__list {
+          .choosing__item {
+
+          }
+        }
+      }
+    }
+  }
+}

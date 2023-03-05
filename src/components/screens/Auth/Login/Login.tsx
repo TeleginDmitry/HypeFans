@@ -4,7 +4,7 @@ import stylesAuth from '../Auth.module.scss'
 import OtherEntrance from '../OtherEntrance/OtherEntrance'
 import Input from '@ui/input/Input'
 import { Link } from 'react-router-dom'
-import AuthButton from '@ui/authButton/AuthButton'
+import AuthButton from '@ui/Button/Button'
 import logo from '@assets/images/auth/logoBlack.png'
 
 export default function Login() {
@@ -17,7 +17,7 @@ export default function Login() {
 				<h1 className={stylesAuth.title}>Вход</h1>
 				<p className={stylesAuth.question}>
 					Нет аккаунта?{' '}
-					<Link to='/registr' className={stylesAuth.question__style}>
+					<Link to='/registration' className={stylesAuth.question__style}>
 						Создайте
 					</Link>
 				</p>

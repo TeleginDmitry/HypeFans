@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from '../configs/api.config'
+import { ACCESS, API_URL } from '../configs/api.config'
 
 
 
@@ -9,7 +9,11 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use(config => {
-	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+	const token = localStorage.getItem(ACCESS)
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`
+	}
+	
 	return config
 })
 
