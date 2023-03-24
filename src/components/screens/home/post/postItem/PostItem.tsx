@@ -1,28 +1,37 @@
 import React from "react";
 import styles from "./PostItem.module.scss";
-import { IPost } from "../posts.interface";
+import { IPost } from "../../../../../shared/interfaces/post.interface";
 import { ReactComponent as Like } from "@assets/images/post/like.svg";
 import { ReactComponent as Comment } from "@assets/images/post/comments.svg";
 import { ReactComponent as Bookmark } from "@assets/images/post/bookmark.svg";
+import moment from 'moment';
+import 'moment/locale/ru';
+import { motion } from "framer-motion";
+
+
 
 export default function PostItem(post: IPost) {
   const {
-    count_comments,
-    count_likes,
+    comments,
+    likes,
     description,
     id,
     medias,
     user,
-    time_create,
+    date_joined
   } = post;
 
+  
+  const now = moment();
+	const formattedDate = moment(date_joined).from(now);
+
   return (
-    <div className={styles.wrapper}>
+    <motion.div initial={{opacity: 0}} viewport={{ once: true }} whileInView={{opacity: 1}} transition={{duration: .8}} className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.user}>
           <div className={styles.user__container}>
             <div className={styles.logo__container}>
-              <img className={styles.logo} src={user.avatar} alt="HypeFans" />
+              <img draggable={false} className={styles.logo} src={user.avatar} alt="HypeFans" />
             </div>
             <div className={styles.user__texts}>
               <h2 className={styles.user__name}>{user.username}</h2>
@@ -30,7 +39,8 @@ export default function PostItem(post: IPost) {
             </div>
           </div>
           <div className={styles.time__container}>
-            <p className={styles.time}>{time_create}</p>
+            <p className={styles.time}>{formattedDate}</p>
+      
           </div>
           <div className={styles.point__container}>
             <div className={styles.point}></div>
@@ -42,17 +52,21 @@ export default function PostItem(post: IPost) {
           <div className={styles.description__container}>
             <p className={styles.description}>{description}</p>
           </div>
+          {!!medias?.length && 
           <div className={styles.images__container}>
-            {medias.map((image) => {
-              return (
-                <img
-                  className={styles.image}
-                  src={image.media}
-                  alt="HypeFans"
-                />
-              );
-            })}
-          </div>
+          {medias?.map((image) => {
+            return (
+              <img
+                className={styles.image}
+                key={image.id}
+                src={image.media}
+                alt="HypeFans"
+              />
+            );
+          })}
+        </div>
+          }
+          
         </div>
         <div className={styles.action}>
           <div className={styles.action__block}>
@@ -64,12 +78,15 @@ export default function PostItem(post: IPost) {
           </div>
         </div>
         <div className={styles.info}>
-          <span className={styles.info__likes}>{count_likes} лайков</span>
-          <span className={styles.info__comments}>
-            Посмотреть {count_comments} комментариев
-          </span>
+          <span className={styles.info__likes}>{likes} лайков</span>
+          {comments ? <span className={styles.info__comments}>
+            Посмотреть {comments} комментариев
+          </span> : <span className={styles.info__comments}>
+            Нет комментариев
+          </span>}
+          
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

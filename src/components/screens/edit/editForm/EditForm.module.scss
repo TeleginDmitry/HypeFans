@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .form__item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .form__error {
+    color: red;
+    margin-left: 10px;
+  }
+}

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
-import { useAppDispatch } from '@hooks/ReduxHooks'
-import { verifyThunk } from '@store/AuthSlice/AuthSlice'
+import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks'
+import { verify } from '@store/auth/auth.actions'
+import $api from '../api/api.interceptor'
+import { AuthService } from '../services/auth/Auth.service'
 
 interface AuthProviderProps {
 	children: React.ReactNode
@@ -9,9 +11,8 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const dispatch = useAppDispatch()
 
-
 	useEffect(() => {
-		dispatch(verifyThunk())
+		dispatch(verify())
 	}, [])
 
 	return <>{children}</>

@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import styles from './Button.module.scss'
 
-interface IButton {
-    children: string
+interface IButton extends ButtonHTMLAttributes<HTMLButtonElement>  {
+    children: string,
+    isDisabled?: boolean,
 }
 
 
-export default function Button({children}: IButton) {
+export default function Button({children, isDisabled=false, type='submit', ...props}: IButton) {
   return (
-    <button className={styles.button}>{children}</button>
+    <button type={type} disabled={isDisabled} className={styles.button} {...props}>{children}</button>
   )
 }

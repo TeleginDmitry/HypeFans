@@ -1,24 +1,27 @@
-export interface AuthResponse {
-  refresh: string,
-  access: string
-  user_id: number
+import { IUser } from "./user.interface"
+
+export interface IRegister {
+	email: string
+	username: string
+	password: string
 }
 
-export interface AuthSignup {
-  email: string
-  username: string
-  password: string
+export interface ILogin {
+	email: string
+	password: string
 }
 
-export interface AuthLogin{
-  email: string
-  password: string
+
+
+export interface IUserResponse {
+	user: IUser
 }
 
-export interface AuthRefresh{
-  access: string
+export interface ITokens  {
+	access: string
+	refresh: string
 }
 
-export interface AuthVerify{
-  user_id: number
+export interface IResponse extends ITokens {
+  user: IUser
 }

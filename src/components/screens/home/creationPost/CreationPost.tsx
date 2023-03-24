@@ -4,9 +4,13 @@ import styles from './CreationPost.module.scss'
 import { ReactComponent as Clear } from '@assets/images/homeHeader/clear.svg'
 import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAppSelector } from 'hooks/ReduxHooks'
+import { API_URL } from 'configs/api.config'
 
 const CreationPost = () => {
 	const [isActiveSearch, setIsActiveSearch] = useState(false)
+
+	const user = useAppSelector(state => state.auth.user)
 
 	return (
 		<div className={isActiveSearch
@@ -50,7 +54,7 @@ const CreationPost = () => {
 							<div className={styles.logo__container}>
 								<img
 									className={styles.logo}
-									src='https://avatars.mds.yandex.net/i?id=f214a777fc5e480a0004400014279d6d-3537590-images-thumbs&n=13'
+									src={API_URL + user?.avatar}
 									alt='HypeFans'
 								/>
 							</div>

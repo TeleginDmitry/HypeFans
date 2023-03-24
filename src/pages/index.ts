@@ -1,15 +1,19 @@
 import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
-import RegistrPage from "./RegistrPage";
+import RegisterPage from "./RegisterPage";
 import CreationNewObject from "./CreationNewObject";
 import Settings from "./Settings";
 import Profile from "./Profile";
+import Edit from "./Edit";
+import Messages from "./Messages";
 
 export {
   HomePage,
   LoginPage,
-  RegistrPage,
+  RegisterPage,
   CreationNewObject,
   Settings,
   Profile,
+  Edit,
+  Messages
 };
