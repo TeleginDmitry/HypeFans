@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
-				path: '/messages',
+				path: '/messages/',
 				element: (
 					// <PrivateElement>
 						<Messages />

@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    .header__flex {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .header__svg {
+            height: 40px;
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .header__title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+}

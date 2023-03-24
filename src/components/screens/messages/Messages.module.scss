@@ -1,0 +1,30 @@
+@import '@assets/styles/_variables.module';
+@import '@assets/styles/variables.module';
+@import '@assets/styles/colors.module';
+
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1 1 100%;
+
+    .content {
+        background-color: $backgroundWhite;
+        display: flex;
+        flex-direction: column;
+        max-width: 1500px;
+        width: 100%;
+        border-radius: $borderRadius;
+
+        .container {
+            display: flex;
+            flex: 1 1 100%;
+
+            .chat {
+                border-left: 1px solid rgba(0, 0, 0, 0.2);
+                flex: 1;
+
+            }
+        }
+    }
+}
