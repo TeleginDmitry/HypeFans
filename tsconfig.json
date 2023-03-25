@@ -1,12 +1,22 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "baseUrl": "./src",
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@services/*": ["./src/services/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@store/*": ["./src/store/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@fonts/*": ["./src/fonts/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@router/*": ["./src/router/*"]
+    },
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,12 +33,6 @@
     "jsx": "react-jsx",
     "allowUnreachableCode": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "**/node_modules/**",
-    "build/**",
-    "public/**"
-  ]
+  "include": ["src"],
+  "exclude": ["**/node_modules/**", "build/**", "public/**"]
 }

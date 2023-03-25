@@ -1,4 +1,4 @@
-import { useAppSelector } from 'hooks/ReduxHooks'
+import { useTypedSelector } from 'hooks/useTypedSelector'
 import React from 'react'
 import CreationPost from './creationPost/CreationPost'
 import styles from './Home.module.scss'
@@ -7,7 +7,7 @@ import PostsList from './post/postList/PostsList'
 import StoryList from './story/storyList/StoryList'
 
 export default function Home() {
-	const isAuth = useAppSelector(state => state.auth.isAuth)
+	const isAuth = useTypedSelector(state => state.auth.isAuth)
 
 	return (
 		<div className={styles.wrapper}>

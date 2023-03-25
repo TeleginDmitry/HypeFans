@@ -4,13 +4,13 @@ import styles from './CreationPost.module.scss'
 import { ReactComponent as Clear } from '@assets/images/homeHeader/clear.svg'
 import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAppSelector } from 'hooks/ReduxHooks'
 import { API_URL } from 'configs/api.config'
+import { useTypedSelector } from 'hooks/useTypedSelector'
 
 const CreationPost = () => {
 	const [isActiveSearch, setIsActiveSearch] = useState(false)
 
-	const user = useAppSelector(state => state.auth.user)
+	const user = useTypedSelector(state => state.auth.user)
 
 	return (
 		<div className={isActiveSearch

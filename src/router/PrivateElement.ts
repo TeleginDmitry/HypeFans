@@ -1,5 +1,5 @@
+import { useTypedSelector } from 'hooks/useTypedSelector';
 import { ReactNode, useEffect } from 'react'
-import { useAppSelector } from '../hooks/ReduxHooks'
 import { useNavigate } from 'react-router-dom'
 
 interface IPrivateElement {
@@ -9,7 +9,7 @@ interface IPrivateElement {
 const PrivateElement = ({ children }: IPrivateElement) => {
 	const navigate = useNavigate()
 
-	const { isAuth, isLoading } = useAppSelector(state => state.auth)
+	const { isAuth, isLoading } = useTypedSelector(state => state.auth)
 
 	useEffect(() => {
 		const checkAuthentication = async () => {

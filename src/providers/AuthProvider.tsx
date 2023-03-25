@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks'
-import { verify } from '@store/auth/auth.actions'
-import $api from '../api/api.interceptor'
-import { AuthService } from '../services/auth/Auth.service'
+import React, { useEffect } from "react";
+import useActions from "hooks/useActions";
 
 interface AuthProviderProps {
-	children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-	const dispatch = useAppDispatch()
+  const { verify } = useActions();
 
-	useEffect(() => {
-		dispatch(verify())
-	}, [])
+  useEffect(() => {
+    verify();
+  }, []);
 
-	return <>{children}</>
-}
+  return <>{children}</>;
+};
