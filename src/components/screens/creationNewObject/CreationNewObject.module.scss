@@ -22,14 +22,13 @@
         position: relative;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           background-color: #00000033;
           bottom: 0;
           left: -16px;
           right: -16px;
           height: 1px;
-
         }
 
         @media (max-width: 425px) {
@@ -79,10 +78,9 @@
 
     .buttons__container {
       display: flex;
-      background: #F8F1F0;
+      background: #f8f1f0;
       padding: 3px;
       border-radius: 9px;
-
 
       @media (min-width: 425px) {
         display: none;
@@ -92,10 +90,10 @@
         flex: 1;
         padding: 8px 0;
         border-radius: 7px;
-        transition: all .3s;
+        transition: all 0.3s;
 
         &__active {
-          background-color: #FFFFFF;
+          background-color: #ffffff;
         }
       }
     }
@@ -115,7 +113,6 @@
           border-radius: 50%;
           width: 60px;
           height: 60px;
-
         }
       }
 
@@ -132,7 +129,7 @@
       position: relative;
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         background-color: #00000033;
         top: 0;
@@ -143,18 +140,16 @@
         @media (min-width: 425px) {
           display: none;
         }
-
       }
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         background-color: #00000033;
         bottom: 0;
         left: -16px;
         right: -16px;
         height: 1px;
-
       }
 
       @media (max-width: 425px) {
@@ -169,32 +164,6 @@
           line-height: 20px;
         }
       }
-
-      .media__container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-
-        .media__content {
-          position: relative;
-          padding: 5px;
-          .media {
-            width: 130px;
-            height: 130px;
-           
-            object-fit: cover;
-          }
-          .media__delete {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            cursor: pointer;
-          }
-        }
-
-
-      }
-
     }
 
     .submit__container {

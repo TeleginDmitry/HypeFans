@@ -25,3 +25,11 @@ export interface IChangeUser {
 	data: IDataUser
 	id: number
 }
+
+export interface IShortUser {
+	id: number
+	prefix: string
+	avatar: string | null
+	username: string
+}
+

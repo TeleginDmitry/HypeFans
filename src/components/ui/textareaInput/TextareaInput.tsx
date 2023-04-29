@@ -1,31 +1,24 @@
 import React from 'react'
-import ReactTextareaAutosize from 'react-textarea-autosize'
+import ReactTextareaAutosize, {
+	TextareaAutosizeProps,
+} from 'react-textarea-autosize'
 import styles from './TextareaInput.module.scss'
 import { classNames as cn } from '@utils/classNames/classNames'
 
-interface ITextarea {
-	placeholder?: string
-	minRows?: number
-	maxRows?: number
+interface ITextareaProps extends TextareaAutosizeProps {
 	isWrong?: boolean
-	value?: string
-	name?: string
-	id?: string
 }
 
 const TextareaInput = ({
-	minRows = 8,
-	maxRows,
-  placeholder,
 	isWrong = false,
+	className,
+	minRows = 1,
 	...props
-}: ITextarea) => {
+}: ITextareaProps) => {
 	return (
 		<ReactTextareaAutosize
-			minRows={minRows}
-			maxRows={maxRows}
-      placeholder={placeholder}
 			className={isWrong ? cn([styles.input, styles.wrong]) : styles.input}
+			minRows={minRows}
 			{...props}
 		/>
 	)

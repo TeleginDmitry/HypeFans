@@ -4,3 +4,9 @@ export interface IPagination<T> {
   previous: string | null
   results: T
 }
+
+
+export interface IQueryPagination {
+  limit: number
+  offset: number
+}

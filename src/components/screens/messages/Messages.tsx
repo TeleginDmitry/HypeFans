@@ -1,24 +1,25 @@
-import Button from "components/ui/Button/Button";
+import Button from "components/ui/button/Button";
 import { useSearchParams } from "react-router-dom";
+import Chat from "./chat/Chat";
 import CreationBlock from "./creationBlock/CreationBlock";
-import HeaderMessages from "./header/HeaderMessages";
-import MessagesList from "./message/messagesList/MessagesList";
+import Header from "./header/Header";
+import ConversationsList from "./conversation/conversationsList/ConversationsList"
 import styles from "./Messages.module.scss";
 
 const Messages = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams.get('user'))
+
   
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <HeaderMessages></HeaderMessages>
+        <Header></Header>
         <div className={styles.container}>
-          <MessagesList></MessagesList>
+          <ConversationsList></ConversationsList>
           <div className={styles.chat}>
-            {!searchParams.has('user') && <CreationBlock></CreationBlock>}
+            {!searchParams.has('user') ? <CreationBlock></CreationBlock> : <Chat></Chat>}
           </div>
         </div>
       </div>

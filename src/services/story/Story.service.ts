@@ -1,21 +1,37 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { API_URL } from '../../configs/api.config'
 import { IPagination } from '../../shared/interfaces/pagination.interface'
-import { IStory } from '../../shared/interfaces/story.interface'
+import { IStory, IModalStory } from '../../shared/interfaces/story.interface'
+import instance from 'api/api.interceptor'
+
+interface IGetStories {
+	limit: number
+	offset: number
+}
+
+interface IGetStory {
+	story: number | string
+}
 
 export const StoryService = {
 	getStories: async (
-		limit: number = 5,
-		offset: number = 0
+		params?: IGetStories
 	): Promise<AxiosResponse<IPagination<IStory[]>>> => {
-		return axios.get<IPagination<IStory[]>>(`${API_URL}/stories/`, {
+		return instance.get<IPagination<IStory[]>>(`${API_URL}/stories/`, {
+			params,
+		})
+	},
+	getStoriesById: async (
+		story_id: number
+	): Promise<AxiosResponse<IStory[]>> => {
+		return instance.get<IStory[]>(`${API_URL}/stories/`, {
 			params: {
-				limit,
-				offset,
+				story: story_id,
 			},
 		})
 	},
 	createStory: async (description: string) => {
-		return axios.post(`${API_URL}/story/`, { description })
+		return instance.post(`${API_URL}/stories/`, { description })
 	},
+
 }

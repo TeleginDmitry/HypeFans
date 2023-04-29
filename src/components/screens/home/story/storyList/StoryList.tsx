@@ -1,75 +1,92 @@
-import React, { useState, useRef } from "react";
-import styles from "./StoryList.module.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { StoryItem } from "../storyItem/StoryItem";
-import "swiper/css";
-import { useQuery } from "react-query";
-import { StoryService } from "services/story/Story.service";
-import { IStory } from "shared/interfaces/story.interface";
-import { useObserver } from "hooks/useObserver";
-import { IPagination } from "shared/interfaces/pagination.interface";
-import { useTypedSelector } from "hooks/useTypedSelector";
+import React, { useRef, useEffect } from 'react'
+import styles from './StoryList.module.scss'
+import { StoryItem } from '../storyItem/StoryItem'
+import useInfinityQuery from 'hooks/useInfinityQuery'
+import { IPagination } from 'shared/interfaces/pagination.interface'
+import { IStory } from 'shared/interfaces/story.interface'
+import { StoryService } from 'services/story/Story.service'
+import Modal, { IColors } from 'components/ui/modal/Modal'
+import StoryModal from '../storyModal/StoryModal'
+import Slider from 'components/shared/slider/Slider'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { STORY_PARAM } from 'configs/index.config'
 
 export default function StoryList() {
-  const { isAuth, user } = useTypedSelector((state) => state.auth);
+	const navigation = useNavigate()
 
-  const observer = useRef(null);
+	const [searchParams, setSearchParams] = useSearchParams()
+	const story_id = searchParams.get(STORY_PARAM)
 
-  const [optionsQuery, setOptionsQuery] = useState({
-    offset: 0,
-    limit: 5,
-  });
+	const observer = useRef(null)
 
-  const [totalPages, setTotalPages] = useState(0);
+	const { data: storyList, refetch } = useInfinityQuery<IStory>({
+		observer,
+		queryKey: 'stories',
+		queryFunc: async (params): Promise<IPagination<IStory[]>> => {
+			const response = await StoryService.getStories(params)
+			return response.data
+		},
+	})
 
-  const [storiesList, setStoriesList] = useState<IStory[]>([]);
+	// const {} = useInfiniteQuery()
 
-  async function fetchStories(offset: number, limit: number) {
-    const response = await StoryService.getStories(limit, offset);
-    return response.data as IPagination<IStory[]>;
-  }
+	function handlerClickStory(story_id: number) {
+		navigation(`?${STORY_PARAM}=${story_id}`)
+	}
 
-  const { isLoading } = useQuery(
-    ["stories", optionsQuery.offset],
-    () => fetchStories(optionsQuery.offset, optionsQuery.limit),
-    {
-      keepPreviousData: true,
-      onSuccess: (data) => {
-        setTotalPages((state) => (state = data.count));
-        setStoriesList((state) => [...state, ...data.results]);
-      },
-    }
-  );
+	function handlerClose() {
+		searchParams.delete(STORY_PARAM)
+		setSearchParams(searchParams)
+	}
 
-  useObserver(
-    observer,
-    optionsQuery.offset + optionsQuery.limit < totalPages,
-    totalPages,
-    optionsQuery,
-    isLoading,
-    () => {
-      setOptionsQuery((state) => ({
-        ...state,
-        offset: state.offset + state.limit,
-      }));
-    }
-  );
+	return (
+		<>
+			<Slider<IStory>
+				SwiperSlideProps={{ className: styles.slider }}
+				SwiperProps={{
+					slidesPerView: 'auto',
+					spaceBetween: 10,
+				}}
+				dataList={storyList}
+			>
+				{(story, index) => {
+					return (
+						<StoryItem
+							onClick={() => handlerClickStory(story.id)}
+							user={story.user}
+						
+						></StoryItem>
+					)
+				}}
+			</Slider>
 
-  return (
-    <Swiper slidesPerView="auto" spaceBetween={10}>
-      {/* {isAuth && (
-				<SwiperSlide slot='wrapper-start' className={styles.slider}>
-					<StoryItem {...stories[0]} isMyStory={true}></StoryItem>
-				</SwiperSlide>
-			)} */}
-      {storiesList?.map((story) => {
-        return (
-          <SwiperSlide className={styles.slider} key={story.id}>
-            <StoryItem {...story}></StoryItem>
-          </SwiperSlide>
-        );
-      })}
-      <div ref={observer} slot="wrapper-end"></div>
-    </Swiper>
-  );
+			{/* <Swiper slidesPerView='auto' spaceBetween={10}>
+				{isAuth && (
+					<SwiperSlide slot='wrapper-start' className={styles.slider}>
+						<StoryItem user={user} isMyStory={true}></StoryItem>
+					</SwiperSlide>
+				)}
+				{storyList?.map((story, index) => {
+					return (
+						<SwiperSlide
+							onClick={() => handlerStory(index)}
+							className={styles.slider}
+							key={story.id}
+						>
+							<StoryItem user={story.user}></StoryItem>
+						</SwiperSlide>
+					)
+				})}
+				<div ref={observer} slot='wrapper-end'></div>
+			</Swiper> */}
+			{!!story_id && (
+				<Modal handlerClose={handlerClose} color={IColors.gray}>
+					<StoryModal
+					// initialIndexStory={initialIndexStory}
+					// storyList={storyList}
+					></StoryModal>
+				</Modal>
+			)}
+		</>
+	)
 }

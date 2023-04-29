@@ -1,0 +1,29 @@
+@mixin styleSvg() {
+  cursor: pointer;
+  * {
+    stroke: #000000;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #00000033;
+  padding: 15px;
+  gap: 10px;
+
+  
+
+  .header__info {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    .header__back {
+      @include styleSvg();
+    }
+  }
+  .header__points {
+    @include styleSvg();
+  }
+}

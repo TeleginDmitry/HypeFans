@@ -3,7 +3,7 @@ import styles from "./Registr.module.scss";
 import stylesAuth from "../Auth.module.scss";
 import { Link } from "react-router-dom";
 import Input from "@ui/input/Input";
-import AuthButton from "@ui/Button/Button";
+import AuthButton from "@ui/button/Button";
 import { useFormik } from "formik";
 import logo from "@assets/images/auth/logoBlack.png";
 import { AnimatePresence, motion } from "framer-motion";

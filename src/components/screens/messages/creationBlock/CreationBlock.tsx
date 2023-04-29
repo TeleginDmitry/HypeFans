@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CreationBlock.module.scss";
-import Button from "components/ui/Button/Button";
+import Button from "components/ui/button/Button";
 
 const CreationBlock = () => {
   return (

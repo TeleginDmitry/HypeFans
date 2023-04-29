@@ -1,0 +1,31 @@
+.description__container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 20px;
+
+  &_active {
+    margin-top: 10px;
+  }
+
+  .description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 450px;
+    height: 1.2em;
+    word-break: break-all;
+    transition: all 1s;
+    line-height: 18px;
+
+    &__active {
+      text-overflow: inherit;
+      height: auto;
+
+      white-space: normal;
+    }
+  }
+  .description__span {
+    color: #fb5734;
+    cursor: pointer;
+  }
+}

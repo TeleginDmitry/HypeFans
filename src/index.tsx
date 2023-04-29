@@ -11,7 +11,12 @@ import {
 } from 'react-query'
 
 const queryClient = new QueryClient({
-	
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			// refetchInterval: 5 * 60 * 1000
+		}
+	}
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

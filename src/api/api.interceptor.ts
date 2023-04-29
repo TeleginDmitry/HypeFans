@@ -16,6 +16,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(config => {
 	const accessToken = getAccessToken()
+	console.log(accessToken)
 
 	if (config && config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
@@ -40,19 +41,16 @@ instance.interceptors.response.use(
 				const response = await AuthService.refresh()
 
 				if (response?.data) {
-
-					console.log('1',response.data)
+					console.log('1', response.data)
 
 					saveTokensStorage(response.data)
 				}
 
-				console.log('2',response.data)
+				console.log('2', response.data)
 
 				return instance.request(originalRequest)
 			} catch (error) {
-				
 				if (errorCatch(error) === 'token_not_valid') removeTokensStorage()
-				
 			}
 		}
 		throw error

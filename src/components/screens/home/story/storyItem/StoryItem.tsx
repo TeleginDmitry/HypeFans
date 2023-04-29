@@ -4,15 +4,30 @@ import styles from './StoryItem.module.scss'
 import 'swiper/css'
 import { classNames as cn } from '@utils/classNames/classNames'
 import { motion } from 'framer-motion'
+import { API_URL } from 'configs/api.config'
 
-export function StoryItem({ user, date_joined, isMyStory }: IStory) {
+interface IStoryItemProps {
+	user: {
+		id: number
+		prefix: string
+		avatar: string
+	}
+	isMyStory?: boolean
+	onClick?: React.MouseEventHandler<HTMLDivElement>
+}
+
+export const StoryItem = ({
+	user,
+	isMyStory = false,
+	onClick,
+}: IStoryItemProps) => {
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
-			viewport={{ once: true }}
-			whileInView={{ opacity: 1 }}
-			transition={{ duration: 0.8 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.5 }}
 			className={styles.story}
+			onClick={onClick}
 		>
 			<div
 				className={
@@ -21,7 +36,12 @@ export function StoryItem({ user, date_joined, isMyStory }: IStory) {
 						: styles.avatar__container
 				}
 			>
-				<img draggable={false}  className={styles.avatar} src={user.avatar} alt='HypeFans' />
+				<img
+					draggable={false}
+					className={styles.avatar}
+					src={isMyStory ? API_URL + user.avatar : user.avatar}
+					alt='HypeFans'
+				/>
 			</div>
 			<div className={styles.prefix__container}>
 				{isMyStory ? (

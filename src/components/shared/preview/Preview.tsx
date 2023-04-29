@@ -7,18 +7,32 @@ const Preview = () => {
 	const [isVisible, setIsVisible] = useState(true)
 
 	useEffect(() => {
-    document.body.style.overflow = 'hidden'
-		setTimeout(() => {
-      document.body.style.overflow = 'auto'
-		  setIsVisible(false)
-		}, 3000)
+		if (
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent
+			)
+		) {
+			document.body.style.overflow = 'hidden'
+			const timer = setTimeout(() => {
+				document.body.style.overflow = 'auto'
+				setIsVisible(false)
+			}, 3000)
+
+			return () => {
+				clearTimeout(timer)
+			}
+		}
 	}, [])
 
 	return (
 		<>
 			<AnimatePresence>
 				{isVisible && (
-					<motion.div exit={{opacity: 0}} transition={{ duration: 1 }} className={styles.preview}>
+					<motion.div
+						exit={{ opacity: 0 }}
+						transition={{ duration: 1 }}
+						className={styles.preview}
+					>
 						<motion.img
 							transition={{ duration: 1 }}
 							initial={{ opacity: 0 }}

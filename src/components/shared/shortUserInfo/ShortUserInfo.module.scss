@@ -1,0 +1,33 @@
+.short {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  .avatar__container {
+    .avatar {
+      width: 100%;
+      max-width: 40px;
+      min-height: 40px;
+      max-height: 40px;
+      user-select: none;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .user__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .user__username {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .user__prefix {
+      font-size: 16px;
+    }
+  }
+}

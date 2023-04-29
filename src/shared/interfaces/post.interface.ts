@@ -1,4 +1,4 @@
-
+import { IShortUser } from './user.interface'
 
 interface IUser {
 	id: number
@@ -13,6 +13,20 @@ interface IMedia {
 	date_joined: string
 }
 
+export interface ILike {
+	id: number
+	date_joined: string
+	post: number
+	user: number
+}
+
+export interface IComment {
+	id: number
+	text: string
+	date_joined: string
+	user: IShortUser
+}
+
 export interface IPost {
 	id: number
 	user: IUser
@@ -21,9 +35,6 @@ export interface IPost {
 	comments: number
 	medias?: IMedia[]
 	date_joined: string
-}
-
-export interface IUploadMedia {
-	post_id: number
-	media: File
+	is_liked: boolean
+	lastComment: IComment | null
 }

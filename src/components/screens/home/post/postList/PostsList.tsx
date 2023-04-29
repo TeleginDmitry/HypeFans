@@ -1,66 +1,65 @@
-import React, { useRef, useState, useEffect } from "react";
-import styles from "./PostsList.module.scss";
-import PostItem from "../postItem/PostItem";
-import { useQuery } from "react-query";
-import { PostService } from "@services/post/Post.service";
-import { IPost } from "shared/interfaces/post.interface";
-import { IPagination } from "shared/interfaces/pagination.interface";
-import { useObserver } from "hooks/useObserver";
-import Loader from "@ui/loader/Loader";
+import { useRef } from 'react'
+import styles from './PostsList.module.scss'
+import PostItem from '../postItem/PostItem'
+import Loader from '@ui/loader/Loader'
+import useInfinityQuery from 'hooks/useInfinityQuery'
+import { IPagination } from 'shared/interfaces/pagination.interface'
+import { IPost } from 'shared/interfaces/post.interface'
+import { PostService } from 'services/post/Post.service'
+import PostsLoader from 'components/shared/postsLoader/PostsLoader'
+import usePagination from 'hooks/usePagination'
+import { useObserver } from 'hooks/useObserver'
 
-export default function PostsList() {
-  const observer = useRef(null);
+interface IPostsList {
+	user_id?: number | string
+}
 
-  const [optionsQuery, setOptionsQuery] = useState({
-    offset: 0,
-    limit: 10,
-  });
+export default function PostsList({ user_id }: IPostsList) {
+	const observer = useRef(null)
 
-  const [totalPages, setTotalPages] = useState(0);
+	const {
+		data: postList,
+		isLoading,
+		handlerOffset,
+		hasNextPage,
+	} = usePagination<IPost>({
+		initialLimit: 3,
+		queryFunc: async (params): Promise<IPagination<IPost[]>> => {
+			const response = await PostService.getPosts(params)
+			return response.data
+		},
+		isInfinity: true,
+		queryKey: 'posts',
+		queryParam: { user_id },
+	})
 
-  const [postsList, setPostsList] = useState<IPost[]>([]);
 
-  async function fetchPosts(offset: number, limit: number) {
-    const response = await PostService.getPosts(limit, offset);
-    return response.data as IPagination<IPost[]>;
-  }
+	useObserver({
+		element: observer,
+		callback: handlerOffset,
+		isLoading,
+		condition: hasNextPage,
+		observerParams: { rootMargin: '0px 0px 500px 0px' },
+	})
 
-  const { isLoading } = useQuery(
-    ["posts", optionsQuery.offset],
-    () => fetchPosts(optionsQuery.offset, optionsQuery.limit),
-    {
-      keepPreviousData: true,
-      onSuccess: (data) => {
-        setTotalPages((state) => (state = data.count));
-        setPostsList((state) => [...state, ...data.results]);
-      },
-    }
-  );
+	return (
+		<div className={styles.posts__list}>
+			{postList?.map(post => {
+				return <PostItem key={post.id} {...post}></PostItem>
+			})}
+			<div className={styles.posts__observer} ref={observer}></div>
+			{isLoading && (
+				<>
+					<Loader></Loader>
+					<PostsLoader />
+				</>
+			)}
 
-  console.log(optionsQuery);
-
-  useObserver(
-    observer,
-    optionsQuery.offset + optionsQuery.limit < totalPages,
-    totalPages,
-    optionsQuery,
-    isLoading,
-    () => {
-      setOptionsQuery((state) => ({
-        ...state,
-        offset: state.offset + state.limit,
-      }));
-    },
-    { rootMargin: "0px 0px 500px 0px" }
-  );
-
-  return (
-    <div className={styles.posts__list}>
-      {postsList?.map((post) => {
-        return <PostItem key={post.id} {...post}></PostItem>;
-      })}
-      <div className={styles.posts__observer} ref={observer}></div>
-      {isLoading && <Loader></Loader>}
-    </div>
-  );
+			{!isLoading && !postList?.length && (
+				<h2 className={styles.title__exist}>
+					У пользователя не существует ни одного поста!
+				</h2>
+			)}
+		</div>
+	)
 }

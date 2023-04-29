@@ -4,7 +4,7 @@ import stylesAuth from "../Auth.module.scss";
 import OtherEntrance from "../OtherEntrance/OtherEntrance";
 import Input from "@ui/input/Input";
 import { Link } from "react-router-dom";
-import AuthButton from "@ui/Button/Button";
+import AuthButton from "@ui/button/Button";
 import logo from "@assets/images/auth/logoBlack.png";
 import { useFormik } from "formik";
 import { AnimatePresence, motion } from "framer-motion";

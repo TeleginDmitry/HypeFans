@@ -7,7 +7,8 @@ import {
 	Settings,
 	Profile,
 	Edit,
-	Messages
+	Messages,
+	User
 } from '../pages/index'
 import { Layout } from '../components/layout/layout/Layout'
 import { AuthLayout } from '../components/layout/authLayout/AuthLayout'
@@ -48,12 +49,25 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
-				path: '/messages/',
+				path: '/messages',
 				element: (
 					// <PrivateElement>
 						<Messages />
 					// </PrivateElement>
 				),
+			},
+			{
+				path: '/user/:user_id',
+				element: (
+					<PrivateElement>
+						<User />
+					</PrivateElement>
+				),
+			},
+			{
+				path: '/story/:story_id',
+				index: true,
+				
 			},
 		],
 	},

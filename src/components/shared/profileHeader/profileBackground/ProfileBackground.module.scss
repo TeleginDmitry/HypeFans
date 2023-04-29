@@ -1,0 +1,55 @@
+@import "@assets/styles/variables.module";
+
+
+.wrapper {
+  position: relative;
+  .background__container {
+    height: 210px;
+    .background {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: $borderRadius;
+
+      @media (max-width: 425px) {
+        border-radius: 0px 0px $borderRadius $borderRadius;
+      }
+    }
+  }
+  .background__back {
+    position: absolute;
+    top: 16px;
+    left: 24px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 5;
+
+    * {
+      stroke: #ffffff;
+    }
+
+    &_color {
+      * {
+        stroke: #000000;
+      }
+      
+    }
+  }
+  .background__points {
+    position: absolute;
+    top: 21px;
+    right: 24px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 5;
+
+    &_color {
+      * {
+        stroke: #000000;
+      }
+      
+    }
+  }
+}

@@ -1,18 +1,20 @@
 import React, { useEffect, useRef } from 'react'
 
-export const useObserver = (
-	element: React.MutableRefObject<null>,
-	condition: boolean,
-	totalPages: number,
-	optionsQuery: {
-		offset: number,
-		limit: number
-	},
-	isLoading: boolean,
-	
-	callback: (props?: any) => void,
-	observerParam?: IntersectionObserverInit,
-) => {
+interface IUseObserver {
+	element: React.MutableRefObject<null>
+	isLoading: boolean
+	callback: (props?: any) => void
+	observerParams?: IntersectionObserverInit
+	condition?: boolean
+}
+
+export const useObserver = ({
+	callback,
+	condition,
+	element,
+	isLoading,
+	observerParams,
+}: IUseObserver) => {
 	const observer = useRef<IntersectionObserver>()
 
 	useEffect(() => {
@@ -21,11 +23,10 @@ export const useObserver = (
 
 		const cb: IntersectionObserverCallback = function (entries) {
 			if (entries[0].isIntersecting && condition) {
-				console.log(optionsQuery.offset + optionsQuery.limit  < totalPages, optionsQuery, totalPages)
 				callback()
 			}
 		}
-		observer.current = new IntersectionObserver(cb, observerParam)
+		observer.current = new IntersectionObserver(cb, observerParams)
 		if (element.current) {
 			observer.current.observe(element.current)
 		}

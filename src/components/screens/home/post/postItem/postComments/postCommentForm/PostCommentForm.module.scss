@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+
+  @media (max-width: 425px) {
+    padding: 0 14px 7px 14px;
+  }
+
+  .avatar__container {
+    .avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .form {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+
+    .button {
+      background-color: transparent;
+      .button__svg {
+
+      }
+    }
+  }
+}

@@ -1,10 +1,11 @@
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import React from 'react'
+import React, { useState } from 'react'
 import CreationPost from './creationPost/CreationPost'
 import styles from './Home.module.scss'
 import HomeHeader from './homeHeader/HomeHeader'
 import PostsList from './post/postList/PostsList'
 import StoryList from './story/storyList/StoryList'
+
 
 export default function Home() {
 	const isAuth = useTypedSelector(state => state.auth.isAuth)

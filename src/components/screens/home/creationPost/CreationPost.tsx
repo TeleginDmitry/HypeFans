@@ -6,8 +6,13 @@ import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
 import { motion, AnimatePresence } from 'framer-motion'
 import { API_URL } from 'configs/api.config'
 import { useTypedSelector } from 'hooks/useTypedSelector'
+import { useNavigate } from 'react-router-dom'
 
 const CreationPost = () => {
+
+	const navigate = useNavigate()
+
+
 	const [isActiveSearch, setIsActiveSearch] = useState(false)
 
 	const user = useTypedSelector(state => state.auth.user)
@@ -51,7 +56,9 @@ const CreationPost = () => {
 							transition={{ duration: 0.3 }}
 							className={styles.creation}
 						>
-							<div className={styles.logo__container}>
+							<div onClick={() => {
+								navigate('/profile')
+							}} className={styles.logo__container}>
 								<img
 									className={styles.logo}
 									src={API_URL + user?.avatar}

@@ -1,0 +1,16 @@
+.media__item {
+  position: relative;
+  padding: 5px;
+  .media {
+    width: 130px;
+    height: 130px;
+   
+    object-fit: cover;
+  }
+  .media__delete {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    cursor: pointer;
+  }
+}

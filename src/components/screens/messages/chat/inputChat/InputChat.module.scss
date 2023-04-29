@@ -1,0 +1,36 @@
+.wrapper {
+  background-color: #f9f9f9;
+  padding: 16px 30px;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .input__container {
+      .input {
+        width: 100%;
+        background-color: transparent;
+        font-size: 15px;
+        line-height: 18px;
+      }
+    }
+    .functions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .actions {
+        display: flex;
+        gap: 20px;
+        .action {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+        }
+      }
+      .button {
+        background-color: transparent;
+        height: 30px;
+        
+      }
+    }
+  }
+}

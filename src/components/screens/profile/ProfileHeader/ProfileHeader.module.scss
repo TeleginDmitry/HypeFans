@@ -1,0 +1,18 @@
+@import "@assets/styles/variables.module";
+
+.wrapper {
+  position: relative;
+
+
+  .content {
+    @include contentProfile();
+
+    &__relative {
+      margin-top: 0px;
+    }
+
+    .button__container {
+      padding: 25px 20px;
+    }
+  }
+}

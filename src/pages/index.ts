@@ -6,6 +6,7 @@ import Settings from "./Settings";
 import Profile from "./Profile";
 import Edit from "./Edit";
 import Messages from "./Messages";
+import User from "./User";
 
 export {
   HomePage,
@@ -15,5 +16,6 @@ export {
   Settings,
   Profile,
   Edit,
-  Messages
+  Messages,
+  User
 };

@@ -1,0 +1,34 @@
+
+$close__color: #FFFFFF;
+
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+
+
+
+  .modal__close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    z-index: 2;
+
+
+    * {
+      stroke: $close__color;
+    }
+  }
+}
