@@ -10,16 +10,17 @@ interface IUseObserver {
 
 export const useObserver = ({
 	callback,
-	condition,
+	condition = true,
 	element,
 	isLoading,
-	observerParams,
+	observerParams = {},
 }: IUseObserver) => {
 	const observer = useRef<IntersectionObserver>()
 
 	useEffect(() => {
 		if (isLoading) return
 		if (observer.current) observer.current.disconnect()
+		
 
 		const cb: IntersectionObserverCallback = function (entries) {
 			if (entries[0].isIntersecting && condition) {
@@ -27,7 +28,7 @@ export const useObserver = ({
 			}
 		}
 		observer.current = new IntersectionObserver(cb, observerParams)
-		if (element.current) {
+		if (element?.current) {
 			observer.current.observe(element.current)
 		}
 	}, [isLoading])

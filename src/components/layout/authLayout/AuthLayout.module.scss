@@ -1,7 +1,5 @@
-@import "@assets/styles/mixins.module";
-
 .wrapper {
-  background-color: $wrapper-color;
+  background-color: var(--wrapper-color);
   padding: 20px;
   position: relative;
 

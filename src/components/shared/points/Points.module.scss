@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  padding: 7px;
+
+  .point {
+    padding: 2px;
+    background-color: #00000099;
+    border-radius: 50%;
+  }
+}

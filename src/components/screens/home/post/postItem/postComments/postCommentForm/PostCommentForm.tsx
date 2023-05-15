@@ -8,6 +8,7 @@ import { useTypedSelector } from 'hooks/useTypedSelector'
 import { Link } from 'react-router-dom'
 import { API_URL } from 'configs/api.config'
 import { ReactComponent as Send } from '@assets/images/send.svg'
+import { classNames as cn } from 'utils/classNames/classNames'
 
 interface IInitialValues {
 	comment: string
@@ -15,6 +16,7 @@ interface IInitialValues {
 
 interface IPostCommentForm {
 	post_id: number
+	isForModal?: boolean
 }
 
 const validate = (values: IInitialValues) => {
@@ -27,8 +29,11 @@ const validate = (values: IInitialValues) => {
 	return errors
 }
 
-const PostCommentForm = ({ post_id }: IPostCommentForm) => {
+const PostCommentForm = ({ post_id, isForModal }: IPostCommentForm) => {
 	const user = useTypedSelector(state => state.auth.user)
+
+
+	const classNamesWrapper = isForModal ? cn([styles.wrapper, styles.wrapper_modal]) : styles.wrapper
 
 	const formik = useFormik({
 		initialValues: {
@@ -49,7 +54,7 @@ const PostCommentForm = ({ post_id }: IPostCommentForm) => {
 	})
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={classNamesWrapper}>
 			<Link to={'/profile'} className={styles.avatar__container}>
 				<img src={API_URL + user.avatar} className={styles.avatar} />
 			</Link>

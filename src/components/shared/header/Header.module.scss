@@ -1,7 +1,5 @@
-@import "@assets/styles/colors.module";
-
 .header {
-  background-color: #ffff;
+  background-color: #ffffff;
   padding: 7px;
   display: flex;
   justify-content: space-evenly;
@@ -28,7 +26,7 @@
     .active {
       svg {
         * {
-          stroke: $stroke-active;
+          stroke: var(--stroke-active);
         }
       }
     }
@@ -38,7 +36,7 @@
 
       * {
         transition: all 0.2s;
-        stroke: $stroke;
+        stroke: var(--stroke);
         stroke-opacity: 1;
         stroke-width: 4px;
       }

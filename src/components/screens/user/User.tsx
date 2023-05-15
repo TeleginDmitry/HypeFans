@@ -6,7 +6,7 @@ import { UserService } from 'services/user/User.service'
 import { IUser } from 'shared/interfaces/user.interface'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import ProfileHeader from './ProfileHeader/ProfileHeader'
-import { useFetching } from 'hooks/useFetching'
+import useFetching from 'hooks/useFetching'
 
 const User = () => {
 	const navigate = useNavigate()
@@ -15,10 +15,12 @@ const User = () => {
 
 	const { user_id } = useParams()
 
-	const { data: user, fetchQuery } = useFetching<IUser>(async () => {
-		const response = await UserService.getUser(user_id)
+	const { data: user, fetchQuery } = useFetching<IUser>({
+		callback: async () => {
+			const response = await UserService.getUser(user_id)
 
-		return response.data
+			return response.data
+		},
 	})
 
 	useEffect(() => {

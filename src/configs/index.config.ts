@@ -1,3 +1,7 @@
 export const STORY_PARAM = 'story'
+export const POST_PARAM = 'post'
 
-export const pathImages = './assets/images/TEST/'
+// const path = require('path');
+
+// export const pathImages = '@assets/images/TEST/';
+

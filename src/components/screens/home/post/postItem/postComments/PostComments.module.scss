@@ -1,13 +1,22 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 15px;
+  position: relative;
 
-  .comments {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-left: 20px;
+  .comments__container {
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+    .comments {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      margin-left: 20px;
+    }
   }
 
   .show__comments {

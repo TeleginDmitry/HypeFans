@@ -1,4 +1,30 @@
-import { useTypedSelector } from 'hooks/useTypedSelector';
+// import { useTypedSelector } from 'hooks/useTypedSelector'
+// import { ReactNode, useEffect } from 'react'
+// import { useNavigate } from 'react-router-dom'
+
+// interface IPrivateElement {
+// 	children: ReactNode
+// }
+
+// const PrivateElement = ({ children }: IPrivateElement) => {
+// 	const navigate = useNavigate()
+
+// 	const { isAuth, isLoading } = useTypedSelector(state => state.auth)
+
+// 	return useEffect(() => {
+// 		setTimeout(() => {
+// 			if (!isAuth && !isLoading) {
+// 				navigate('/login', { replace: true })
+// 			} else {
+// 				return children
+// 			}
+// 		})
+// 	}, [isAuth, isLoading])
+// }
+
+// export default PrivateElement
+
+import { useTypedSelector } from 'hooks/useTypedSelector'
 import { ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +40,7 @@ const PrivateElement = ({ children }: IPrivateElement) => {
 	useEffect(() => {
 		const checkAuthentication = async () => {
 			if (!isAuth && isLoading === false) {
-				navigate('/login', {replace: true})
+				navigate('/login', { replace: true })
 			} else {
 				return null
 			}

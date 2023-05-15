@@ -1,10 +1,8 @@
-@import "@assets/styles/mixins.module";
-
 .wrapper {
-  background-color: $wrapper-color;
+  background-color: var(--wrapper-color);
   
   @media (max-width: 425px) {
-    background-color: #ffffff;
+    background-color: var(--background-white);
   }
 
   .content {

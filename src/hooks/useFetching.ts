@@ -1,26 +1,55 @@
-import { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { AxiosError } from 'axios'
 
-type callbackType<T> = (...args: any[]) => Promise<T>
+type ICallback<T> = (...args: any[]) => Promise<T>
 
-export const useFetching = <T>(callback: callbackType<T>) => {
+interface IFetching<T> {
+	onSuccess?: (data: T) => void
+	onError?: (error: AxiosError) => void
+	condition?: boolean
+	callback?: ICallback<T>
+}
+
+const useFetching = <T>({
+	onError,
+	onSuccess,
+	condition = true,
+	callback,
+}: IFetching<T> = {}) => {
 	const [data, setData] = useState<T>()
 	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState('')
-	const [isError, setIsError] = useState(false)
+	const [error, setError] = useState<AxiosError | undefined>(undefined)
+	const latestQueryArgsRef = useRef<ICallback<T>>()
 
-	const fetchQuery = async (...args) => {
+	async function handlerQuery(queryFunc: ICallback<T>) {
+		if (!condition) return
+
 		try {
 			setIsLoading(true)
-			const response = await callback(...args)
+			const response = await queryFunc()
 			setData(response)
-			return response
-		} catch (e) {
-			setError(e.message)
-			setIsError(true)
+			onSuccess?.(response)
+			latestQueryArgsRef.current = queryFunc
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				setError(error)
+				onError?.(error)
+			}
 		} finally {
 			setIsLoading(false)
 		}
 	}
+	async function fetchQuery(...args: any[]) {
+		if (callback) {
+			await handlerQuery(() => callback(...args))
+		}
+	}
 
-	return { data, fetchQuery, isLoading, error, isError }
+	const refetch = async () => {
+		await handlerQuery(latestQueryArgsRef.current)
+	}
+
+	return { data, handlerQuery, isLoading, error, refetch, fetchQuery }
 }
+
+export default useFetching

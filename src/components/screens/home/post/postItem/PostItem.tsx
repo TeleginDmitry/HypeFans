@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './PostItem.module.scss'
 import { IPost } from 'shared/interfaces/post.interface'
 import { motion } from 'framer-motion'
@@ -8,16 +8,33 @@ import ConvertDate from 'utils/ConvertDate/ConvertDate'
 import PostActions from './postActions/PostActions'
 import PostSvgActions from './postSvgActions/PostSvgActions'
 import PostComments from './postComments/PostComments'
+import Points from 'components/shared/points/Points'
+import FlexibleImages from 'components/shared/flexibleImages/FlexibleImages'
+import { POST_PARAM } from 'configs/index.config'
 
-export default function PostItem(post: IPost) {
-	const { comments, likes, description, id, medias, user, date_joined } = post
+interface IPostItem {
+	post: IPost
+	isForModal?: boolean
+}
+
+export default function PostItem({ post, isForModal = false }: IPostItem) {
+	const {
+		comments,
+		likes,
+		description,
+		id,
+		medias,
+		user,
+		date_joined,
+		is_liked,
+		lastComment,
+	} = post
 
 	const [isVisibleActions, setIsVisibleActions] = useState(false)
-	const [isVisibleComments, setIsVisibleComments] = useState(false)
 
 	const [commentsState, setCommentsState] = useState(comments)
 	const [likesState, setLikesState] = useState(likes)
-
+	const [isLikedState, setIsLiked] = useState(is_liked)
 	const navigate = useNavigate()
 
 	const formattedDate = ConvertDate(date_joined)
@@ -26,8 +43,8 @@ export default function PostItem(post: IPost) {
 		setIsVisibleActions(state => !state)
 	}
 
-	function handlerClickComment() {
-		setIsVisibleComments(state => !state)
+	function handlerOpenModal() {
+		navigate(`/?${POST_PARAM}=${id}`)
 	}
 
 	return (
@@ -42,7 +59,7 @@ export default function PostItem(post: IPost) {
 				<div className={styles.user}>
 					<ShortUserInfo
 						onClick={() => {
-							navigate(`/user/${post.user.id}`)
+							navigate(`/user/${user.id}`)
 						}}
 						avatar={user.avatar}
 						prefix={user.prefix}
@@ -51,50 +68,42 @@ export default function PostItem(post: IPost) {
 					<div className={styles.time__container}>
 						<p className={styles.time}>{formattedDate}</p>
 					</div>
-					<div onClick={handlerClickPoints} className={styles.point__container}>
-						<div className={styles.point}></div>
-						<div className={styles.point}></div>
-						<div className={styles.point}></div>
-					</div>
+					<Points
+						onClick={handlerClickPoints}
+						className={styles.point__container}
+					></Points>
 					{isVisibleActions && (
 						<div className={styles.actions__container}>
-							<PostActions></PostActions>
+							<PostActions post_id={id}></PostActions>
 						</div>
 					)}
 				</div>
 				<div className={styles.content}>
-					<div className={styles.description__container}>
+					<div
+						onClick={handlerOpenModal}
+						className={styles.description__container}
+					>
 						<p className={styles.description}>{description}</p>
 					</div>
 					{!!medias?.length && (
-						<div className={styles.images__container}>
-							{medias?.map(image => {
-								return (
-									<img
-										className={styles.image}
-										key={image.id}
-										src={image.media}
-										alt='HypeFans'
-									/>
-								)
-							})}
-						</div>
+						<FlexibleImages images={medias}></FlexibleImages>
 					)}
 				</div>
 				<PostSvgActions
-					handlerClickComment={handlerClickComment}
-					post_id={post.id}
-					isLiked={post.is_liked}
+					handlerClickComment={handlerOpenModal}
+					post_id={id}
+					isLiked={isLikedState}
 					likes={likesState}
-					setLikes={setLikesState}
+					setLikesState={setLikesState}
 					comments={commentsState}
+					setIsLiked={setIsLiked}
 				></PostSvgActions>
 
-				{!!post.lastComment && (
+				{!!lastComment && (
 					<PostComments
 						countComments={commentsState}
-						lastComment={post.lastComment}
-						setComments={setCommentsState}
+						lastComment={lastComment}
+						isForModal={isForModal}
 						post_id={id}
 					></PostComments>
 				)}

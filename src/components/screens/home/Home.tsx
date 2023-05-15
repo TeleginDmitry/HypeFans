@@ -1,6 +1,6 @@
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import React, { useState } from 'react'
-import CreationPost from './creationPost/CreationPost'
+import HomeForm from './homeForm/HomeForm'
 import styles from './Home.module.scss'
 import HomeHeader from './homeHeader/HomeHeader'
 import PostsList from './post/postList/PostsList'
@@ -19,7 +19,7 @@ export default function Home() {
 				</div>
 				{isAuth && (
 					<div className={styles.creation__container}>
-						<CreationPost></CreationPost>
+						<HomeForm></HomeForm>
 					</div>
 				)}
 

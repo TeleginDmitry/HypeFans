@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import {
 	HomePage,
@@ -8,7 +9,7 @@ import {
 	Profile,
 	Edit,
 	Messages,
-	User
+	User,
 } from '../pages/index'
 import { Layout } from '../components/layout/layout/Layout'
 import { AuthLayout } from '../components/layout/authLayout/AuthLayout'
@@ -26,11 +27,19 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/create',
-				element: <CreationNewObject />,
+				element: (
+					<PrivateElement>
+						<CreationNewObject />,
+					</PrivateElement>
+				),
 			},
 			{
 				path: '/settings',
-				element: <Settings />,
+				element: (
+					<PrivateElement>
+						<Settings />
+					</PrivateElement>
+				),
 			},
 			{
 				path: '/profile',
@@ -51,9 +60,9 @@ export const router = createBrowserRouter([
 			{
 				path: '/messages',
 				element: (
-					// <PrivateElement>
+					<PrivateElement>
 						<Messages />
-					// </PrivateElement>
+					</PrivateElement>
 				),
 			},
 			{
@@ -67,16 +76,17 @@ export const router = createBrowserRouter([
 			{
 				path: '/story/:story_id',
 				index: true,
-				
 			},
 		],
 	},
 	{
 		path: '/',
 		element: (
-			<PrivateAuth>
-				<AuthLayout />
-			</PrivateAuth>
+			<Suspense>
+				<PrivateAuth>
+					<AuthLayout />
+				</PrivateAuth>
+			</Suspense>
 		),
 		children: [
 			{

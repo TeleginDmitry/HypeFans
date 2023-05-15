@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import useActions from "hooks/useActions";
 
 interface AuthProviderProps {
@@ -8,7 +8,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { verify } = useActions();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     verify();
   }, []);
 

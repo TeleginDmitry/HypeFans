@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState } from 'react'
 import styles from './CreationNewObject.module.scss'
 import { ReactComponent as Back } from '@assets/images/newPost/arrow-left.svg'
 import Button from '@ui/button/Button'
@@ -6,7 +6,7 @@ import ReactTextareaAutosize from 'react-textarea-autosize'
 import { ReactComponent as Vector } from '@assets/images/newPost/vector.svg'
 import { classNames as cn } from '@utils/classNames/classNames'
 import { useNavigate } from 'react-router-dom'
-import SelectMedia from '../../shared/selectMedia/SelectMedia'
+import SelectMedia from 'components/shared/selectMedia/SelectMedia'
 import viewMedia, { IViewMedia } from 'utils/viewMedia/ViewMedia'
 import MediasList from 'components/shared/media/mediaList/MediasList'
 
@@ -16,11 +16,9 @@ const CreationNewObject = () => {
 	const [countActiveButton, setCountActiveButton] = useState(1)
 	const [medias, setMedias] = useState<IViewMedia[]>([])
 
-	function deleteMedia(id) {
+	function deleteMedia(id: string) {
 		setMedias(state => state.filter(media => media.id !== id))
 	}
-
-	console.log(medias)
 
 	return (
 		<div className={styles.wrapper}>

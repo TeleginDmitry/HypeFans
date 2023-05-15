@@ -1,0 +1,10 @@
+.wrapper {
+  cursor: pointer;
+  .avatar {
+    width: 55px;
+    height: 55px;
+
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}

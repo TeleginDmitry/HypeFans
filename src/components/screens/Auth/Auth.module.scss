@@ -1,9 +1,7 @@
-@import "@assets/styles/colors.module";
-
 .wrapper {
     max-width: 630px;
     width: 100%;
-    background-color: $color-form;
+    background-color: var(--color-form);
     padding: 30px;
     border-radius: 16px;
     display: flex;
@@ -83,30 +81,7 @@
 }
 
 .question__style {
-    color: $color-link;
+    color: var(--color-link);
 }
 
-// @media (max-width: 767px) {
-//     .wrapper {
-//         max-width: 500px;
-//         gap: 15px;
-//     }
-//     .question {
-//         display: none;
-//     }
-//     .form__wrapper {
-//         display: none;
-//     }
-//     .form__text {
-//         font-size: 16px;
-//     }
-//     .other {
-//         display: none;
-//     }
-// }
 
-// @media (min-width: 768px) {
-//     // .form__hide {
-//     //     display: none;
-//     // }
-// }

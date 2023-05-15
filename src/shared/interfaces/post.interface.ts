@@ -13,12 +13,6 @@ interface IMedia {
 	date_joined: string
 }
 
-export interface ILike {
-	id: number
-	date_joined: string
-	post: number
-	user: number
-}
 
 export interface IComment {
 	id: number
@@ -37,4 +31,19 @@ export interface IPost {
 	date_joined: string
 	is_liked: boolean
 	lastComment: IComment | null
+}
+
+export interface ILike {
+	id: number
+	date_joined: string
+	post: number
+	user: number
+}
+
+export interface IPostSearch {
+	id: number
+	user: IUser
+	description: string
+	likes: number
+	date_joined: string
 }

@@ -1,7 +1,12 @@
 import { AxiosResponse } from 'axios'
 import { API_URL } from '../../configs/api.config'
 import { IPagination } from '../../shared/interfaces/pagination.interface'
-import { IComment, ILike, IPost } from '../../shared/interfaces/post.interface'
+import {
+	IComment,
+	ILike,
+	IPost,
+	IPostSearch,
+} from '../../shared/interfaces/post.interface'
 import {
 	ICreateComment,
 	IGetPosts,
@@ -17,6 +22,18 @@ export const PostService = {
 		return instance.get(`${API_URL}/posts/`, {
 			params,
 		})
+	},
+	getPostsSearch: async (
+		description: string
+	): Promise<AxiosResponse<IPostSearch[]>> => {
+		return instance.get(`${API_URL}/posts/`, {
+			params: {
+				search: description,
+			},
+		})
+	},
+	getPost: async (post_id: number | string): Promise<AxiosResponse<IPost>> => {
+		return instance.get(`${API_URL}/post/${post_id}/`)
 	},
 	createPost: async (data: any): Promise<AxiosResponse<IPost>> => {
 		return instance.post(`${API_URL}/posts/`, data)

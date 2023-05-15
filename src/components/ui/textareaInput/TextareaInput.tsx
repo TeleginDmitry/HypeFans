@@ -15,9 +15,13 @@ const TextareaInput = ({
 	minRows = 1,
 	...props
 }: ITextareaProps) => {
+	const classNameWrapper = isWrong
+		? cn([styles.input, styles.wrong, className])
+		: cn([styles.input, className])
+
 	return (
 		<ReactTextareaAutosize
-			className={isWrong ? cn([styles.input, styles.wrong]) : styles.input}
+			className={classNameWrapper}
 			minRows={minRows}
 			{...props}
 		/>

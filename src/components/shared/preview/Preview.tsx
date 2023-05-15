@@ -2,25 +2,22 @@ import React, { useEffect, useState } from 'react'
 import styles from './Preview.module.scss'
 import logo from '@assets/images/auth/logoBlack.png'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useOverflowBody } from 'hooks/useOverflowBody'
 
 const Preview = () => {
 	const [isVisible, setIsVisible] = useState(true)
 
-	useEffect(() => {
-		if (
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-				navigator.userAgent
-			)
-		) {
-			document.body.style.overflow = 'hidden'
-			const timer = setTimeout(() => {
-				document.body.style.overflow = 'auto'
-				setIsVisible(false)
-			}, 3000)
+	const { appendClass, deleteClass } = useOverflowBody()
 
-			return () => {
-				clearTimeout(timer)
-			}
+	useEffect(() => {
+		appendClass()
+		const timeout = setTimeout(() => {
+			deleteClass()
+			setIsVisible(false)
+		}, 3000)
+
+		return () => {
+			return clearTimeout(timeout)
 		}
 	}, [])
 

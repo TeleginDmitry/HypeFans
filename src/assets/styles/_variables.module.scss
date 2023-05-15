@@ -1,7 +1,9 @@
-$borderRadius: 16px;
-
-
-
-@mixin contentProfile () {
+@mixin contentProfile() {
   margin-top: 160px;
+}
+
+:root {
+  --border-radius-16: 16px;
+  --border-radius-32: 32px;
+  --border-radius-50-p: 50%;
 }

@@ -1,19 +1,18 @@
-$wrapper-color: #F8F3F3;
-$backgroundWhite: #ffffff;
+:root {
+  --wrapper-color: #f8f3f3;
+  --background-white: #ffffff;
 
+  --stroke: #808080;
+  --stroke-active: #fb5734;
 
-// Header
+  --color-form: rgba(255, 255, 255, 1);
+  --color-link: rgba(251, 87, 52, 1);
 
-$stroke: #808080;
-$stroke-active: #fb5734;
+  --input-color: rgba(0, 0, 0, 0.3);
+  --text-color: rgba(0, 0, 0, 1);
+  --wrong-color: rgba(214, 10, 10, 0.5);
 
-
-// Auth 
-
-$color-form: rgba(255, 255, 255, 1);
-$color-link: rgba(251, 87, 52, 1);
-
-
-$input-color: rgba(0, 0, 0, 0.3);
-$text-color: rgba(0, 0, 0, 1);
-$wrong-color: rgba(214, 10, 10, 0.5);
+  --background-modal: #1c2331;
+  --block-modal: #ffffff;
+  --close-modal-color: #ffffff;
+}

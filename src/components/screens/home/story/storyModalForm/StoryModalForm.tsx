@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactTextareaAutosize from 'react-textarea-autosize'
-import styles from './StoryForm.module.scss'
+import styles from './StoryModalForm.module.scss'
 import { ReactComponent as Send } from '@assets/images/send.svg'
 import { motion } from 'framer-motion'
 
-const StoryForm = () => {
+const StoryModalForm = () => {
 	return (
 		<motion.form
 			initial={{ opacity: 0 }}
@@ -25,4 +25,4 @@ const StoryForm = () => {
 	)
 }
 
-export default StoryForm
+export default StoryModalForm

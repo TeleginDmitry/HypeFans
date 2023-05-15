@@ -1,13 +1,4 @@
-
-$close__color: #FFFFFF;
-
-
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,20 +6,41 @@ $close__color: #FFFFFF;
   bottom: 0;
   z-index: 4;
 
-
-
+  .scroll {
+    position: relative;
+    overflow-y: auto;
+    z-index: 1;
+    max-height: 100vh;
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+      @media (max-width: 425px) {
+        padding: 0;
+      }
+    }
+  }
   .modal__close {
-    position: absolute;
-    top: 40px;
+    position: fixed;
+    z-index: 2;
+    top: 20px;
     right: 40px;
     width: 35px;
     height: 35px;
     cursor: pointer;
-    z-index: 2;
-
 
     * {
-      stroke: $close__color;
+      stroke: var(--close-modal-color);
     }
+  }
+  .background {
+    background-color: var(--background-modal);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }

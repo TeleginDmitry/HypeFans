@@ -1,93 +1,78 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './PostComments.module.scss'
-import { PostService } from 'services/post/Post.service'
+import { PostService } from '@services/post/Post.service'
 import PostCommentItem from './postCommentItem/PostCommentItem'
 import PostCommentForm from './postCommentForm/PostCommentForm'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { IComment } from 'shared/interfaces/post.interface'
-import usePagination from 'hooks/usePagination'
-import { IPagination } from 'shared/interfaces/pagination.interface'
+import Loader from '@ui/loader/Loader'
+import usePaginationCustom from 'hooks/usePaginationCustom'
+import useCursorPagination from 'hooks/useCursorPagination'
 
 interface IPostComments {
 	post_id: number
 	countComments: number
 	lastComment: IComment
-	setComments: React.Dispatch<React.SetStateAction<number>>
+	isForModal?: boolean
 }
 
 const PostComments = ({
 	post_id,
-	setComments,
 	lastComment,
 	countComments,
+	isForModal,
 }: IPostComments) => {
 	const isAuth = useTypedSelector(state => state.auth.isAuth)
 
-
-
-	// const { fetchQuery } = useFetching(async params => {
-	// 	const response = await PostService.getComments(params)
-	// 	const data = response.data
-
-	// 	if (response.status === 200) {
-	// 		setPostComments(state => [...data.results, ...state])
-	// 		setComments(() => data.count)
-	// 		setOffset(state => (state += limit))
-	// 	}
-	// 	return data.results
-	// })
-
 	const {
 		data: postComments,
-		isLoading,
-		handlerOffset,
 		hasNextPage,
-		totalPages,
+		fetchNextPage,
+		isLoading,
 		refetch,
-
-	} = usePagination<IComment>({
-		queryFunc: async (params): Promise<IPagination<IComment[]>> => {
+	} = useCursorPagination<IComment>(
+		async params => {
 			const response = await PostService.getComments(params)
-			const data = response.data
-			setComments(() => data.count)
-			return data
+			return response.data
 		},
-		queryKey: 'comments',
-		queryParam: { post_id },
-		initialOffset: 1,
-		initialLimit: 3,
-	})
-
-
-	function decreaseComments() {
-		setComments(state => (state -= 1))
-	}
+		{
+			queryParam: { post_id },
+			isInfinity: true,
+			initialState: [lastComment],
+		}
+	)
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.comments}>
-				<PostCommentItem
-					decreaseComments={decreaseComments}
-					comment={lastComment}
-				></PostCommentItem>
-				{postComments?.map(comment => {
-					return (
-						<PostCommentItem
-							decreaseComments={decreaseComments}
-							comment={comment}
-						></PostCommentItem>
-					)
-				})}
+			<div className={styles.comments__container}>
+				<div className={styles.comments}>
+					{postComments?.map(comment => {
+						return (
+							<PostCommentItem
+								refetch={refetch}
+								key={comment.id}
+								comment={comment}
+							></PostCommentItem>
+						)
+					})}
+				</div>
 			</div>
 
-			{countComments > 1 ||  hasNextPage && (
-				<span className={styles.show__comments} onClick={handlerOffset}>
+			{/* {isLoading && <Loader></Loader>} */}
+
+			{((hasNextPage === undefined && countComments > postComments.length) ||
+				hasNextPage) && (
+				<span
+					className={styles.show__comments}
+					onClick={() => !isLoading && fetchNextPage()}
+				>
 					Показать следующие комментарии
 				</span>
 			)}
 
 			{isAuth && (
 				<PostCommentForm
+					isForModal={isForModal}
 					post_id={post_id}
 				></PostCommentForm>
 			)}
@@ -95,4 +80,4 @@ const PostComments = ({
 	)
 }
 
-export default PostComments
+export default React.memo(PostComments)

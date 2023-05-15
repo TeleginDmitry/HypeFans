@@ -1,4 +1,4 @@
-import React, { useState , ChangeEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import styles from './SelectMedia.module.scss'
 import { ReactComponent as Clock } from '@assets/images/newPost/clock.svg'
 import { ReactComponent as Image } from '@assets/images/newPost/image.svg'
@@ -6,14 +6,14 @@ import { ReactComponent as Inbox } from '@assets/images/newPost/inbox.svg'
 import { ReactComponent as Mic } from '@assets/images/newPost/mic.svg'
 import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
 import { ReactComponent as Paperclip } from '@assets/images/newPost/paperclip.svg'
-import { classNames as cn } from '../../../utils/classNames/classNames'
-import UploadFile from '../../ui/uploadFile/UploadFile'
+import { classNames as cn } from '@utils/classNames/classNames'
+import UploadFile from '@ui/uploadFile/UploadFile'
 
 interface ISelectMedia {
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-const SelectMedia = ({onChange}: ISelectMedia) => {
+const SelectMedia = ({ onChange }: ISelectMedia) => {
 	const [isActiveSelect, setIsActiveSelect] = useState(false)
 
 	return (

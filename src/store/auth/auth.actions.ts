@@ -7,9 +7,7 @@ import {
 	IUserResponse,
 	ILogin,
 } from '../../shared/interfaces/auth.interface'
-import {
-	IChangeUser, IUser
-} from '../../shared/interfaces/user.interface'
+import { IChangeUser, IUser } from '../../shared/interfaces/user.interface'
 import {
 	removeTokensStorage,
 	saveTokensStorage,
@@ -58,10 +56,9 @@ export const register = createAsyncThunk<IResponse, IRegister>(
 
 export const changeUser = createAsyncThunk<IUser, IChangeUser>(
 	'auth/changeUser',
-	async ({id, data}, { rejectWithValue }) => {
-
+	async ({ id, data }, { rejectWithValue }) => {
 		try {
-			const response = await UserService.changeUser({id, data})
+			const response = await UserService.changeUser({ id, data })
 			return response.data as IUser
 		} catch (error) {
 			return rejectWithValue(error)
@@ -76,25 +73,11 @@ export const verify = createAsyncThunk<IUserResponse>(
 			const response = await AuthService.verify()
 
 			return response.data as IUserResponse
-		
 		} catch (error) {
 			return rejectWithValue(error)
 		}
 	}
 )
-
-// export const getUser = createAsyncThunk<IUser, { id: number }>(
-// 	'auth/getUser',
-// 	async ({ id }, { rejectWithValue }) => {
-// 		try {
-// 			const response = await UserService.getUser(id)
-
-// 			return response.data as IUser
-// 		} catch (error) {
-// 			return rejectWithValue(error)
-// 		}
-// 	}
-// )
 
 export const logout = createAsyncThunk<void, void>(
 	'auth/logout',

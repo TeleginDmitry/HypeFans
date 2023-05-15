@@ -7,7 +7,7 @@ type IInitialState = {
 	user: IUser | null
 	error: string | null
 	isError: boolean
-	isLoading: boolean | null
+	isLoading: boolean
 	isAuth: boolean
 }
 
@@ -15,7 +15,7 @@ const initialState: IInitialState = {
 	user: null,
 	error: null,
 	isError: false,
-	isLoading: null,
+	isLoading: false,
 	isAuth: false,
 }
 

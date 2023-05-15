@@ -1,6 +1,3 @@
-@import "@assets/styles/variables.module";
-@import "@assets/styles/colors.module";
-
 %animateSvg {
   transition: all 0.5s;
   stroke: #ffffff;
@@ -12,12 +9,12 @@
   justify-content: center;
 
   .content {
-    background-color: $backgroundWhite;
+    background-color: var(--background-white);
     display: flex;
     flex-direction: column;
     max-width: 1100px;
     width: 100%;
-    border-radius: $borderRadius;
+    border-radius: var(--border-radius-16);
     .user__medias {
       position: relative;
       .background__container {
@@ -27,10 +24,10 @@
           height: 100%;
           width: 100%;
           object-fit: cover;
-          border-radius: $borderRadius;
+          border-radius: var(--border-radius-16);
 
           @media (max-width: 425px) {
-            border-radius: 0px 0px $borderRadius $borderRadius;
+            border-radius: 0px 0px var(--border-radius-16) var(--border-radius-16);
           }
         }
         .background__back {

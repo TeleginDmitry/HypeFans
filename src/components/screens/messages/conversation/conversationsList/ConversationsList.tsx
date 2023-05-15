@@ -1,6 +1,6 @@
 import { useTypedSelector } from "hooks/useTypedSelector";
 import React, { useEffect } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { chatService } from "services/chat/chat.service";
 import MessageItem from "../conversationItem/ConversationItem";
 import { dataMessages } from "./data";
@@ -11,7 +11,7 @@ const ConversationsList = () => {
 
   const user_id = useTypedSelector((state) => state.auth.user?.id)
 
-  const {data: conversationList, refetch} = useQuery('conversation', async (): Promise<IConversation[]> => {
+  const {data: conversationList, refetch} = useQuery(['conversation'], async (): Promise<IConversation[]> => {
     const response = await chatService.getConversation()
     return response.data
   }, {
