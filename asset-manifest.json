@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/HypeFans/static/css/main.52d8a298.css",
-    "main.js": "/HypeFans/static/js/main.59354987.js",
+    "main.js": "/HypeFans/static/js/main.f4bafa15.js",
     "static/css/531.836c3eef.chunk.css": "/HypeFans/static/css/531.836c3eef.chunk.css",
-    "static/js/531.607ae73e.chunk.js": "/HypeFans/static/js/531.607ae73e.chunk.js",
+    "static/js/531.1ca66282.chunk.js": "/HypeFans/static/js/531.1ca66282.chunk.js",
     "static/css/916.836c3eef.chunk.css": "/HypeFans/static/css/916.836c3eef.chunk.css",
-    "static/js/916.480ff70b.chunk.js": "/HypeFans/static/js/916.480ff70b.chunk.js",
-    "static/js/418.825bfd74.chunk.js": "/HypeFans/static/js/418.825bfd74.chunk.js",
+    "static/js/916.80465cf9.chunk.js": "/HypeFans/static/js/916.80465cf9.chunk.js",
+    "static/js/418.9b7b86d6.chunk.js": "/HypeFans/static/js/418.9b7b86d6.chunk.js",
     "static/media/background.jpg": "/HypeFans/static/media/background.0e0095b58d292ffeb29c.jpg",
     "static/media/FactorA-Regular.eot": "/HypeFans/static/media/FactorA-Regular.d7084f57c279a0a27572.eot",
     "static/media/FactorAMedium-Regular.eot": "/HypeFans/static/media/FactorAMedium-Regular.8bcfa461c1032eea4547.eot",
@@ -55,15 +55,15 @@
     "static/media/vector.svg": "/HypeFans/static/media/vector.bccf7606a019b2bdcc8e96f5af9e4bc9.svg",
     "static/media/back.svg": "/HypeFans/static/media/back.947b27c081cac6b6f23535d59f9c548d.svg",
     "main.52d8a298.css.map": "/HypeFans/static/css/main.52d8a298.css.map",
-    "main.59354987.js.map": "/HypeFans/static/js/main.59354987.js.map",
+    "main.f4bafa15.js.map": "/HypeFans/static/js/main.f4bafa15.js.map",
     "531.836c3eef.chunk.css.map": "/HypeFans/static/css/531.836c3eef.chunk.css.map",
-    "531.607ae73e.chunk.js.map": "/HypeFans/static/js/531.607ae73e.chunk.js.map",
+    "531.1ca66282.chunk.js.map": "/HypeFans/static/js/531.1ca66282.chunk.js.map",
     "916.836c3eef.chunk.css.map": "/HypeFans/static/css/916.836c3eef.chunk.css.map",
-    "916.480ff70b.chunk.js.map": "/HypeFans/static/js/916.480ff70b.chunk.js.map",
-    "418.825bfd74.chunk.js.map": "/HypeFans/static/js/418.825bfd74.chunk.js.map"
+    "916.80465cf9.chunk.js.map": "/HypeFans/static/js/916.80465cf9.chunk.js.map",
+    "418.9b7b86d6.chunk.js.map": "/HypeFans/static/js/418.9b7b86d6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.52d8a298.css",
-    "static/js/main.59354987.js"
+    "static/js/main.f4bafa15.js"
   ]
 }
