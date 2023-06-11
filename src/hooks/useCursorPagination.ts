@@ -75,7 +75,7 @@ const useCursorPagination = <T>(
 			params['cursor'] = cursor
 		}
 		const response = await callback(params)
-		console.log(response)
+		
 
 		savePage(response)
 

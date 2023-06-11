@@ -1,0 +1,60 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: -16px;
+    right: -16px;
+    height: 1px;
+    z-index: 1;
+
+    @media (min-width: 425px) {
+      display: none;
+    }
+  }
+
+  .input {
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+    border: none;
+
+    &::placeholder {
+      position: relative;
+      transform: none;
+      top: 0;
+    }
+
+    &__wrong {
+      &::placeholder {
+        color: var(--wrong-color);
+      }
+    }
+  }
+
+  .button__container {
+    padding-top: 10px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.2);
+      top: 0;
+      left: -16px;
+      right: -16px;
+      height: 1px;
+    }
+
+    @media (max-width: 425px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

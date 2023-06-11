@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styles from './SearchPost.module.scss'
 import { ReactComponent as Cancel } from '@assets/images/homeHeader/clear.svg'
 import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
 import MyAvatar from 'components/shared/myAvatar/MyAvatar'
-import { PostService } from 'services/post/Post.service'
-import useFetching from 'hooks/useFetching'
-import PostItemSearch from './postItemSearch/PostItemSearch'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import SearchPostList from './searchPostList/SearchPostList'
 import { useNavigate } from 'react-router-dom'
+import { POST_PARAM } from 'configs/index.config'
+import { classNames as cn } from 'utils/classNames/classNames'
 
 interface ISearchPost {
 	changeStateActive: () => void
@@ -15,36 +16,36 @@ interface ISearchPost {
 const SearchPost = ({ changeStateActive }: ISearchPost) => {
 	const navigate = useNavigate()
 
+	const isAuth = useTypedSelector(state => state.auth.isAuth)
+
+	const inputRef = useRef<HTMLInputElement>(null)
+
 	const [valueInput, setValueInput] = useState('')
 
-	const {
-		data: posts = [],
-		isLoading,
-		fetchQuery,
-	} = useFetching({
-		callback: async (description: string) => {
-			const response = await PostService.getPostsSearch(description)
-			return response.data
-		},
-	})
+	const wrapperClass = valueInput
+		? cn([styles.wrapper, styles.wrapper__active])
+		: styles.wrapper
 
 	function onChange(input: React.ChangeEvent<HTMLInputElement>) {
 		setValueInput(input.target.value)
 	}
 
-	function clickPost(post_id: number) {
-		setValueInput('')
-
-		navigate(`/?post=${post_id}`)
+	function focusInput() {
+		if (inputRef.current) {
+			inputRef.current.focus()
+		}
 	}
 
-	useEffect(() => {
-		if (!isLoading && valueInput) fetchQuery(valueInput)
-	}, [valueInput])
+	function onClickPost(post_id: number) {
+		setValueInput('')
+
+		navigate(`/?${POST_PARAM}=${post_id}`)
+	}
 
 	return (
-		<div className={styles.wrapper}>
-			<MyAvatar />
+		<div className={wrapperClass}>
+			{isAuth && <MyAvatar />}
+
 			<div className={styles.searching}>
 				<input
 					className={styles.searching__input}
@@ -52,17 +53,24 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
 					placeholder='Поиск поста...'
 					onChange={onChange}
 					value={valueInput}
+					ref={inputRef}
 				/>
 			</div>
-			<div onClick={changeStateActive} className={styles.cancel__container}>
-				<Cancel className={styles.cancel}></Cancel>
-			</div>
-			{!!posts.length && valueInput && (
-				<div className={styles.posts__container}>
-					{posts.map((post, index) => {
-						return <PostItemSearch  clickPost={clickPost} key={post.id} post={post} index={index}></PostItemSearch>
-					})}
+			{isAuth ? (
+				<div onClick={changeStateActive} className={styles.icon__container}>
+					<Cancel className={styles.icon}></Cancel>
 				</div>
+			) : (
+				<div onClick={focusInput} className={styles.icon__container}>
+					<Search className={styles.icon}></Search>
+				</div>
+			)}
+
+			{valueInput && (
+				<SearchPostList
+					valueInput={valueInput}
+					onClickPost={onClickPost}
+				></SearchPostList>
 			)}
 		</div>
 	)

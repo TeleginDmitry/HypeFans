@@ -2,7 +2,7 @@
 	"name": "HypeFans",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://d1mas1k2021.github.io/HypeFans/",
+	"homepage": "https://d1mas1k2021.github.io/HypeFans",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.3",
 		"@tanstack/react-query": "^4.29.5",
@@ -22,14 +22,15 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-intersection-observer": "^9.4.3",
+		"react-media-recorder": "^1.6.6",
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.8.1",
 		"react-scripts": "5.0.1",
+		"react-svg": "^16.1.15",
 		"react-textarea-autosize": "^8.4.0",
 		"swiper": "^9.0.5",
 		"typescript": "^4.9.5",
-		"ui-hypefans-lib": "^1.0.0",
-		"uniqid": "^5.4.0",
+		"ui-hypefans-lib": "^1.0.5",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {

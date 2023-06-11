@@ -1,0 +1,10 @@
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .action {
+    cursor: pointer;
+    font-size: 14px;
+  }
+}

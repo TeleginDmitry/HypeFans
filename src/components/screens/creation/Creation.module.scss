@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 100%;
+
+  .content {
+    background-color: var(--background-white);
+    border-radius: var(--border-radius-16);
+    max-width: 900px;
+    width: 100%;
+    padding: 0 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .submit {
+      max-width: 100%;
+    }
+  }
+}

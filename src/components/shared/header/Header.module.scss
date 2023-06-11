@@ -7,7 +7,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 2;
 
   @media (max-width: 425px) {
     border-radius: 24px 24px 0px 0px;
@@ -16,9 +16,7 @@
     position: fixed;
     bottom: 0;
   }
-  @media (min-width: 425px) {
-    top: 0;
-  }
+  
 
   .header__item {
     cursor: pointer;

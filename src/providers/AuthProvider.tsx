@@ -1,16 +1,16 @@
-import React, { useLayoutEffect } from "react";
-import useActions from "hooks/useActions";
+import React, { useLayoutEffect } from 'react'
+import useActions from 'hooks/useActions'
 
 interface AuthProviderProps {
-  children: React.ReactNode;
+	children: React.ReactNode
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { verify } = useActions();
+	const { verify } = useActions()
 
-  useLayoutEffect(() => {
-    verify();
-  }, []);
+	useLayoutEffect(() => {
+		verify()
+	}, [])
 
-  return <>{children}</>;
-};
+	return <>{children}</>
+}

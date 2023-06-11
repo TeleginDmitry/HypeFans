@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CreationBlock.module.scss";
-import Button from "components/ui/button/Button";
+import { Button } from 'ui-hypefans-lib'
 
 const CreationBlock = () => {
   return (

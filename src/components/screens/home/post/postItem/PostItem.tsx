@@ -2,22 +2,18 @@ import React, { useState } from 'react'
 import styles from './PostItem.module.scss'
 import { IPost } from 'shared/interfaces/post.interface'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import ShortUserInfo from 'components/shared/shortUserInfo/ShortUserInfo'
-import ConvertDate from 'utils/ConvertDate/ConvertDate'
-import PostActions from './postActions/PostActions'
-import PostSvgActions from './postSvgActions/PostSvgActions'
 import PostComments from './postComments/PostComments'
-import Points from 'components/shared/points/Points'
-import FlexibleImages from 'components/shared/flexibleImages/FlexibleImages'
-import { POST_PARAM } from 'configs/index.config'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import PostCommentForm from './postComments/postCommentForm/PostCommentForm'
+import PostContent from './postContent/PostContent'
+import PostHeader from 'components/shared/postHeader/PostHeader'
+import PostActions from 'components/shared/postActions/PostActions'
 
 interface IPostItem {
 	post: IPost
-	isForModal?: boolean
 }
 
-export default function PostItem({ post, isForModal = false }: IPostItem) {
+export default function PostItem({ post }: IPostItem) {
 	const {
 		comments,
 		likes,
@@ -26,26 +22,19 @@ export default function PostItem({ post, isForModal = false }: IPostItem) {
 		medias,
 		user,
 		date_joined,
-		is_liked,
+		isLiked,
 		lastComment,
 	} = post
 
-	const [isVisibleActions, setIsVisibleActions] = useState(false)
+	const isAuth = useTypedSelector(state => state.auth.isAuth)
 
-	const [commentsState, setCommentsState] = useState(comments)
-	const [likesState, setLikesState] = useState(likes)
-	const [isLikedState, setIsLiked] = useState(is_liked)
-	const navigate = useNavigate()
+	const [isClickComment, setClickComment] = useState(false)
 
-	const formattedDate = ConvertDate(date_joined)
-
-	function handlerClickPoints() {
-		setIsVisibleActions(state => !state)
+	function handlerClickComment() {
+		setClickComment(state => (state = !state))
 	}
 
-	function handlerOpenModal() {
-		navigate(`/?${POST_PARAM}=${id}`)
-	}
+	const isShowForm = isAuth && (lastComment || isClickComment)
 
 	return (
 		<motion.div
@@ -56,57 +45,32 @@ export default function PostItem({ post, isForModal = false }: IPostItem) {
 			className={styles.wrapper}
 		>
 			<div className={styles.container}>
-				<div className={styles.user}>
-					<ShortUserInfo
-						onClick={() => {
-							navigate(`/user/${user.id}`)
-						}}
-						avatar={user.avatar}
-						prefix={user.prefix}
-						username={user.username}
-					></ShortUserInfo>
-					<div className={styles.time__container}>
-						<p className={styles.time}>{formattedDate}</p>
-					</div>
-					<Points
-						onClick={handlerClickPoints}
-						className={styles.point__container}
-					></Points>
-					{isVisibleActions && (
-						<div className={styles.actions__container}>
-							<PostActions post_id={id}></PostActions>
-						</div>
-					)}
-				</div>
-				<div className={styles.content}>
-					<div
-						onClick={handlerOpenModal}
-						className={styles.description__container}
-					>
-						<p className={styles.description}>{description}</p>
-					</div>
-					{!!medias?.length && (
-						<FlexibleImages images={medias}></FlexibleImages>
-					)}
-				</div>
-				<PostSvgActions
-					handlerClickComment={handlerOpenModal}
+				<PostHeader
+					date_joined={date_joined}
 					post_id={id}
-					isLiked={isLikedState}
-					likes={likesState}
-					setLikesState={setLikesState}
-					comments={commentsState}
-					setIsLiked={setIsLiked}
-				></PostSvgActions>
-
-				{!!lastComment && (
-					<PostComments
-						countComments={commentsState}
-						lastComment={lastComment}
-						isForModal={isForModal}
+					user={user}
+				></PostHeader>
+				<PostContent
+					post_id={id}
+					description={description}
+					medias={medias}
+				></PostContent>
+				<div className={styles.actions__container}>
+					<PostActions
 						post_id={id}
-					></PostComments>
-				)}
+						isLiked={isLiked}
+						comments={comments}
+						likes={likes}
+						handlerClickComment={handlerClickComment}
+					></PostActions>
+				</div>
+
+				<PostComments
+					countComments={comments}
+					lastComment={lastComment}
+					post_id={id}
+				></PostComments>
+				{isShowForm && <PostCommentForm post_id={id}></PostCommentForm>}
 			</div>
 		</motion.div>
 	)

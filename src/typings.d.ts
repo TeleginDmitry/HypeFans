@@ -1,5 +1,5 @@
-declare module "*.interface";
-declare module "@*.interface";
+declare module "*.interface.ts";
+declare module "@*.interface.ts";
 declare module "@*";
 declare module "*.module.scss";
 declare module "*.gif";

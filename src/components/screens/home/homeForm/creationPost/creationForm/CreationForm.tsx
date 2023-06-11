@@ -7,40 +7,34 @@ import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
 import { AnimatePresence, motion } from 'framer-motion'
 import TextareaInput from '@ui/textareaInput/TextareaInput'
 import UploadFile from 'components/ui/uploadFile/UploadFile'
-import useViewMedia from 'hooks/useViewMedia'
+import useViewMedia from 'hooks/useViewUploadMedias'
+import MediasList from 'components/shared/media/mediaList/MediasList'
+import { classNames } from 'utils/classNames/classNames'
 
 interface ICreationForm {
 	changeStateActive: () => void
 }
 
-const iconsForm = [
-	{
-		id: 1,
-		Icon: (
-			<UploadFile>
-				<Image />
-			</UploadFile>
-		),
-	},
-	{
-		id: 2,
-		Icon: <Video />,
-	},
-]
-
 const CreationForm = ({ changeStateActive }: ICreationForm) => {
 	const [valueInput, setValueInput] = useState('')
 	const [isVisible, setIsVisible] = useState(false)
 
-	const { handlerMedia, resultMedias } = useViewMedia()
+	const [viewMedias, setViewMedias, handlerMedia] = useViewMedia({
+		isInfinity: true,
+	})
 
 	function handlerInputChange(input: React.ChangeEvent<HTMLTextAreaElement>) {
 		setValueInput(input.target.value)
 	}
 
-	function handlerUploadMedias(event: React.ChangeEvent<HTMLInputElement>) {
-		handlerMedia([...event.target.files])
+	function handlerUploadviewMedias(input: React.ChangeEvent<HTMLInputElement>) {
+		handlerMedia(input.target.files)
 	}
+
+	function deleteMedia(id: number) {
+		setViewMedias(state => state.filter(media => media.id !== id))
+	}
+
 	useEffect(() => {
 		if (valueInput) setIsVisible(true)
 		else setIsVisible(false)
@@ -48,7 +42,13 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
 
 	return (
 		<form className={styles.form}>
-			<div className={styles.creation}>
+			<div
+				className={
+					valueInput
+						? classNames([styles.creation, styles.creation__padding])
+						: styles.creation
+				}
+			>
 				<TextareaInput
 					className={styles.creation__input}
 					placeholder='Хей, о чем ты думаешь?'
@@ -58,7 +58,7 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
 				></TextareaInput>
 
 				<AnimatePresence>
-					{(isVisible || !!resultMedias.length) && (
+					{(isVisible || !!viewMedias.length) && (
 						<div className={styles.actions}>
 							<motion.div
 								initial={{ opacity: 0 }}
@@ -67,7 +67,7 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
 								transition={{ delay: 0 * 0.1 }}
 								className={styles.action}
 							>
-								<UploadFile multiple={true} onChange={handlerUploadMedias}>
+								<UploadFile multiple={true} onChange={handlerUploadviewMedias}>
 									<Image />
 								</UploadFile>
 							</motion.div>
@@ -84,26 +84,18 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
 					)}
 				</AnimatePresence>
 
-				{!!resultMedias.length && (
-					<div className={styles.images}>
-						{resultMedias.map(media => {
-							return (
-								<img
-									className={styles.image}
-									key={media.id}
-									src={media.linkView}
-									alt=''
-								/>
-							)
-						})}
-					</div>
+				{!!viewMedias.length && (
+					<MediasList
+						medias={viewMedias}
+						deleteMedia={deleteMedia}
+					></MediasList>
 				)}
 			</div>
-			<div onClick={changeStateActive} className={styles.icon__container}>
+			<div className={styles.icon__container}>
 				{isVisible ? (
 					<Send className={styles.icon}></Send>
 				) : (
-					<Search className={styles.icon}></Search>
+					<Search onClick={changeStateActive} className={styles.icon}></Search>
 				)}
 			</div>
 		</form>

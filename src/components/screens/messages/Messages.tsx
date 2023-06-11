@@ -1,10 +1,10 @@
-import Button from "components/ui/button/Button";
 import { useSearchParams } from "react-router-dom";
 import Chat from "./chat/Chat";
 import CreationBlock from "./creationBlock/CreationBlock";
 import Header from "./header/Header";
 import ConversationsList from "./conversation/conversationsList/ConversationsList"
 import styles from "./Messages.module.scss";
+import { Button } from "ui-hypefans-lib";
 
 const Messages = () => {
 

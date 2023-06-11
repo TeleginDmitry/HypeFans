@@ -3,12 +3,13 @@ import styles from './PostCommentForm.module.scss'
 import TextareaInput from 'components/ui/textareaInput/TextareaInput'
 import { useFormik } from 'formik'
 import { PostService } from 'services/post/Post.service'
-import { IComment } from 'shared/interfaces/post.interface'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { Link } from 'react-router-dom'
 import { API_URL } from 'configs/api.config'
 import { ReactComponent as Send } from '@assets/images/send.svg'
-import { classNames as cn } from 'utils/classNames/classNames'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { COMMENTS_KEY, POST_LIST_KEY } from 'configs/index.config'
+import { motion } from 'framer-motion'
 
 interface IInitialValues {
 	comment: string
@@ -16,7 +17,6 @@ interface IInitialValues {
 
 interface IPostCommentForm {
 	post_id: number
-	isForModal?: boolean
 }
 
 const validate = (values: IInitialValues) => {
@@ -29,40 +29,54 @@ const validate = (values: IInitialValues) => {
 	return errors
 }
 
-const PostCommentForm = ({ post_id, isForModal }: IPostCommentForm) => {
+const PostCommentForm = ({ post_id }: IPostCommentForm) => {
+	const queryClient = useQueryClient()
+
 	const user = useTypedSelector(state => state.auth.user)
 
+	const { mutate } = useMutation(
+		async (comment: string) => {
+			const data = {
+				text: comment,
+				post_id: post_id,
+			}
+			const response = await PostService.createComment(data)
+			return response.data
+		},
+		{
+			onSuccess: () => {
+				resetForm()
+				queryClient.prefetchInfiniteQuery([COMMENTS_KEY, post_id])
+				queryClient.invalidateQueries(POST_LIST_KEY)
+			},
+		}
+	)
 
-	const classNamesWrapper = isForModal ? cn([styles.wrapper, styles.wrapper_modal]) : styles.wrapper
-
-	const formik = useFormik({
+	const { handleSubmit, handleChange, getFieldProps, resetForm } = useFormik({
 		initialValues: {
 			comment: '',
 		},
 		validate,
 		onSubmit: async values => {
-			const data = {
-				text: values.comment,
-				post: post_id,
-			}
-			const response = await PostService.createComment(data)
-
-			if (response.status === 201) {
-				formik.resetForm()
-			}
+			mutate(values.comment)
 		},
 	})
 
 	return (
-		<div className={classNamesWrapper}>
-			<Link to={'/profile'} className={styles.avatar__container}>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.3 }}
+			className={styles.wrapper}
+		>
+			<Link to={'/profile'}>
 				<img src={API_URL + user.avatar} className={styles.avatar} />
 			</Link>
 
-			<form onSubmit={formik.handleSubmit} className={styles.form}>
+			<form onSubmit={handleSubmit} className={styles.form}>
 				<TextareaInput
-					onChange={formik.handleChange}
-					{...formik.getFieldProps('comment')}
+					{...getFieldProps('comment')}
+					onChange={handleChange}
 					placeholder='Введите комментарий...'
 					maxRows={6}
 				></TextareaInput>
@@ -71,7 +85,7 @@ const PostCommentForm = ({ post_id, isForModal }: IPostCommentForm) => {
 					<Send className={styles.button__svg}></Send>
 				</button>
 			</form>
-		</div>
+		</motion.div>
 	)
 }
 

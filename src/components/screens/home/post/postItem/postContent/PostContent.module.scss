@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+
+  .description__container {
+    cursor: pointer;
+    @media (max-width: 425px) {
+      padding: 0 var(--padding-left-post);
+    }
+
+    .description {
+      line-height: 21px;
+      font-size: 15px;
+      overflow-wrap: break-word;
+    }
+  }
+}

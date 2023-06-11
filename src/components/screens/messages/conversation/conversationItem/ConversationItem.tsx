@@ -4,6 +4,7 @@ import { IConversation } from 'shared/interfaces/conversation.interface'
 import styles from './ConversationItem.module.scss'
 import { SERVER_URL } from 'configs/api.config'
 import ConvertDate from 'utils/ConvertDate/ConvertDate'
+import { USER_PAGE } from 'configs/index.config'
 
 const ConversationItem = ({
 	id,
@@ -22,7 +23,7 @@ const ConversationItem = ({
 	return (
 		<div
 			onClick={() => {
-				navigate(`?user=${membership?.id}`, { replace: false })
+				navigate(`?${USER_PAGE}=${membership?.id}`, { replace: false })
 			}}
 			className={styles.conversation}
 		>

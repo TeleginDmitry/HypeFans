@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Preview.module.scss'
 import logo from '@assets/images/auth/logoBlack.png'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useOverflowBody } from 'hooks/useOverflowBody'
+import { PREVIEW_CONTAINER_ID } from 'configs/index.config'
+import Portal from '../portal/Portal'
 
 const Preview = () => {
 	const [isVisible, setIsVisible] = useState(true)
@@ -10,19 +12,19 @@ const Preview = () => {
 	const { appendClass, deleteClass } = useOverflowBody()
 
 	useEffect(() => {
-		appendClass()
+		// appendClass()
 		const timeout = setTimeout(() => {
-			deleteClass()
 			setIsVisible(false)
+			// deleteClass()
 		}, 3000)
 
 		return () => {
-			return clearTimeout(timeout)
+			clearTimeout(timeout)
 		}
 	}, [])
 
 	return (
-		<>
+		<Portal element={document.getElementById(PREVIEW_CONTAINER_ID)}>
 			<AnimatePresence>
 				{isVisible && (
 					<motion.div
@@ -42,7 +44,7 @@ const Preview = () => {
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</>
+		</Portal>
 	)
 }
 

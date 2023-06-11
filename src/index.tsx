@@ -12,8 +12,9 @@ import './assets/styles/_mixins.module.scss'
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			refetchOnWindowFocus: false,
+			// refetchOnWindowFocus: false,
 			// refetchInterval: 5 * 60 * 1000
+			networkMode: 'offlineFirst',
 		},
 	},
 })

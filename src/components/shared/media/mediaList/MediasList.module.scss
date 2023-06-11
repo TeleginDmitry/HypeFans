@@ -2,4 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+
+  @media (max-width: 425px) {
+    justify-content: center;
+  }
 }

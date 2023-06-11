@@ -1,19 +1,19 @@
 import { lazy } from 'react'
-import HomePage from './HomePage'
-import CreationNewObject from './CreationNewObject'
+import Home from './Home'
+import Creation from './Creation'
 import Settings from './Settings'
 import Profile from './Profile'
 import Edit from './Edit'
 import Messages from './Messages'
 import User from './User'
-const LoginPage = lazy(() => import('./LoginPage'))
-const RegisterPage = lazy(() => import('./RegisterPage'))
+const Login = lazy(() => import('./Login'))
+const Register = lazy(() => import('./Register'))
 
 export {
-	HomePage,
-	LoginPage,
-	RegisterPage,
-	CreationNewObject,
+	Home,
+	Login,
+	Register,
+	Creation,
 	Settings,
 	Profile,
 	Edit,

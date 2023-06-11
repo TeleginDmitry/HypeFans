@@ -18,21 +18,8 @@
       padding: 20px;
       min-height: 100vh;
       @media (max-width: 425px) {
-        padding: 0;
+        padding: 0px;
       }
-    }
-  }
-  .modal__close {
-    position: fixed;
-    z-index: 2;
-    top: 20px;
-    right: 40px;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-
-    * {
-      stroke: var(--close-modal-color);
     }
   }
   .background {

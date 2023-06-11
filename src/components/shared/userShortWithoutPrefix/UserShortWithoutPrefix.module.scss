@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    img {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+    }
+
+    span {
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.actions {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #f8f3f3;
+  position: relative;
+  z-index: 1;
+
+  .action {
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 12px 10px 12px 10px;
+    transition: all 0.1s;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: #f8f3f3;
+    }
+  }
+}

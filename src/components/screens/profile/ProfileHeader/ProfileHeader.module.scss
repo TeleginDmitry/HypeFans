@@ -1,11 +1,8 @@
-@import "@assets/styles/variables.module";
-
 .wrapper {
   position: relative;
 
-
   .content {
-    @include contentProfile();
+    margin-top: 160px;
 
     &__relative {
       margin-top: 0px;
@@ -13,6 +10,10 @@
 
     .button__container {
       padding: 25px 20px;
+
+      .button {
+        max-width: 100%;
+      }
     }
   }
 }

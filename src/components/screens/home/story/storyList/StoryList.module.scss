@@ -1,15 +1,14 @@
 .wrapper {
-  .container {
-    display: flex;
-    .observer {
-      position: relative;
-      z-index: 100;
-    }
-  }
+  position: relative;
+}
+.observer {
+  height: 100%;
 }
 
-
-
-.slider {
+.slide {
   width: 100px !important;
+}
+
+.my_story {
+  margin-right: 13px;
 }

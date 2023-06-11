@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie'
 import { ACCESS, REFRESH } from '@configs/api.config'
-import { ITokens } from '../../shared/interfaces/auth.interface'
+import { ITokens } from 'shared/interfaces/auth.interface'
 
 export const getAccessToken = () => {
 	const accessToken = Cookie.get(ACCESS)

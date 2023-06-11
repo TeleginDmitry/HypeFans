@@ -6,8 +6,8 @@ import {
 	IRegister,
 	IUserResponse,
 	ILogin,
-} from '../../shared/interfaces/auth.interface'
-import { IChangeUser, IUser } from '../../shared/interfaces/user.interface'
+} from 'shared/interfaces/auth.interface'
+import { IChangeUser, IUser } from 'shared/interfaces/user.interface'
 import {
 	removeTokensStorage,
 	saveTokensStorage,

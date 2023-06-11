@@ -7,6 +7,7 @@ import { IUser } from 'shared/interfaces/user.interface'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import ProfileHeader from './ProfileHeader/ProfileHeader'
 import useFetching from 'hooks/useFetching'
+import { PROFILE_PAGE } from 'configs/index.config'
 
 const User = () => {
 	const navigate = useNavigate()
@@ -26,7 +27,7 @@ const User = () => {
 	useEffect(() => {
 		if (isLoading === false) {
 			if (meUser?.id && meUser.id === +user_id)
-				return navigate('/profile', { replace: true })
+				return navigate(`/${PROFILE_PAGE}`, { replace: true })
 			fetchQuery()
 		}
 	}, [meUser?.id, user_id])

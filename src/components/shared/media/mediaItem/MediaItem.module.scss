@@ -1,11 +1,11 @@
 .media__item {
   position: relative;
-  padding: 5px;
+
   .media {
-    width: 130px;
-    height: 130px;
-   
+    width: 120px;
+    height: 120px;
     object-fit: cover;
+    border-radius: 50%;
   }
   .media__delete {
     position: absolute;

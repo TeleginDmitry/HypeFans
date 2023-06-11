@@ -30,6 +30,7 @@ body {
   font-size: 100%;
   line-height: 1;
   font-size: 15px;
+  font-family: "Factor A";
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -38,6 +39,7 @@ input,
 button,
 textarea {
   font-family: inherit;
+  font-size: 15px;
 }
 textarea {
   resize: none;
@@ -45,7 +47,8 @@ textarea {
 input::-ms-clear {
   display: none;
 }
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   font-size: 15px;
 }
 button {

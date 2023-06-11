@@ -1,6 +1,6 @@
-import instance from 'api/api.interceptor'
+import instance, { instanceSimple } from 'api/api.interceptor'
 import { TOKEN_API } from '@configs/api.config'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import {
 	ILogin,
 	IRegister,
@@ -41,16 +41,12 @@ export const AuthService = {
 	refresh: async (): Promise<AxiosResponse<ITokens>> => {
 		const refreshToken = getRefreshToken()
 
-		return await axios.post<ITokens>(`${TOKEN_API}/refresh/`, {
+		return await instanceSimple.post<ITokens>(`${TOKEN_API}/refresh/`, {
 			refresh: refreshToken,
 		})
 	},
 
 	verify: async (): Promise<AxiosResponse<IUserResponse>> => {
-		const accessToken = getAccessToken()
-		console.log('3', accessToken)
-		return instance.post<IUserResponse>(`${TOKEN_API}/verify/`, {
-			token: accessToken,
-		})
+		return instance.get<IUserResponse>(`${TOKEN_API}/verify/`)
 	},
 }

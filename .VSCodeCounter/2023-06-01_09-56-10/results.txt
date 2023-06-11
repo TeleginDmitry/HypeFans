@@ -1,0 +1,62 @@
+Date : 2023-06-01 09:56:10
+Directory : d:\HypeFans\hypefans_frontend\src\components\screens\home\post
+Total : 22 files,  794 codes, 5 comments, 143 blanks, all 942 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         11 |        587 |          5 |        106 |        698 |
+| SCSS           |         11 |        207 |          0 |         37 |        244 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                                   | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                      |         22 |        794 |          5 |        143 |        942 |
+| postItem                                                                                                                                               |         18 |        667 |          5 |        123 |        795 |
+| postItem (Files)                                                                                                                                       |          2 |        110 |          0 |         16 |        126 |
+| postItem\postComments                                                                                                                                  |         10 |        376 |          5 |         69 |        450 |
+| postItem\postComments (Files)                                                                                                                          |          2 |        106 |          1 |         18 |        125 |
+| postItem\postComments\postCommentForm                                                                                                                  |          2 |        109 |          0 |         23 |        132 |
+| postItem\postComments\postCommentItem                                                                                                                  |          4 |        117 |          4 |         23 |        144 |
+| postItem\postComments\postCommentItem (Files)                                                                                                          |          2 |         71 |          4 |         14 |         89 |
+| postItem\postComments\postCommentItem\postCommentActions                                                                                               |          2 |         46 |          0 |          9 |         55 |
+| postItem\postComments\postCommentList                                                                                                                  |          2 |         44 |          0 |          5 |         49 |
+| postItem\postContent                                                                                                                                   |          4 |        101 |          0 |         24 |        125 |
+| postItem\postContent (Files)                                                                                                                           |          2 |         63 |          0 |         13 |         76 |
+| postItem\postContent\postMediasModal                                                                                                                   |          2 |         38 |          0 |         11 |         49 |
+| postItem\postHeader                                                                                                                                    |          2 |         80 |          0 |         14 |         94 |
+| postList                                                                                                                                               |          2 |         87 |          0 |         11 |         98 |
+| postModal                                                                                                                                              |          2 |         40 |          0 |          9 |         49 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                                               | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\PostItem.module.scss                                                           | SCSS           |         20 |          0 |          5 |         25 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\PostItem.tsx                                                                   | TypeScript JSX |         90 |          0 |         11 |        101 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\PostComments.module.scss                                          | SCSS           |         28 |          0 |          5 |         33 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\PostComments.tsx                                                  | TypeScript JSX |         78 |          1 |         13 |         92 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentForm\PostCommentForm.module.scss                       | SCSS           |         32 |          0 |          8 |         40 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentForm\PostCommentForm.tsx                               | TypeScript JSX |         77 |          0 |         15 |         92 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentItem\PostCommentItem.module.scss                       | SCSS           |         35 |          0 |          4 |         39 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentItem\PostCommentItem.tsx                               | TypeScript JSX |         36 |          4 |         10 |         50 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentItem\postCommentActions\PostCommentActions.module.scss | SCSS           |         10 |          0 |          1 |         11 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentItem\postCommentActions\PostCommentActions.tsx         | TypeScript JSX |         36 |          0 |          8 |         44 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentList\PostCommentList.module.scss                       | SCSS           |         13 |          0 |          1 |         14 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postComments\postCommentList\PostCommentList.tsx                               | TypeScript JSX |         31 |          0 |          4 |         35 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postContent\PostContent.module.scss                                            | SCSS           |         19 |          0 |          3 |         22 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postContent\PostContent.tsx                                                    | TypeScript JSX |         44 |          0 |         10 |         54 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postContent\postMediasModal\PostMediasModal.module.scss                        | SCSS           |          0 |          0 |          1 |          1 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postContent\postMediasModal\PostMediasModal.tsx                                | TypeScript JSX |         38 |          0 |         10 |         48 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postHeader\PostHeader.module.scss                                              | SCSS           |         28 |          0 |          5 |         33 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postItem\postHeader\PostHeader.tsx                                                      | TypeScript JSX |         52 |          0 |          9 |         61 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postList\PostsList.module.scss                                                          | SCSS           |         15 |          0 |          2 |         17 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postList\PostsList.tsx                                                                  | TypeScript JSX |         72 |          0 |          9 |         81 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postModal\PostModal.module.scss                                                         | SCSS           |          7 |          0 |          2 |          9 |
+| d:\HypeFans\hypefans_frontend\src\components\screens\home\post\postModal\PostModal.tsx                                                                 | TypeScript JSX |         33 |          0 |          7 |         40 |
+| Total                                                                                                                                                  |                |        794 |          5 |        143 |        942 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

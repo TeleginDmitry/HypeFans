@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import styles from './MyAvatar.module.scss'
 import { API_URL } from 'configs/api.config'
+import { PROFILE_PAGE } from 'configs/index.config'
 
 const MyAvatar = () => {
 	const navigate = useNavigate()
@@ -12,7 +13,7 @@ const MyAvatar = () => {
 	return (
 		<div
 			onClick={() => {
-				navigate('/profile')
+				navigate(`/${PROFILE_PAGE}`)
 			}}
 			className={styles.wrapper}
 		>

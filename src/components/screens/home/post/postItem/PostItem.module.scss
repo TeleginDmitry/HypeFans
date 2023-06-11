@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 20px 0;
+  padding: 15px 0;
   position: relative;
   width: 100%;
 
@@ -12,55 +12,12 @@
     gap: 15px;
     flex-direction: column;
 
-    .user {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
+    .actions__container {
+      border-bottom: 1px solid #00000033;
+      padding-bottom: 7px;
 
       @media (max-width: 425px) {
-        padding: 0 14px;
-      }
-
-      .time__container {
-        margin-right: 20px;
-
-        .time {
-        }
-      }
-      .point__container {
-        position: absolute;
-        top: 50%;
-        right: -7px;
-        transform: translate(0, -50%);
-
-        @media (max-width: 425px) {
-          right: 3px;
-        }
-      }
-
-      .actions__container {
-        position: absolute;
-        right: 0px;
-        top: 100%;
-      }
-    }
-
-    .content {
-      display: flex;
-      gap: 15px;
-      flex-direction: column;
-
-      .description__container {
-        cursor: pointer;
-        @media (max-width: 425px) {
-          padding: 0 14px;
-        }
-
-        .description {
-          line-height: 21px;
-          font-size: 15px;
-        }
+        padding-left: var(--padding-left-post);
       }
     }
   }

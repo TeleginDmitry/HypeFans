@@ -1,7 +1,36 @@
+// LINK PARAMS
 export const STORY_PARAM = 'story'
 export const POST_PARAM = 'post'
+export const MEDIAS_PARAM = 'media'
 
-// const path = require('path');
+// PAGES
+export const USER_PAGE = 'profile' // 'user/(id)'
+export const HOME_PAGE = ''
+export const PROFILE_PAGE = 'profile'
+export const CREATION_PAGE = 'creation'
+export const SETTINGS_PAGE = 'settings'
+export const EDIT_PAGE = 'edit'
+export const MESSAGES_PAGE = 'messages'
+export const LOGIN_PAGE = 'login'
+export const REGISTER_PAGE = 'registration'
 
-// export const pathImages = '@assets/images/TEST/';
+// CONTAINERS ID
 
+export const MODAL_CONTAINER_ID = 'modal-container'
+export const PREVIEW_CONTAINER_ID = 'preview-container'
+
+// REACT QUERY
+
+export const POST_LIST_KEY = ['posts']
+export const STORY_LIST_KEY = ['stories']
+export const POST_MEDIAS_KEY = ['post_medias']
+export const POST_MODAL_KEY = 'post_modal' // ['post_modal', (post_id)]
+export const COMMENTS_KEY = 'comments' // ['comments', (post_id)]
+export const SEARCH_POST_KEY = 'searchedPosts' // ['searchedPosts', (valueInput)]
+
+export const STORIES_LIMIT = 10
+export const POSTS_LIMIT = 15
+
+// LOCAL STORAGE
+
+export const IS_SLIDER = 'is_slider'

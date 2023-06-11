@@ -4,32 +4,28 @@
   width: 100%;
   gap: 20px;
   position: relative;
-  .searching {
-    flex: 1 1 100%;
-    .searching__input {
-      width: 100%;
-      padding: 12px 0;
-      font-size: 16px;
-    }
-  }
-  .cancel__container {
-    cursor: pointer;
-    padding: 5px;
-    .cancel {
-      width: 30px;
-      height: 30px;
-    }
+  box-shadow: 0 1px 0 0 var(--wrapper-color);
+  padding-bottom: 10px;
+
+  &__active {
+    box-shadow: none;
   }
 
-  .posts__container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: calc(100% + 15px);
-    left: 0;
-    background-color: #ffffff;
-    z-index: 1;
-    border-radius: 0 0 32px 32px;
+  .searching {
+    flex: 1 1 100%;
+    &__input {
+      width: 100%;
+      padding: 12px 0 12px 10px;
+      font-size: 16px;
+      border: none;
+    }
+  }
+  .icon__container {
+    cursor: pointer;
+    padding: 5px;
+    .icon {
+      width: 28px;
+      height: 28px;
+    }
   }
 }

@@ -4,8 +4,15 @@ import { ReactComponent as Home } from '@assets/images/header/home.svg'
 import { ReactComponent as Message } from '@assets/images/header/message-square.svg'
 import { ReactComponent as Plus } from '@assets/images/header/plus-circle.svg'
 import { ReactComponent as User } from '@assets/images/header/user.svg'
+import {
+	CREATION_PAGE,
+	HOME_PAGE,
+	MESSAGES_PAGE,
+	PROFILE_PAGE,
+	SETTINGS_PAGE,
+} from 'configs/index.config'
 import { NavLink } from 'react-router-dom'
-import uniqid from 'uniqid'
+import generateId from 'utils/generateId/GenerateId'
 
 interface IHeaderItem {
 	id: number | string
@@ -20,29 +27,29 @@ interface IChangingClass {
 
 const headerItems: IHeaderItem[] = [
 	{
-		id: uniqid(),
+		id: generateId(),
 		image: <Home></Home>,
-		to: '/',
+		to: HOME_PAGE,
 	},
 	{
-		id: uniqid(),
+		id: generateId(),
 		image: <Bell></Bell>,
-		to: '/settings',
+		to: `/${SETTINGS_PAGE}`,
 	},
 	{
-		id: uniqid(),
+		id: generateId(),
 		image: <Plus></Plus>,
-		to: '/create',
+		to: `/${CREATION_PAGE}`,
 	},
 	{
-		id: uniqid(),
+		id: generateId(),
 		image: <Message></Message>,
-		to: '/messages',
+		to: `/${MESSAGES_PAGE}`,
 	},
 	{
-		id: uniqid(),
+		id: generateId(),
 		image: <User></User>,
-		to: '/profile',
+		to: `/${PROFILE_PAGE}`,
 	},
 ]
 

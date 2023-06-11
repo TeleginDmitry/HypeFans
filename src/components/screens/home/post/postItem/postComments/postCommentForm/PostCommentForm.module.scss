@@ -3,28 +3,17 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  position: sticky;
-  bottom: 0px;
-  padding: 10px 0;
   background-color: #ffffff;
 
   @media (max-width: 425px) {
     padding: 0 14px 7px 14px;
   }
 
-  &.wrapper_modal {
-    background-color: var(--block-modal);
-  }
-
-  
-
-  .avatar__container {
-    .avatar {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+  .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .form {

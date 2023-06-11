@@ -1,64 +1,100 @@
 import { AxiosResponse } from 'axios'
-import { API_URL } from '../../configs/api.config'
-import { IPagination } from '../../shared/interfaces/pagination.interface'
+import { IPagination } from 'shared/interfaces/pagination.interface'
 import {
-	IComment,
-	ILike,
+	IPostComment,
+	IPostLike,
 	IPost,
 	IPostSearch,
-} from '../../shared/interfaces/post.interface'
+	IPostMedia,
+} from 'shared/interfaces/post.interface'
 import {
 	ICreateComment,
-	IGetPosts,
+	IGetPostsParams,
 	IUploadMedia,
 	IGetComments,
+	ICreatePost,
+	IPostMediaData,
+	ICreateCommentData,
+	IGetMediasParams,
+	IGetMediaParams,
+	ICreateCommentLikeData,
+	IDeleteCommentLikeLink,
 } from './PostService.interface'
 import instance from 'api/api.interceptor'
 
 export const PostService = {
 	getPosts: async (
-		params: IGetPosts
+		params: IGetPostsParams
 	): Promise<AxiosResponse<IPagination<IPost[]>>> => {
-		return instance.get(`${API_URL}/posts/`, {
+		return instance.get(`posts/`, {
 			params,
 		})
 	},
 	getPostsSearch: async (
 		description: string
 	): Promise<AxiosResponse<IPostSearch[]>> => {
-		return instance.get(`${API_URL}/posts/`, {
+		return instance.get(`posts/`, {
 			params: {
 				search: description,
 			},
 		})
 	},
 	getPost: async (post_id: number | string): Promise<AxiosResponse<IPost>> => {
-		return instance.get(`${API_URL}/post/${post_id}/`)
+		return instance.get(`post/${post_id}/`)
 	},
-	createPost: async (data: any): Promise<AxiosResponse<IPost>> => {
-		return instance.post(`${API_URL}/posts/`, data)
+	createPost: async (data: ICreatePost): Promise<AxiosResponse<IPost>> => {
+		return instance.post(`posts/`, data)
+	},
+	deletePost: async (post_id: number): Promise<AxiosResponse<void>> => {
+		return instance.delete(`post/${post_id}/`)
 	},
 	uploadMedia: async (data: IUploadMedia): Promise<AxiosResponse<IPost>> => {
-		return instance.post(`${API_URL}/posts/medias/`, data)
+		return instance.post(`posts/medias/`, data)
 	},
 
-	createLike: async (post_id: number): Promise<AxiosResponse<ILike>> => {
-		return instance.post(`${API_URL}/posts/likes/`, { post: post_id })
+	createLike: async (post_id: number): Promise<AxiosResponse<IPostLike>> => {
+		return instance.post(`post/likes/`, { post: post_id })
 	},
 	deleteLike: async (post_id: number): Promise<AxiosResponse<void>> => {
-		return instance.delete(`${API_URL}/posts/likes/${post_id}/`)
+		return instance.delete(`post/like/${post_id}/`)
+	},
+	createCommentLike: async (data: ICreateCommentLikeData) => {
+		return instance.post('post/comment/likes/', data)
+	},
+	deleteCommentLike: async ({
+		comment,
+	}: IDeleteCommentLikeLink): Promise<AxiosResponse<void>> => {
+		return instance.delete(`post/comment/like/${comment}/`)
 	},
 	getComments: async (
 		params: IGetComments
-	): Promise<AxiosResponse<IPagination<IComment[]>>> => {
-		return instance.get(`${API_URL}/posts/comments/`, { params })
+	): Promise<AxiosResponse<IPagination<IPostComment[]>>> => {
+		return instance.get(`post/comments/`, { params })
 	},
 	createComment: async (
-		data: ICreateComment
-	): Promise<AxiosResponse<IComment>> => {
-		return instance.post(`${API_URL}/posts/comments/`, data)
+		data: ICreateCommentData
+	): Promise<AxiosResponse<IPostComment>> => {
+		return instance.post(`post/comments/`, data)
 	},
 	deleteComment: async (comment_id: number): Promise<AxiosResponse<void>> => {
-		return instance.delete(`${API_URL}/posts/comments/${comment_id}/`)
+		return instance.delete(`post/comment/${comment_id}/`)
+	},
+
+	// TEST
+	// getMedias: async (
+	// 	params: IGetMediasParams
+	// ): Promise<AxiosResponse<IPostMedia[]>> => {
+	// 	return instanceSimple.get(`post/medias/`, { params })
+	// },
+	getMedias: async (
+		params: IGetMediaParams
+	): Promise<AxiosResponse<IPostMedia[]>> => {
+		return instance.get(`post/medias/`, { params })
+	},
+	createMedia: async (data: any): Promise<AxiosResponse<IPostMedia>> => {
+		return instance.post(`post/medias/`, data)
+	},
+	deleteMedia: async (post_id: number): Promise<AxiosResponse<void>> => {
+		return instance.delete(`post/media/${post_id}/`)
 	},
 }

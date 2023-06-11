@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './EditFields.module.scss'
-import Input from '@ui/input/Input'
+import { Input } from 'ui-hypefans-lib'
 import TextareaInput from '@ui/textareaInput/TextareaInput'
 import ValidateField from 'components/shared/validateField/ValidateField'
 import { FormikProps } from 'formik'
@@ -17,10 +17,10 @@ const EditFields = ({ formik }: IEditFields) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.container}>
-				<label htmlFor='username'>Имя</label>
 				<Input
 					type='text'
 					id='username'
+					label='Имя'
 					placeholder={user?.username || 'Укажите своё Имя/Фамилию...'}
 					onChange={formik.handleChange}
 					isWrong={!!(formik.touched.username && formik.errors.username)}
@@ -32,10 +32,10 @@ const EditFields = ({ formik }: IEditFields) => {
 				></ValidateField>
 			</div>
 			<div className={styles.container}>
-				<label htmlFor='prefix'>Ник</label>
 				<Input
 					type='text'
 					id='prefix'
+					label='Ник'
 					placeholder={user?.prefix || 'Придумайте свой никнейм...'}
 					onChange={formik.handleChange}
 					isWrong={!!(formik.touched.prefix && formik.errors.prefix)}
@@ -51,6 +51,7 @@ const EditFields = ({ formik }: IEditFields) => {
 				<TextareaInput
 					id='description'
 					minRows={4}
+					// lab='Имя'
 					placeholder={user?.description || 'Запишите свою биографию...'}
 					onChange={formik.handleChange}
 					isWrong={!!(formik.touched.description && formik.errors.description)}
@@ -62,10 +63,10 @@ const EditFields = ({ formik }: IEditFields) => {
 				></ValidateField>
 			</div>
 			<div className={styles.container}>
-				<label htmlFor='site'>Сайт</label>
 				<Input
 					type='url'
 					id='site'
+					label='Сайт'
 					placeholder={user?.site || 'Введите ссылку на ваш сайт...'}
 					onChange={formik.handleChange}
 					isWrong={!!(formik.touched.site && formik.errors.site)}

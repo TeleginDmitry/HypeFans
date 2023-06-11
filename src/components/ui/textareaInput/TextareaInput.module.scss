@@ -18,9 +18,7 @@
 
     &::placeholder {
         color: var(--input-color);
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(3px);
     }
 
     &.wrong {
@@ -29,5 +27,12 @@
         &::placeholder {
             color: var(--wrong-color);
         }
+    }
+
+    @media (max-width: 425px) {
+        padding: 10px;
+    }
+    @media (max-width: 360px) {
+        padding: 8px;
     }
 }

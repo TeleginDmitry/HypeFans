@@ -4,7 +4,7 @@ import ProfileBackground from 'components/shared/profileHeader/profileBackground
 import ProfileInfo from 'components/shared/profileHeader/profileInfo/ProfileInfo'
 import ProfileDescription from 'components/shared/profileHeader/profileDescription/ProfileDescription'
 import { Link } from 'react-router-dom'
-import Button from 'components/ui/button/Button'
+import { Button } from 'ui-hypefans-lib'
 import { classNames as cn } from 'utils/classNames/classNames'
 
 const ProfileHeader = () => {
@@ -16,13 +16,19 @@ const ProfileHeader = () => {
 
 			<ProfileInfo isMyProfile={true} user={user}></ProfileInfo>
 
-			<div className={user?.background ? styles.content : cn([styles.content, styles.content__relative])}>
+			<div
+				className={
+					user?.background
+						? styles.content
+						: cn([styles.content, styles.content__relative])
+				}
+			>
 				<ProfileDescription
 					description={user?.description}
 				></ProfileDescription>
 				<div className={styles.button__container}>
 					<Link to={'/edit'}>
-						<Button>Редактировать профиль</Button>
+						<Button className={styles.button}>Редактировать профиль</Button>
 					</Link>
 				</div>
 			</div>

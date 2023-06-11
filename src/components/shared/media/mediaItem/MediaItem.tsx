@@ -3,11 +3,11 @@ import styles from './MediaItem.module.scss'
 import { ReactComponent as Circle } from '@assets/images/newPost/x-circle.svg'
 
 import { motion } from 'framer-motion'
-import { IViewMedia } from 'utils/viewMedia/ViewMedia'
+import { IResponseViewMedia } from 'hooks/useViewUploadMedias'
 
 interface IMediaItem {
-	media: IViewMedia
-	deleteMedia: (id: string) => void
+	media: IResponseViewMedia
+	deleteMedia: (id: number) => void
 }
 
 export default function MediaItem({ media, deleteMedia }: IMediaItem) {
@@ -23,7 +23,7 @@ export default function MediaItem({ media, deleteMedia }: IMediaItem) {
 		>
 			<motion.img
 				className={styles.media}
-				src={media.linkView}
+				src={media.view}
 				alt='HypeFans'
 			/>
 			<Circle

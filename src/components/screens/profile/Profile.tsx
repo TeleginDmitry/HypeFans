@@ -4,8 +4,7 @@ import styles from './Profile.module.scss'
 import ProfileHeader from './ProfileHeader/ProfileHeader'
 
 const Profile = () => {
-
-	const user = useTypedSelector((state) => state.auth.user)
+	const user = useTypedSelector(state => state.auth.user)
 
 	return (
 		<div className={styles.wrapper}>
@@ -13,7 +12,6 @@ const Profile = () => {
 				<ProfileHeader></ProfileHeader>
 				<div className={styles.posts__container}>
 					{user?.id && <PostsList user_id={user.id}></PostsList>}
-					
 				</div>
 			</div>
 		</div>

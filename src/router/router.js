@@ -1,10 +1,10 @@
 import { Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import {
-	HomePage,
-	LoginPage,
-	RegisterPage,
-	CreationNewObject,
+	Home,
+	Login,
+	Register,
+	Creation,
 	Settings,
 	Profile,
 	Edit,
@@ -13,8 +13,17 @@ import {
 } from '../pages/index'
 import { Layout } from '../components/layout/layout/Layout'
 import { AuthLayout } from '../components/layout/authLayout/AuthLayout'
-import PrivateElement from './PrivateElement'
-import PrivateAuth from './PrivateAuth'
+import PrivateRoute  from './PrivateRoute'
+import {
+	CREATION_PAGE,
+	EDIT_PAGE,
+	LOGIN_PAGE,
+	MESSAGES_PAGE,
+	PROFILE_PAGE,
+	REGISTER_PAGE,
+	SETTINGS_PAGE,
+	USER_PAGE,
+} from 'configs/index.config'
 
 export const router = createBrowserRouter([
 	{
@@ -23,59 +32,55 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <HomePage />,
+				element: <Home />,
 			},
 			{
-				path: '/create',
+				path: `/${CREATION_PAGE}`,
 				element: (
-					<PrivateElement>
-						<CreationNewObject />,
-					</PrivateElement>
+					<PrivateRoute>
+						<Creation />,
+					</PrivateRoute>
 				),
 			},
 			{
-				path: '/settings',
+				path: `/${SETTINGS_PAGE}`,
 				element: (
-					<PrivateElement>
+					<PrivateRoute>
 						<Settings />
-					</PrivateElement>
+					</PrivateRoute>
 				),
 			},
 			{
-				path: '/profile',
+				path: `/${PROFILE_PAGE}`,
 				element: (
-					<PrivateElement>
+					<PrivateRoute>
 						<Profile />
-					</PrivateElement>
+					</PrivateRoute>
 				),
 			},
 			{
-				path: '/edit',
+				path: `/${EDIT_PAGE}`,
 				element: (
-					<PrivateElement>
+					<PrivateRoute>
 						<Edit />
-					</PrivateElement>
+					</PrivateRoute>
 				),
 			},
 			{
-				path: '/messages',
+				path: `/${MESSAGES_PAGE}`,
 				element: (
-					<PrivateElement>
+					<PrivateRoute>
 						<Messages />
-					</PrivateElement>
+					</PrivateRoute>
 				),
 			},
 			{
-				path: '/user/:user_id',
+				path: `/${USER_PAGE}/:user_id`,
 				element: (
-					<PrivateElement>
+					<PrivateRoute>
 						<User />
-					</PrivateElement>
+					</PrivateRoute>
 				),
-			},
-			{
-				path: '/story/:story_id',
-				index: true,
 			},
 		],
 	},
@@ -83,19 +88,19 @@ export const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<Suspense>
-				<PrivateAuth>
+				<PrivateRoute isAuthRoute={true}>
 					<AuthLayout />
-				</PrivateAuth>
+				</PrivateRoute >
 			</Suspense>
 		),
 		children: [
 			{
-				path: '/login',
-				element: <LoginPage />,
+				path: `/${LOGIN_PAGE}`,
+				element: <Login />,
 			},
 			{
-				path: '/registration',
-				element: <RegisterPage />,
+				path: `/${REGISTER_PAGE}`,
+				element: <Register />,
 			},
 		],
 	},

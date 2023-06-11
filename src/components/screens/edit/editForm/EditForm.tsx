@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './EditForm.module.scss'
 import { useFormik } from 'formik'
-import Button from '@ui/button/Button'
+import { Button } from 'ui-hypefans-lib'
 import { IDataUser } from 'shared/interfaces/user.interface'
 import { PrefixService } from 'services/prefix/Prefix.service'
 import { useTypedSelector } from 'hooks/useTypedSelector'
@@ -10,8 +10,8 @@ import { IInitialValues } from './EditForm.interface'
 import EditFields from '../editFields/EditFields'
 
 interface IEditForm {
-	background?: string | File
-	avatar?: string | File
+	background: File
+	avatar: File
 }
 
 const validate = async (values: IInitialValues) => {
@@ -91,7 +91,9 @@ const EditForm = ({ avatar, background }: IEditForm) => {
 		<form onSubmit={formik.handleSubmit} className={styles.form}>
 			<EditFields formik={formik} />
 
-			<Button type='submit'>Сохранить</Button>
+			<Button className={styles.button} type='submit'>
+				Сохранить
+			</Button>
 		</form>
 	)
 }

@@ -1,0 +1,14 @@
+.wrapper {
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+  .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+}

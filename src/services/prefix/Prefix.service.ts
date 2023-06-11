@@ -1,12 +1,12 @@
-import axios, { AxiosResponse } from 'axios'
-import { API_URL } from '../../configs/api.config'
+import { AxiosResponse } from 'axios'
 import { IResponsePrefix } from '../../shared/interfaces/prefix.interface'
+import { instanceSimple } from 'api/api.interceptor'
 
 export const PrefixService = {
 	isUniquePrefix: async (
 		value: string
 	): Promise<AxiosResponse<IResponsePrefix>> => {
-		return axios.get<IResponsePrefix>(`${API_URL}/prefix/`, {
+		return instanceSimple.get<IResponsePrefix>(`prefix/`, {
 			params: {
 				value,
 			},

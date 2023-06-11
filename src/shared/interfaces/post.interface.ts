@@ -1,49 +1,66 @@
 import { IShortUser } from './user.interface'
 
-interface IUser {
+export interface IPostUser {
 	id: number
 	username: string
 	prefix: string
 	avatar: string
 }
 
-interface IMedia {
+export interface IPostMediaShort {
 	id: number
 	media: string
 	date_joined: string
 }
 
-
-export interface IComment {
+export interface IPostMedia {
 	id: number
-	text: string
+	media: string
 	date_joined: string
 	user: IShortUser
 }
 
+export interface IPostComment {
+	id: number
+	text: string
+	date_joined: string
+	user: IShortUser
+	post: number
+	likes: number
+	isLiked: boolean
+}
+
 export interface IPost {
 	id: number
-	user: IUser
+	user: IPostUser
 	description: string
 	likes: number
 	comments: number
-	medias?: IMedia[]
+	medias?: IPostMediaShort[]
 	date_joined: string
-	is_liked: boolean
-	lastComment: IComment | null
+	isLiked: boolean
+	lastComment: IPostComment | null
 }
 
-export interface ILike {
+export interface IPostLike {
 	id: number
 	date_joined: string
 	post: number
 	user: number
 }
 
+export interface ICommentLike {
+	id: number
+	user: IShortUser
+	date_joined: string
+}
+
 export interface IPostSearch {
 	id: number
-	user: IUser
+	user: IPostUser
 	description: string
 	likes: number
+	comments: number
 	date_joined: string
+	is_liked: boolean
 }

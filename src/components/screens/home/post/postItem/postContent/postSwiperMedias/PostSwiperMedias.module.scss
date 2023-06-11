@@ -1,0 +1,28 @@
+.swiper {
+  border-radius: var(--border-radius-16);
+  width: 100%;
+  .swiper__container {
+    display: flex;
+    align-items: center;
+
+    .slide {
+      height: 100%;
+      width: 100% !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .media__container {
+        display: flex;
+        justify-content: center;
+
+        .media {
+          max-width: 100%;
+          object-fit: cover;
+          user-select: none;
+          border-radius: var(--border-radius-16);
+        }
+      }
+    }
+  }
+}

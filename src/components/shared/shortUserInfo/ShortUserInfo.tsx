@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styles from './ShortUserInfo.module.scss'
+import { API_URL } from 'configs/api.config'
 
 interface IShortUserInfo {
 	avatar: string
@@ -20,7 +21,7 @@ const ShortUserInfo = ({
 				<img
 					draggable={false}
 					className={styles.avatar}
-					src={avatar}
+					src={API_URL + avatar}
 					alt='HypeFans'
 				/>
 			</div>
@@ -32,4 +33,4 @@ const ShortUserInfo = ({
 	)
 }
 
-export default ShortUserInfo
+export default memo(ShortUserInfo)

@@ -1,0 +1,12 @@
+.wrapper {
+  background-color: var(--block-modal);
+  border-radius: var(--border-radius-16);
+  padding: 0px 20px;
+  max-width: 660px;
+  width: 100%;
+
+
+  @media (max-width: 425px) {
+    padding: 0px;
+  }
+}

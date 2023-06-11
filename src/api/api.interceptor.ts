@@ -6,17 +6,19 @@ import {
 	saveTokensStorage,
 } from '../services/auth/Auth.helper'
 import { AuthService } from '../services/auth/Auth.service'
-import { errorCatch, getContentType } from './api.helper'
+import { errorCatch } from './api.helper'
+
+export const instanceSimple = axios.create({
+	baseURL: API_URL,
+})
 
 const instance = axios.create({
 	// withCredentials: true,
 	baseURL: API_URL,
-	// headers: getContentType(),
 })
 
 instance.interceptors.request.use(config => {
 	const accessToken = getAccessToken()
-	console.log(accessToken)
 
 	if (config && config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
@@ -28,29 +30,24 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
 	config => config,
 	async error => {
-		const originalRequest = error.config
-
 		if (
 			error.response.status === 401 &&
 			error.config &&
 			!error.config._isRetry
 		) {
-			originalRequest._isRetry = true
+			error.config._isRetry = true
 
 			try {
 				const response = await AuthService.refresh()
 
-				if (response?.data) {
-					console.log('1', response.data)
-
+				if (response.status === 200) {
 					saveTokensStorage(response.data)
+
+					return instance.request(error.config)
 				}
-
-				console.log('2', response.data)
-
-				return instance.request(originalRequest)
 			} catch (error) {
-				if (errorCatch(error) === 'token_not_valid') removeTokensStorage()
+				// if (errorCatch(error) === 'token_not_valid')
+				// 	return removeTokensStorage()
 			}
 		}
 		throw error

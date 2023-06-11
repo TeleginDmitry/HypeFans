@@ -1,0 +1,17 @@
+.wrapper {
+  max-width: 390px;
+
+  @media (max-width: 425px) {
+    display: none;
+  }
+  .agreement {
+    text-align: center;
+    line-height: 21px;
+    font-weight: 500;
+    font-size: 14px;
+
+    .link {
+      color: var(--color-link);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 5px solid #fff;
+  transition: all 0.3s;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  .container {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+
+    .description {
+      overflow-wrap: break-word;
+      line-height: 21px;
+      text-indent: 12px;
+      cursor: pointer;
+    }
+  }
+}

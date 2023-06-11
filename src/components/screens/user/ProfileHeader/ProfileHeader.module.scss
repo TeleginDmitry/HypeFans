@@ -1,12 +1,9 @@
-@import "@assets/styles/variables.module";
-
 .wrapper {
   position: relative;
- 
 
   .content {
-    @include contentProfile();
-    
+    margin-top: 160px;
+
     &__relative {
       margin-top: 0px;
     }

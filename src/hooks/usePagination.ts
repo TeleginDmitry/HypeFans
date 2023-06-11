@@ -1,80 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { IPagination } from 'shared/interfaces/pagination.interface'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import {
-	useInView,
-	IntersectionObserverProps,
-} from 'react-intersection-observer'
+	QueryFunctionContext,
+	useInfiniteQuery,
+	UseInfiniteQueryOptions,
+} from '@tanstack/react-query'
+import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
 
-interface IUsePagination<T> {
-	queryParam?: {}
-	initialLimit?: number
-	initialOffset?: number
-	isInfinity?: boolean
-	observerParams?: IntersectionObserverProps
-	enabled?: boolean
+type ICallback<T> = (options: QueryFunctionContext) => Promise<IPagination<T[]>>
+
+interface IUsePagination<T>
+	extends Omit<
+		UseInfiniteQueryOptions<IPagination<T[]>>,
+		'getNextPageParam' | 'getPreviousPageParam' | 'keepPreviousData' | 'queryFn'
+	> {
+	nameParam?: string
+	queryFn: ICallback<T>
 }
 
-type ICallback<T> = (params: any) => Promise<IPagination<T[]>>
+const usePagination = <T>(options: IUsePagination<T>) => {
+	const { nameParam = 'offset', queryFn: callback, ...queryOptions } = options
 
-const usePagination = <T>(
-	queryKey: (string | number)[],
-	callback: ICallback<T>,
-	{
-		queryParam,
-		initialOffset = 0,
-		initialLimit = 15,
-		isInfinity = false,
-		observerParams,
-		enabled = true,
-	}: IUsePagination<T>
-) => {
-	const [nextPage, setNextPage] = useState('')
-	const [previousPage, setPreviousPage] = useState('')
+	const { data, ...result } = useInfiniteQuery({
+		queryFn: async options => {
+			const response = await callback(options)
 
-	function getPageParam(page: string) {
-		return page?.split('&')?.reduce((acc, item) => {
-			const splitResult = item.split('=')
-
-			acc = splitResult[0] === 'offset' && +splitResult[1]
-			return acc
-		}, initialOffset)
-	}
-
-	const { fetchNextPage, hasNextPage, ...otherPropsQuery } = useInfiniteQuery(
-		[queryKey],
-		async ({ pageParam = initialOffset }) => {
-			const params = {
-				limit: initialLimit,
-				offset: pageParam,
-				...queryParam,
-			}
-			const response = await callback(params)
-
-			setPreviousPage(response.previous)
-			setNextPage(response.next)
-			return response.results
+			return response
 		},
-		{
-			getNextPageParam: () => getPageParam(nextPage),
-			getPreviousPageParam: () => getPageParam(previousPage),
-			keepPreviousData: true,
-			enabled,
-		}
-	)
-
-	const { ref, inView } = useInView({
-		...observerParams,
-		skip: !hasNextPage,
+		getNextPageParam: lastPage =>
+			getValueParamFromQuery(lastPage.next, nameParam),
+		getPreviousPageParam: lastPage =>
+			getValueParamFromQuery(lastPage.previous, nameParam),
+		keepPreviousData: true,
+		...queryOptions,
 	})
 
-	useEffect(() => {
-		if (inView) {
-			fetchNextPage()
-		}
-	}, [inView])
-
-	return { ref, fetchNextPage, hasNextPage, ...otherPropsQuery }
+	return { data: data ? data.pages.flat() : [], ...result }
 }
 
 export default usePagination
