@@ -37,9 +37,7 @@ export const router = createBrowserRouter([
 			{
 				path: `/${CREATION_PAGE}`,
 				element: (
-					<PrivateRoute>
-						<Creation />,
-					</PrivateRoute>
+					<Creation />
 				),
 			},
 			{

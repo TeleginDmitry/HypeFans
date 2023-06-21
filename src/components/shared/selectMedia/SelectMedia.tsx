@@ -7,7 +7,7 @@ import { ReactComponent as Mic } from '@assets/images/newPost/mic.svg'
 import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
 import { ReactComponent as Paperclip } from '@assets/images/newPost/paperclip.svg'
 import cn from '@utils/classNames/classNames'
-import UploadFile from '@ui/uploadFile/UploadFile'
+import UploadFile from '@ui/UploadFile/UploadFile'
 
 interface ISelectMedia {
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void

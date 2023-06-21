@@ -1,5 +1,5 @@
 import React from 'react'
-import RegisterComponent from '../components/screens/Auth/register/Register'
+import RegisterComponent from '@components/screens/Auth/Register/Register'
 import useChangingTitlePage from 'hooks/useChangingTitlePage'
 
 export default function Register() {

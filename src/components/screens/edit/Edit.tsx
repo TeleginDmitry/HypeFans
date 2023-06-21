@@ -6,7 +6,7 @@ import { ReactComponent as Camera } from '@assets/images/edit/camera.svg'
 import { useNavigate } from 'react-router-dom'
 import { API_URL } from 'configs/api.config'
 import EditForm from './editForm/EditForm'
-import UploadFile from '@ui/uploadFile/UploadFile'
+import UploadFile from '@ui/UploadFile/UploadFile'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 

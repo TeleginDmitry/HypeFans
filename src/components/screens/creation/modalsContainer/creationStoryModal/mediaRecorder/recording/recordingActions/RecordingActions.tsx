@@ -3,7 +3,7 @@ import Camera from 'components/shared/actions/camera/Camera'
 import UploadMedia from 'components/shared/actions/uploadMedia/UploadMedia'
 import RecordButton from 'components/shared/recordButton/RecordButton'
 import styles from './RecordingActions.module.scss'
-import UploadFile from 'components/ui/uploadFile/UploadFile'
+import UploadFile from '@ui/UploadFile/UploadFile'
 
 interface IRecordingActions {
 	onUploadFile: (event: React.ChangeEvent<HTMLInputElement>) => void
