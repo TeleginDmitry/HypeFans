@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 import styles from './ProfileDescription.module.scss'
 
 interface IProfileDescription {
@@ -14,11 +14,10 @@ const ProfileDescription = ({ description }: IProfileDescription) => {
 			{description && (
 				<div className={styles.description__container}>
 					<p
-						className={
-							isFullDescription
-								? cn([styles.description, styles.description__active])
-								: styles.description
-						}
+						className={cn(
+							[styles.description],
+							[isFullDescription, styles.description__active]
+						)}
 					>
 						{description}
 					</p>

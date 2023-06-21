@@ -1,8 +1,9 @@
-// Styles
 .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s;
-  padding-bottom: 10px;
+  
+  @media (max-width: 425px) {
+    padding: 0px 10px;
+  }
 }

@@ -33,13 +33,15 @@ const PostCommentItem = ({ comment }: IPostCommentItem) => {
 					<ConvertedDate date={date_joined}></ConvertedDate>
 				</div>
 			</div>
-			<PostCommentActions
-				likes={likes}
-				isLiked={isLiked}
-				user={user}
-				post_id={post}
-				comment={id}
-			></PostCommentActions>
+			<div className={styles.postActions__container}>
+				<PostCommentActions
+					likes={likes}
+					isLiked={isLiked}
+					user={user}
+					post_id={post}
+					comment={id}
+				></PostCommentActions>
+			</div>
 		</div>
 	)
 }

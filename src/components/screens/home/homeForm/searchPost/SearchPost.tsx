@@ -7,7 +7,7 @@ import { useTypedSelector } from 'hooks/useTypedSelector'
 import SearchPostList from './searchPostList/SearchPostList'
 import { useNavigate } from 'react-router-dom'
 import { POST_PARAM } from 'configs/index.config'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface ISearchPost {
 	changeStateActive: () => void
@@ -21,10 +21,6 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const [valueInput, setValueInput] = useState('')
-
-	const wrapperClass = valueInput
-		? cn([styles.wrapper, styles.wrapper__active])
-		: styles.wrapper
 
 	function onChange(input: React.ChangeEvent<HTMLInputElement>) {
 		setValueInput(input.target.value)
@@ -43,7 +39,7 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
 	}
 
 	return (
-		<div className={wrapperClass}>
+		<div className={cn([styles.wrapper], [valueInput, styles.wrapper__active])}>
 			{isAuth && <MyAvatar />}
 
 			<div className={styles.searching}>

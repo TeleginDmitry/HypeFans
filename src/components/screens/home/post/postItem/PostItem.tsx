@@ -38,10 +38,10 @@ export default function PostItem({ post }: IPostItem) {
 
 	return (
 		<motion.div
-			initial={{ opacity: 0 }}
-			viewport={{ once: true }}
-			whileInView={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
+			// initial={{ opacity: 0 }}
+			// viewport={{ once: true }}
+			// whileInView={{ opacity: 1 }}
+			// transition={{ duration: 0.5 }}
 			className={styles.wrapper}
 		>
 			<div className={styles.container}>

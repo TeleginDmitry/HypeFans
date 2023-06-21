@@ -3,7 +3,7 @@ import ProfileBackground from 'components/shared/profileHeader/profileBackground
 import ProfileInfo from 'components/shared/profileHeader/profileInfo/ProfileInfo'
 import ProfileDescription from 'components/shared/profileHeader/profileDescription/ProfileDescription'
 import { IUser } from 'shared/interfaces/user.interface'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface IProfileHeader {
 	user: IUser
@@ -16,7 +16,7 @@ const ProfileHeader = ({ user }: IProfileHeader) => {
 
 			<ProfileInfo user={user}></ProfileInfo>
 
-			<div className={user?.background ? styles.content : cn([styles.content, styles.content__relative])}>
+			<div className={cn([styles.content], [user?.background, styles.content__relative])}>
         <ProfileDescription description={user?.description}></ProfileDescription>
       </div>
 		</div>

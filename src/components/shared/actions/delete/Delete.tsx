@@ -1,14 +1,17 @@
 import React from 'react'
+import { ReactComponent as DeleteSvg } from '@assets/images/post/delete.svg'
 import { MutationFunction, useMutation } from '@tanstack/react-query'
 import styles from './Delete.module.scss'
 import { useTypedSelector } from 'hooks/useTypedSelector'
+import { IActionsVariablesSize } from '../actionsVariables.interface'
+import { actionsStyles } from 'utils/actionsStyles/ActionsStyles'
 
-interface IDelete {
+interface IDelete extends IActionsVariablesSize {
 	onDelete: MutationFunction<unknown, void>
 	user_id: number
 }
 
-const Delete = ({ onDelete, user_id }: IDelete) => {
+const Delete = ({ onDelete, user_id, size = 'medium' }: IDelete) => {
 	const { isAuth, user } = useTypedSelector(state => state.auth)
 
 	const { mutate: deleteMutation, isLoading: deleteLoading } =
@@ -23,9 +26,11 @@ const Delete = ({ onDelete, user_id }: IDelete) => {
 	return (
 		<>
 			{isAuth && user.id === user_id && (
-				<span onClick={deleteFunction} className={styles.action}>
-					удалить
-				</span>
+				<DeleteSvg
+					style={actionsStyles({ size })}
+					onClick={deleteFunction}
+					className={styles.delete}
+				></DeleteSvg>
 			)}
 		</>
 	)

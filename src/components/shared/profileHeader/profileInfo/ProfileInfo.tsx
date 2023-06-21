@@ -1,6 +1,6 @@
 import { SERVER_URL } from 'configs/api.config'
 import { IUser } from 'shared/interfaces/user.interface'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 import styles from './ProfileInfo.module.scss'
 import { ReactComponent as Message } from '@assets/images/profile/message.svg'
 import { ReactComponent as Frame } from '@assets/images/profile/frame.svg'
@@ -29,19 +29,16 @@ const ProfileInfo = ({ isMyProfile = false, user }: IProfileInfo) => {
 					user: userId,
 					conversation: conversation_id,
 				})
-
-        console.log(responseMembership)
 			})
 		}
 	}
 
 	return (
 		<div
-			className={
-				user?.background
-					? styles.wrapper
-					: cn([styles.wrapper, styles.wrapper__little])
-			}
+			className={cn(
+				[styles.wrapper],
+				[user?.background, styles.wrapper__little]
+			)}
 		>
 			<div className={styles.content}>
 				<div className={styles.avatar__container}>

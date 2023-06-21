@@ -9,17 +9,16 @@ export interface IUser {
 	prefix: string
 	posts: number
 	status: boolean
-	site: string
+	site: string | null
 }
 
-
 export interface IDataUser {
-  username: string
-  prefix: string
-  description?: string
-  site?: string
-  background?: File | null
-  avatar?: File | null
+	username: string
+	prefix: string
+	description?: string
+	site?: string
+	background?: File | null
+	avatar?: File | null
 }
 export interface IChangeUser {
 	data: IDataUser
@@ -32,4 +31,3 @@ export interface IShortUser {
 	avatar: string | null
 	username: string
 }
-

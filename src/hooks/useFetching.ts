@@ -52,7 +52,15 @@ const useFetching = <T>({
 		await handlerQuery(latestQueryArgsRef.current)
 	}
 
-	return { data, handlerQuery, isLoading, error, refetch, fetchQuery, isSuccess }
+	return {
+		data: data,
+		handlerQuery,
+		isLoading,
+		error,
+		refetch,
+		fetchQuery,
+		isSuccess,
+	}
 }
 
 export default useFetching

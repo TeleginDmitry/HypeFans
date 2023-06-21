@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
 import { ReactComponent as LikeSvg } from '@assets/images/post/like.svg'
 import styles from './Like.module.scss'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 import { MutationFunction, useMutation } from '@tanstack/react-query'
 import { useTypedSelector } from 'hooks/useTypedSelector'
+import { IActionsVariablesSize } from '../actionsVariables.interface'
+import { actionsStyles } from 'utils/actionsStyles/ActionsStyles'
 
-interface ILike {
+interface ILike extends IActionsVariablesSize {
 	likes: number
 	isLiked: boolean
 	onCreate: MutationFunction<unknown, void>
 	onDelete: MutationFunction<unknown, void>
 }
 
-const Like = ({ isLiked, likes, onCreate, onDelete }: ILike) => {
+const Like = ({
+	isLiked,
+	likes,
+	onCreate,
+	onDelete,
+	size = 'medium',
+}: ILike) => {
 	const isAuth = useTypedSelector(state => state.auth.isAuth)
 
 	const [likesState, setLikes] = useState(likes)
@@ -48,7 +56,8 @@ const Like = ({ isLiked, likes, onCreate, onDelete }: ILike) => {
 	return (
 		<div onClick={handlerClickLike} className={styles.wrapper}>
 			<LikeSvg
-				className={isLikedState ? cn([styles.like, styles.liked]) : styles.like}
+				className={cn([styles.like], [isLikedState, styles.liked])}
+				style={actionsStyles({ size })}
 			></LikeSvg>
 			<span className={styles.count}>{likesState}</span>
 		</div>

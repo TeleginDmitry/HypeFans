@@ -4,7 +4,7 @@ import styles from './ProfileBackground.module.scss'
 import { ReactComponent as Clear } from '@assets/images/newPost/arrow-left.svg'
 import { ReactComponent as Points } from '@assets/images/profile/points.svg'
 import { useNavigate } from 'react-router-dom'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface IProfileBackground {
 	background?: string
@@ -28,9 +28,17 @@ const ProfileBackground = ({ background }: IProfileBackground) => {
 				onClick={() => {
 					navigate(-1)
 				}}
-				className={!background ? cn([styles.background__back, styles.background__back_color]) : styles.background__back}
+				className={cn(
+					[styles.background__back],
+					[!background, styles.background__back_color]
+				)}
 			></Clear>
-			<Points className={!background ? cn([styles.background__points, styles.background__points_color]) : styles.background__points }></Points>
+			<Points
+				className={cn(
+					[styles.background__points],
+					[!background, styles.background__points_color]
+				)}
+			></Points>
 		</div>
 	)
 }

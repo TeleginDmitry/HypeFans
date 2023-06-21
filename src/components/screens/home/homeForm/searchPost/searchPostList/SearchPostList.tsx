@@ -4,8 +4,6 @@ import styles from './SearchPostList.module.scss'
 import { PostService } from 'services/post/Post.service'
 import useFetching from 'hooks/useFetching'
 import { AnimatePresence } from 'framer-motion'
-import { useQuery } from '@tanstack/react-query'
-import { SEARCH_POST_KEY } from 'configs/index.config'
 
 interface ISearchPostList {
 	onClickPost(post_id: number): void
@@ -13,14 +11,22 @@ interface ISearchPostList {
 }
 
 const SearchPostList = ({ onClickPost, valueInput }: ISearchPostList) => {
-	const { data: posts = [] } = useQuery({
-		queryKey: [SEARCH_POST_KEY, valueInput],
-		queryFn: async () => {
+	const { data: posts = [], fetchQuery } = useFetching({
+		callback: async () => {
 			const response = await PostService.getPostsSearch(valueInput)
 			return response.data
 		},
-		keepPreviousData: true,
 	})
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			fetchQuery()
+		}, 300)
+
+		return () => {
+			clearTimeout(timeout)
+		}
+	}, [valueInput])
 
 	return (
 		<div className={styles.wrapper}>

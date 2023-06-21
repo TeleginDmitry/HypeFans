@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
 import { ReactComponent as Clear } from '@assets/images/homeHeader/clear.svg'
 import logo from '@assets/images/homeHeader/logo.png'
-import { classNames as cn } from '../../../../utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 export default function HomeHeader() {
 	const [isActiveSearch, setIsActiveSearch] = useState(false)
@@ -27,9 +27,7 @@ export default function HomeHeader() {
 	return (
 		<div
 			className={
-				isActiveSearch
-					? cn([styles.header, styles.header__active])
-					: cn([styles.header])
+				cn([styles.header], [isActiveSearch, styles.header__active])
 			}
 		>
 			<div className={styles.header__block}>

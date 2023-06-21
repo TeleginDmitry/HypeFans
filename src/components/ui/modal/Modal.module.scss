@@ -5,29 +5,18 @@
   right: 0;
   bottom: 0;
   z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
 
-  .scroll {
-    position: relative;
-    overflow-y: auto;
-    z-index: 1;
-    max-height: 100vh;
-    .content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      min-height: 100vh;
-      @media (max-width: 425px) {
-        padding: 0px;
-      }
-    }
+  @media (max-width: 425px) {
+    padding: 0px;
   }
-  .background {
-    background-color: var(--background-modal);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
+
+}
+
+.scrollable {
+  align-items: flex-start;
 }

@@ -8,12 +8,11 @@ import { MODAL_CONTAINER_ID } from 'configs/index.config'
 interface IModal {
 	children: React.ReactElement
 	opacity?: number
-	handlerClose(): void
+	handlerClose: () => void | null
 }
 
 const Modal = ({ children, opacity = 0.8, handlerClose }: IModal) => {
-	const contentRef = useRef<HTMLDivElement>(null)
-
+	const wrapperRef = useRef<HTMLDivElement>(null)
 	const [isMounted, setMounted] = useState(false)
 
 	const { appendClass, deleteClass } = useOverflowBody()
@@ -21,7 +20,9 @@ const Modal = ({ children, opacity = 0.8, handlerClose }: IModal) => {
 	const handleModalClick = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
 	) => {
-		if (event.target === contentRef.current) {
+		if (!handlerClose) return
+
+		if (event.target === wrapperRef.current) {
 			handlerClose()
 		}
 	}
@@ -39,6 +40,8 @@ const Modal = ({ children, opacity = 0.8, handlerClose }: IModal) => {
 	}, [])
 
 	useEffect(() => {
+		if (!handlerClose) return
+
 		const handleEscapePress = (event: KeyboardEvent) => {
 			if (event.key === 'Escape') {
 				handlerClose()
@@ -52,16 +55,27 @@ const Modal = ({ children, opacity = 0.8, handlerClose }: IModal) => {
 		}
 	}, [handlerClose])
 
+	useEffect(() => {
+		if (!isMounted) return
+
+		const modalElement = wrapperRef.current
+
+		if (modalElement.scrollHeight > window.innerHeight) {
+			modalElement.classList.add(styles.scrollable)
+		} else {
+			modalElement.classList.remove(styles.scrollable)
+		}
+	}, [isMounted])
+
 	return isMounted ? (
 		<Portal element={document.getElementById(MODAL_CONTAINER_ID)}>
-			<div onClick={handleModalClick} className={styles.modal}>
-				<div className={styles.scroll}>
-					<div ref={contentRef} className={styles.content}>
-						{children}
-					</div>
-				</div>
-
-				<div className={styles.background} style={{ opacity }}></div>
+			<div
+				ref={wrapperRef}
+				style={{ backgroundColor: `rgb(65, 65, 65, ${opacity})` }}
+				onClick={handleModalClick}
+				className={styles.modal}
+			>
+				{children}
 			</div>
 		</Portal>
 	) : null

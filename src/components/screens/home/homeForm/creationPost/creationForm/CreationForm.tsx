@@ -9,7 +9,7 @@ import TextareaInput from '@ui/textareaInput/TextareaInput'
 import UploadFile from 'components/ui/uploadFile/UploadFile'
 import useViewMedia from 'hooks/useViewUploadMedias'
 import MediasList from 'components/shared/media/mediaList/MediasList'
-import { classNames } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface ICreationForm {
 	changeStateActive: () => void
@@ -44,9 +44,7 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
 		<form className={styles.form}>
 			<div
 				className={
-					valueInput
-						? classNames([styles.creation, styles.creation__padding])
-						: styles.creation
+					cn([styles.creation], [valueInput, styles.creation__padding])
 				}
 			>
 				<TextareaInput

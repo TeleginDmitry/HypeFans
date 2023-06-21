@@ -46,12 +46,13 @@ const PostCommentActions = (props: IPostCommentActions) => {
 
 	return (
 		<div className={styles.actions}>
-			<Delete onDelete={deleteComment} user_id={user.id}></Delete>
+			<Delete size='low' onDelete={deleteComment} user_id={user.id}></Delete>
 			<Like
 				likes={likes}
 				isLiked={isLiked}
 				onDelete={deleteLike}
 				onCreate={createLike}
+				size='low'
 			></Like>
 		</div>
 	)

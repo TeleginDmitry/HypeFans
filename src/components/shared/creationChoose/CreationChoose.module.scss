@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  padding: 3px;
+  border-radius: 9px;
+
+  @media (min-width: 426px) {
+    display: none;
+  }
+
+  .button {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 7px;
+    transition: all 0.3s;
+  }
+}

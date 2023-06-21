@@ -6,7 +6,7 @@ import { ReactComponent as Inbox } from '@assets/images/newPost/inbox.svg'
 import { ReactComponent as Mic } from '@assets/images/newPost/mic.svg'
 import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
 import { ReactComponent as Paperclip } from '@assets/images/newPost/paperclip.svg'
-import { classNames as cn } from '@utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 import UploadFile from '@ui/uploadFile/UploadFile'
 
 interface ISelectMedia {
@@ -28,11 +28,10 @@ const SelectMedia = ({ onChange }: ISelectMedia) => {
 					<Paperclip className={styles.select__svg}></Paperclip>
 				</div>
 				<div
-					className={
-						isActiveSelect
-							? cn([styles.select__container, styles.select__container_active])
-							: styles.select__container
-					}
+					className={cn(
+						[styles.select__container],
+						[isActiveSelect, styles.select__container_active]
+					)}
 				>
 					<div className={styles.select__content}>
 						<div className={styles.select__item}>

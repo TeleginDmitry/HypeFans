@@ -2,7 +2,6 @@
 	"name": "HypeFans",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://d1mas1k2021.github.io/HypeFans",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.3",
 		"@tanstack/react-query": "^4.29.5",
@@ -22,16 +21,14 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-intersection-observer": "^9.4.3",
-		"react-media-recorder": "^1.6.6",
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.8.1",
 		"react-scripts": "5.0.1",
-		"react-svg": "^16.1.15",
 		"react-textarea-autosize": "^8.4.0",
+		"react-webcam": "^7.1.1",
 		"swiper": "^9.0.5",
 		"typescript": "^4.9.5",
-		"ui-hypefans-lib": "^1.0.5",
-		"web-vitals": "^2.1.4"
+		"ui-hypefans-lib": "^1.0.5"
 	},
 	"scripts": {
 		"start": "craco start",
@@ -62,30 +59,9 @@
 		]
 	},
 	"devDependencies": {
-		"@babel/core": "^7.21.5",
-		"@babel/plugin-transform-modules-commonjs": "^7.21.5",
-		"@babel/preset-env": "^7.21.5",
-		"@babel/preset-react": "^7.18.6",
-		"@babel/preset-typescript": "^7.21.5",
 		"@craco/craco": "^7.1.0",
 		"@types/js-cookie": "^3.0.3",
 		"@types/node": "^18.16.3",
-		"babel-loader": "^9.1.2",
-		"clean-webpack-plugin": "^4.0.0",
-		"css-loader": "^6.7.3",
-		"file-loader": "^6.2.0",
-		"gh-pages": "^5.0.0",
-		"html-loader": "^4.2.0",
-		"html-webpack-plugin": "^5.5.1",
-		"mini-css-extract-plugin": "^2.7.5",
-		"postcss-loader": "^7.3.0",
-		"sass": "^1.62.1",
-		"sass-loader": "^13.2.2",
-		"style-loader": "^3.3.2",
-		"ts-loader": "^9.4.2",
-		"url-loader": "^4.1.1",
-		"webpack": "^5.81.0",
-		"webpack-cli": "^5.0.2",
-		"webpack-dev-server": "^4.13.3"
+		"gh-pages": "^5.0.0"
 	}
 }

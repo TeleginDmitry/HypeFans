@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: end;
   border-bottom: 1px solid var(--under-line-color);
-  padding-bottom: 3px;
+  padding-bottom: 6px;
 
   &:last-child {
     border-bottom: none;
@@ -41,5 +41,14 @@
         font-size: 14px;
       }
     }
+  }
+
+  .postActions__container {
+    opacity: 0;
+    transition: opacity .5s;
+  }
+
+  &:hover .postActions__container {
+    opacity: 1;
   }
 }

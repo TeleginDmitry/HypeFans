@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 import styles from './Loader.module.scss'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface ILoader {
 	className?: string

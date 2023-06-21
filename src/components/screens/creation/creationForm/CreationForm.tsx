@@ -8,8 +8,7 @@ import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useFormik } from 'formik'
 import { PostService } from 'services/post/Post.service'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import useFetching from 'hooks/useFetching'
-import { classNames } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 import { useMutation } from '@tanstack/react-query'
 
 interface IInitialValues {
@@ -108,11 +107,10 @@ const CreationForm = () => {
 				{...getFieldProps('description')}
 				placeholder='Поделитесь своими мыслями...'
 				minRows={6}
-				className={
-					errors.description && touched.description
-						? classNames([styles.input, styles.input__wrong])
-						: styles.input
-				}
+				className={cn(
+					[styles.input],
+					[errors.description && touched.description, styles.input__wrong]
+				)}
 			></TextareaInput>
 			<MediasList medias={medias} deleteMedia={deleteMedia}></MediasList>
 			<SelectMedia onChange={handlerUploadMedias}></SelectMedia>

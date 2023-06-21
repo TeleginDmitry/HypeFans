@@ -9,18 +9,12 @@
     max-width: 700px;
     width: 100%;
     border-radius: var(--border-radius-16);
-    .story__container {
-      padding: 20px 10px 10px 10px;
-    }
-    .creation__container {
-      padding: 20px 10px 10px 10px;
-    }
-    .posts__container {
-      padding: 0 20px;
+    padding: 20px 20px;
+    gap: 20px;
 
-      @media (max-width: 425px) {
-        padding: 0px;
-      }
+    @media (max-width: 425px) {
+      padding: 0px;
     }
+    
   }
 }

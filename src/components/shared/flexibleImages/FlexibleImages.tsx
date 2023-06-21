@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './FlexibleImages.module.scss'
-import { classNames as cn } from 'utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
+import Image from 'components/ui/image/Image'
 
 interface IImage {
 	id: number | string
@@ -18,9 +19,10 @@ const FlexibleImages = ({
 	alt,
 	handlerClickImage,
 }: IFlexibleImages) => {
-	const classNameImage = !!handlerClickImage
-		? cn([styles.image, styles.image__click])
-		: styles.image
+	const classNameImage = cn(
+		[styles.image],
+		[!!handlerClickImage, styles.image__click]
+	)
 
 	if (!images.length) return null
 
@@ -28,14 +30,13 @@ const FlexibleImages = ({
 		<div className={styles.container}>
 			{images.map(image => {
 				return (
-					<img
+					<Image
 						key={image.id}
 						className={classNameImage}
 						src={image.media}
 						onClick={() => handlerClickImage(image.id)}
 						alt={alt}
-						loading={'lazy'}
-					></img>
+					></Image>
 				)
 			})}
 		</div>

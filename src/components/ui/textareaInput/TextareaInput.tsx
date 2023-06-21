@@ -3,7 +3,7 @@ import ReactTextareaAutosize, {
 	TextareaAutosizeProps,
 } from 'react-textarea-autosize'
 import styles from './TextareaInput.module.scss'
-import { classNames as cn } from '@utils/classNames/classNames'
+import cn from '@utils/classNames/classNames'
 
 interface ITextareaProps extends TextareaAutosizeProps {
 	isWrong?: boolean
@@ -15,9 +15,10 @@ const TextareaInput = ({
 	minRows = 1,
 	...props
 }: ITextareaProps) => {
-	const classNameWrapper = isWrong
-		? cn([styles.input, styles.wrong, className])
-		: cn([styles.input, className])
+	const classNameWrapper = cn(
+		[styles.input, className],
+		[isWrong, styles.wrong]
+	)
 
 	return (
 		<ReactTextareaAutosize

@@ -5,6 +5,7 @@ import 'swiper/css'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { STORY_PARAM } from 'configs/index.config'
+import Image from 'components/ui/image/Image'
 
 interface IStoryItem {
 	story: IStory
@@ -19,6 +20,8 @@ export const StoryItem = ({ story }: IStoryItem) => {
 		navigation(`/?${STORY_PARAM}=${story_id}`)
 	}
 
+	
+
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -28,12 +31,7 @@ export const StoryItem = ({ story }: IStoryItem) => {
 			onClick={() => handlerClickStory(id)}
 		>
 			<div className={styles.avatar__container}>
-				<img
-					draggable={false}
-					className={styles.avatar}
-					src={user.avatar}
-					alt='HypeFans'
-				/>
+				<Image className={styles.avatar} src={user.avatar} />
 			</div>
 			<span className={styles.prefix}>{user.prefix}</span>
 		</motion.div>
