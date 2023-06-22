@@ -1,66 +1,66 @@
 import { IShortUser } from './user.interface'
 
 export interface IPostUser {
-	id: number
-	username: string
-	prefix: string
-	avatar: string
+  username: string
+  avatar: string
+  prefix: string
+  id: number
 }
 
 export interface IPostMediaShort {
-	id: number
-	media: string
-	date_joined: string
+  date_joined: string
+  media: string
+  id: number
 }
 
 export interface IPostMedia {
-	id: number
-	media: string
-	date_joined: string
-	user: IShortUser
+  date_joined: string
+  user: IShortUser
+  media: string
+  id: number
 }
 
 export interface IPostComment {
-	id: number
-	text: string
-	date_joined: string
-	user: IShortUser
-	post: number
-	likes: number
-	isLiked: boolean
+  date_joined: string
+  isLiked: boolean
+  user: IShortUser
+  likes: number
+  post: number
+  text: string
+  id: number
 }
 
 export interface IPost {
-	id: number
-	user: IPostUser
-	description: string
-	likes: number
-	comments: number
-	medias?: IPostMediaShort[]
-	date_joined: string
-	isLiked: boolean
-	lastComment: IPostComment | null
+  lastComment: IPostComment | null
+  medias?: IPostMediaShort[]
+  date_joined: string
+  description: string
+  isLiked: boolean
+  comments: number
+  user: IPostUser
+  likes: number
+  id: number
 }
 
 export interface IPostLike {
-	id: number
-	date_joined: string
-	post: number
-	user: number
+  date_joined: string
+  user: number
+  post: number
+  id: number
 }
 
 export interface ICommentLike {
-	id: number
-	user: IShortUser
-	date_joined: string
+  date_joined: string
+  user: IShortUser
+  id: number
 }
 
 export interface IPostSearch {
-	id: number
-	user: IPostUser
-	description: string
-	likes: number
-	comments: number
-	date_joined: string
-	is_liked: boolean
+  date_joined: string
+  description: string
+  is_liked: boolean
+  comments: number
+  user: IPostUser
+  likes: number
+  id: number
 }

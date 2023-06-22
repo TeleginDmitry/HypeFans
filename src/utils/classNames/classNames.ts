@@ -1,18 +1,18 @@
 export default function cn(
-	defaultClasses?: string[],
-	...conditions: [boolean, string][]
+  defaultClasses?: string[],
+  ...conditions: [boolean, string][]
 ) {
-	if (!defaultClasses) return
+  if (!defaultClasses) return
 
-	const result: string[] = []
+  const result: string[] = []
 
-	defaultClasses.forEach(item => {
-		result.push(item)
-	})
+  defaultClasses.forEach((item) => {
+    result.push(item)
+  })
 
-	conditions.forEach(item => {
-		if (item[0]) result.push(item[1])
-	})
+  conditions.forEach((item) => {
+    if (item[0]) result.push(item[1])
+  })
 
-	return result.join(' ')
+  return result.join(' ')
 }

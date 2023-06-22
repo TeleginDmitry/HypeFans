@@ -1,27 +1,28 @@
 import React from 'react'
+
 import styles from './Video.module.scss'
 
 interface IVideo
-	extends React.DetailedHTMLProps<
-		React.VideoHTMLAttributes<HTMLVideoElement>,
-		HTMLVideoElement
-	> {
-	src: string
-	classVideo?: string
+  extends React.DetailedHTMLProps<
+    React.VideoHTMLAttributes<HTMLVideoElement>,
+    HTMLVideoElement
+  > {
+  classVideo?: string
+  src: string
 }
 
 const Video = (props: IVideo) => {
-	const { src, classVideo, ...videoProps } = props
+  const { classVideo, src, ...videoProps } = props
 
-	if (!src) return null
+  if (!src) return null
 
-	const completeClass = styles.video + ' ' + classVideo
+  const completeClass = styles.video + ' ' + classVideo
 
-	return (
-		<video className={completeClass} autoPlay loop {...videoProps}>
-			<source src={src} type='video/webm' />
-		</video>
-	)
+  return (
+    <video className={completeClass} autoPlay loop {...videoProps}>
+      <source type='video/webm' src={src} />
+    </video>
+  )
 }
 
 export default Video

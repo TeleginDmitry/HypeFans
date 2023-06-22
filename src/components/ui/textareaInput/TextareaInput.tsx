@@ -1,32 +1,33 @@
-import React from 'react'
 import ReactTextareaAutosize, {
-	TextareaAutosizeProps,
+  TextareaAutosizeProps
 } from 'react-textarea-autosize'
-import styles from './TextareaInput.module.scss'
 import cn from '@utils/classNames/classNames'
+import React from 'react'
+
+import styles from './TextareaInput.module.scss'
 
 interface ITextareaProps extends TextareaAutosizeProps {
-	isWrong?: boolean
+  isWrong?: boolean
 }
 
 const TextareaInput = ({
-	isWrong = false,
-	className,
-	minRows = 1,
-	...props
+  isWrong = false,
+  minRows = 1,
+  className,
+  ...props
 }: ITextareaProps) => {
-	const classNameWrapper = cn(
-		[styles.input, className],
-		[isWrong, styles.wrong]
-	)
+  const classNameWrapper = cn(
+    [styles.input, className],
+    [isWrong, styles.wrong]
+  )
 
-	return (
-		<ReactTextareaAutosize
-			className={classNameWrapper}
-			minRows={minRows}
-			{...props}
-		/>
-	)
+  return (
+    <ReactTextareaAutosize
+      className={classNameWrapper}
+      minRows={minRows}
+      {...props}
+    />
+  )
 }
 
 export default TextareaInput

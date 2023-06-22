@@ -1,31 +1,31 @@
 interface Amount {
-	value: string
-	currency: string
+  currency: string
+  value: string
 }
 
 interface Recipient {
-	account_id: string
-	gateway_id: string
+  account_id: string
+  gateway_id: string
 }
 
 interface PaymentMethod {
-	id: string
-	type: string
-	saved: string
+  saved: string
+  type: string
+  id: string
 }
 
 interface Confirmation {
-	type: string
-	return_url: string
-	confirmation_url: string
+  confirmation_url: string
+  return_url: string
+  type: string
 }
 
 export interface IPaymentResponse {
-	id: string
-	status: string
-	amount: Amount
-	recipient: Recipient
-	payment_method: PaymentMethod
-	created_at: Date
-	confirmation: Confirmation
+  payment_method: PaymentMethod
+  confirmation: Confirmation
+  recipient: Recipient
+  created_at: Date
+  amount: Amount
+  status: string
+  id: string
 }

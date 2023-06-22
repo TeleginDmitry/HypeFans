@@ -1,35 +1,34 @@
 import React, { useEffect, useRef } from 'react'
 
 interface IUseObserver {
-	element: React.MutableRefObject<null>
-	isLoading: boolean
-	callback: (props?: any) => void
-	observerParams?: IntersectionObserverInit
-	condition?: boolean
+  observerParams?: IntersectionObserverInit
+  element: React.MutableRefObject<null>
+  callback: (props?: any) => void
+  condition?: boolean
+  isLoading: boolean
 }
 
 export const useObserver = ({
-	callback,
-	condition = true,
-	element,
-	isLoading,
-	observerParams = {},
+  observerParams = {},
+  condition = true,
+  isLoading,
+  callback,
+  element
 }: IUseObserver) => {
-	const observer = useRef<IntersectionObserver>()
+  const observer = useRef<IntersectionObserver>()
 
-	useEffect(() => {
-		if (isLoading) return
-		if (observer.current) observer.current.disconnect()
-		
+  useEffect(() => {
+    if (isLoading) return
+    if (observer.current) observer.current.disconnect()
 
-		const cb: IntersectionObserverCallback = function (entries) {
-			if (entries[0].isIntersecting && condition) {
-				callback()
-			}
-		}
-		observer.current = new IntersectionObserver(cb, observerParams)
-		if (element?.current) {
-			observer.current.observe(element.current)
-		}
-	}, [isLoading])
+    const cb: IntersectionObserverCallback = function (entries) {
+      if (entries[0].isIntersecting && condition) {
+        callback()
+      }
+    }
+    observer.current = new IntersectionObserver(cb, observerParams)
+    if (element?.current) {
+      observer.current.observe(element.current)
+    }
+  }, [isLoading])
 }

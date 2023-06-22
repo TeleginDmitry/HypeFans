@@ -1,22 +1,23 @@
 import { lazy } from 'react'
-import Home from './Home'
-import Creation from './Creation'
+
 import Settings from './Settings'
-import Profile from './Profile'
-import Edit from './Edit'
+import Creation from './Creation'
 import Messages from './Messages'
+import Profile from './Profile'
 import User from './User'
+import Edit from './Edit'
+import Home from './Home'
 const Login = lazy(() => import('./Login'))
 const Register = lazy(() => import('./Register'))
 
 export {
-	Home,
-	Login,
-	Register,
-	Creation,
-	Settings,
-	Profile,
-	Edit,
-	Messages,
-	User,
+  Messages,
+  Settings,
+  Creation,
+  Register,
+  Profile,
+  Login,
+  User,
+  Edit,
+  Home
 }

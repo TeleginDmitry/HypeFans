@@ -2,6 +2,7 @@
   background-color: var(--wrapper-color);
   padding: 20px;
   position: relative;
+  min-height: 100vh;
 
   @media (max-width: 425px) {
     background-color: #ffffff;
@@ -29,7 +30,7 @@
   gap: 100px;
   position: relative;
   z-index: 5;
-  min-height: 100vh
+  min-height: 100vh;
 }
 .logo__content {
   height: 250px;

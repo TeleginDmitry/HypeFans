@@ -1,3 +1,3 @@
-export interface  IActionsVariablesSize {
-  size?: 'low' | 'medium'
+export interface IActionsVariablesSize {
+  size?: 'medium' | 'low'
 }

@@ -1,11 +1,11 @@
-import React from 'react'
-import EditComponent from '@components/screens/edit/Edit'
 import useChangingTitlePage from 'hooks/useChangingTitlePage'
+import EditComponent from '@components/screens/edit/Edit'
+import React from 'react'
 
 const Edit = () => {
-	useChangingTitlePage('Изменить')
+  useChangingTitlePage('Изменить')
 
-	return <EditComponent></EditComponent>
+  return <EditComponent></EditComponent>
 }
 
 export default Edit

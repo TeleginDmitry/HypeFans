@@ -1,16 +1,15 @@
+import { SwiperProps, Swiper } from 'swiper/react'
+import 'swiper/css/pagination'
 import React from 'react'
-import { Swiper, SwiperProps } from 'swiper/react'
 import 'swiper/css'
-import "swiper/css/pagination";
 
 interface ISlider {
-	children: React.ReactNode
-	swiperProps?: SwiperProps
+  children: React.ReactNode
+  swiperProps?: SwiperProps
 }
 
-const Slider = ({ children, swiperProps }: ISlider) => {
-	
-	return <Swiper {...swiperProps}>{children}</Swiper>
+const Slider = ({ swiperProps, children }: ISlider) => {
+  return <Swiper {...swiperProps}>{children}</Swiper>
 }
 
 export default Slider

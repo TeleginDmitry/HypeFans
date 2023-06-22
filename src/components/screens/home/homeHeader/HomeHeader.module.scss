@@ -3,7 +3,7 @@
   justify-content: space-between;
   padding: 0px 20px 0 10px;
   align-items: center;
-  transition: all .3s;
+  transition: all 0.3s;
   height: 57px;
 
   &__active {
@@ -11,8 +11,7 @@
   }
 
   @media (min-width: 426px) {
-      display: none;
-    
+    display: none;
   }
 
   .header__block {
@@ -48,7 +47,6 @@
     cursor: pointer;
     padding: 5px;
     .search {
-      
     }
   }
 }

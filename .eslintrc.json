@@ -1,0 +1,15 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:perfectionist/recommended-line-length",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint", "unused-imports", "jsx-a11y", "react-hooks"],
+  "rules": {
+    "no-console": "error",
+    "unused-imports/no-unused-imports": "error"
+  }
+}

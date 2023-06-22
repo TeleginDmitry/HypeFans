@@ -1,75 +1,76 @@
-import React, { useState, useRef } from 'react'
-import styles from './SearchPost.module.scss'
-import { ReactComponent as Cancel } from '@assets/images/homeHeader/clear.svg'
 import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
+import { ReactComponent as Cancel } from '@assets/images/homeHeader/clear.svg'
 import MyAvatar from 'components/shared/myAvatar/MyAvatar'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import SearchPostList from './searchPostList/SearchPostList'
-import { useNavigate } from 'react-router-dom'
 import { POST_PARAM } from 'configs/index.config'
+import React, { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import cn from '@utils/classNames/classNames'
 
+import SearchPostList from './searchPostList/SearchPostList'
+import styles from './SearchPost.module.scss'
+
 interface ISearchPost {
-	changeStateActive: () => void
+  changeStateActive: () => void
 }
 
 const SearchPost = ({ changeStateActive }: ISearchPost) => {
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 
-	const isAuth = useTypedSelector(state => state.auth.isAuth)
+  const isAuth = useTypedSelector((state) => state.auth.isAuth)
 
-	const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
-	const [valueInput, setValueInput] = useState('')
+  const [valueInput, setValueInput] = useState('')
 
-	function onChange(input: React.ChangeEvent<HTMLInputElement>) {
-		setValueInput(input.target.value)
-	}
+  function onChange(input: React.ChangeEvent<HTMLInputElement>) {
+    setValueInput(input.target.value)
+  }
 
-	function focusInput() {
-		if (inputRef.current) {
-			inputRef.current.focus()
-		}
-	}
+  function focusInput() {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
 
-	function onClickPost(post_id: number) {
-		setValueInput('')
+  function onClickPost(post_id: number) {
+    setValueInput('')
 
-		navigate(`/?${POST_PARAM}=${post_id}`)
-	}
+    navigate(`/?${POST_PARAM}=${post_id}`)
+  }
 
-	return (
-		<div className={cn([styles.wrapper], [valueInput, styles.wrapper__active])}>
-			{isAuth && <MyAvatar />}
+  return (
+    <div className={cn([styles.wrapper], [valueInput, styles.wrapper__active])}>
+      {isAuth && <MyAvatar />}
 
-			<div className={styles.searching}>
-				<input
-					className={styles.searching__input}
-					type='text'
-					placeholder='Поиск поста...'
-					onChange={onChange}
-					value={valueInput}
-					ref={inputRef}
-				/>
-			</div>
-			{isAuth ? (
-				<div onClick={changeStateActive} className={styles.icon__container}>
-					<Cancel className={styles.icon}></Cancel>
-				</div>
-			) : (
-				<div onClick={focusInput} className={styles.icon__container}>
-					<Search className={styles.icon}></Search>
-				</div>
-			)}
+      <div className={styles.searching}>
+        <input
+          className={styles.searching__input}
+          placeholder='Поиск поста...'
+          onChange={onChange}
+          value={valueInput}
+          ref={inputRef}
+          type='text'
+        />
+      </div>
+      {isAuth ? (
+        <div className={styles.icon__container} onClick={changeStateActive}>
+          <Cancel className={styles.icon}></Cancel>
+        </div>
+      ) : (
+        <div className={styles.icon__container} onClick={focusInput}>
+          <Search className={styles.icon}></Search>
+        </div>
+      )}
 
-			{valueInput && (
-				<SearchPostList
-					valueInput={valueInput}
-					onClickPost={onClickPost}
-				></SearchPostList>
-			)}
-		</div>
-	)
+      {valueInput && (
+        <SearchPostList
+          onClickPost={onClickPost}
+          valueInput={valueInput}
+        ></SearchPostList>
+      )}
+    </div>
+  )
 }
 
 export default SearchPost

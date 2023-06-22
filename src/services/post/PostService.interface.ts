@@ -1,51 +1,50 @@
-import { AxiosResponse } from 'axios'
 import { IQueryPagination } from 'shared/interfaces/pagination.interface'
 
 export interface IGetPostsParams extends IQueryPagination {
-	user_id?: number | string
+  user_id?: number | string
 }
 
 export interface IUploadMedia {
-	post_id: number
-	media: File
+  post_id: number
+  media: File
 }
 
 export interface ICreateComment {
-	post: number
-	text: string
+  post: number
+  text: string
 }
 export interface IGetComments {
-	post_id: number | string
-	cursor?: string
+  post_id: number | string
+  cursor?: string
 }
 
 export interface ICreatePost {
-	user_id: number
-	description: string
+  description: string
+  user_id: number
 }
 
 export interface IPostMediaData {
-	media: File
-	post_id: number
+  post_id: number
+  media: File
 }
 
 export interface ICreateCommentData {
-	post_id: number
-	text: string
+  post_id: number
+  text: string
 }
 
 export interface IGetMediasParams {
-	post_id: number | string
+  post_id: number | string
 }
 
 export interface IGetMediaParams {
-	post_id: number | string
+  post_id: number | string
 }
 
 export interface ICreateCommentLikeData {
-	comment: number | string
+  comment: number | string
 }
 
 export interface IDeleteCommentLikeLink {
-	comment: number | string
+  comment: number | string
 }

@@ -1,28 +1,29 @@
-import React from 'react'
-import styles from './ValidateField.module.scss'
 import { AnimatePresence, motion } from 'framer-motion'
+import React from 'react'
+
+import styles from './ValidateField.module.scss'
 
 interface IValidateField {
-	isTouched: boolean
-	error: string
+  isTouched: boolean
+  error: string
 }
 
 const ValidateField = ({ isTouched, error }: IValidateField) => {
-	return (
-		<AnimatePresence>
-			{isTouched && !!error && (
-				<motion.div
-					className={styles.error}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.5 }}
-				>
-					{error}
-				</motion.div>
-			)}
-		</AnimatePresence>
-	)
+  return (
+    <AnimatePresence>
+      {isTouched && !!error && (
+        <motion.div
+          transition={{ duration: 0.5 }}
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          className={styles.error}
+          exit={{ opacity: 0 }}
+        >
+          {error}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 }
 
 export default ValidateField

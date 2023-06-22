@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-type ValueSetter<T> = (value: T | ((prevValue: T) => T)) => void
+type ValueSetter<T> = (value: ((prevValue: T) => T) | T) => void
 
 function useLocalStorage<T>(key: string, initialValue: T): [T, ValueSetter<T>] {
-	const storedValue = localStorage.getItem(key)
-	const initialStoredValue = storedValue
-		? JSON.parse(storedValue)
-		: initialValue
+  const storedValue = localStorage.getItem(key)
+  const initialStoredValue = storedValue
+    ? JSON.parse(storedValue)
+    : initialValue
 
-	const [value, setValue] = useState<T>(initialStoredValue)
+  const [value, setValue] = useState<T>(initialStoredValue)
 
-	useEffect(() => {
-		localStorage.setItem(key, JSON.stringify(value))
-	}, [key, value])
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
 
-	return [value, setValue]
+  return [value, setValue]
 }
 
 export default useLocalStorage

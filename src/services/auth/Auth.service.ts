@@ -1,52 +1,53 @@
+import {
+  IUserResponse,
+  IResponse,
+  IRegister,
+  ITokens,
+  ILogin
+} from 'shared/interfaces/auth.interface'
 import instance, { instanceSimple } from 'api/api.interceptor'
 import { TOKEN_API } from '@configs/api.config'
 import { AxiosResponse } from 'axios'
-import {
-	ILogin,
-	IRegister,
-	IUserResponse,
-	IResponse,
-	ITokens,
-} from 'shared/interfaces/auth.interface'
-import { getRefreshToken, getAccessToken } from './Auth.helper'
+
+import { getRefreshToken } from './Auth.helper'
 
 export const AuthService = {
-	login: async ({
-		email,
-		password,
-	}: ILogin): Promise<AxiosResponse<IResponse>> => {
-		return instance.post<IResponse>(`${TOKEN_API}/login/`, { email, password })
-	},
+  register: async ({
+    username,
+    password,
+    email
+  }: IRegister): Promise<AxiosResponse<IResponse>> => {
+    return instance.post<IResponse>(`${TOKEN_API}/registration/`, {
+      username,
+      password,
+      email
+    })
+  },
 
-	register: async ({
-		email,
-		password,
-		username,
-	}: IRegister): Promise<AxiosResponse<IResponse>> => {
-		return instance.post<IResponse>(`${TOKEN_API}/registration/`, {
-			email,
-			password,
-			username,
-		})
-	},
+  refresh: async (): Promise<AxiosResponse<ITokens>> => {
+    const refreshToken = getRefreshToken()
 
-	logout: async (): Promise<AxiosResponse> => {
-		const refreshToken = getRefreshToken()
+    return await instanceSimple.post<ITokens>(`${TOKEN_API}/refresh/`, {
+      refresh: refreshToken
+    })
+  },
 
-		return instance.post(`${TOKEN_API}/logout/`, {
-			refresh_token: refreshToken,
-		})
-	},
+  logout: async (): Promise<AxiosResponse> => {
+    const refreshToken = getRefreshToken()
 
-	refresh: async (): Promise<AxiosResponse<ITokens>> => {
-		const refreshToken = getRefreshToken()
+    return instance.post(`${TOKEN_API}/logout/`, {
+      refresh_token: refreshToken
+    })
+  },
 
-		return await instanceSimple.post<ITokens>(`${TOKEN_API}/refresh/`, {
-			refresh: refreshToken,
-		})
-	},
+  login: async ({
+    password,
+    email
+  }: ILogin): Promise<AxiosResponse<IResponse>> => {
+    return instance.post<IResponse>(`${TOKEN_API}/login/`, { password, email })
+  },
 
-	verify: async (): Promise<AxiosResponse<IUserResponse>> => {
-		return instance.get<IUserResponse>(`${TOKEN_API}/verify/`)
-	},
+  verify: async (): Promise<AxiosResponse<IUserResponse>> => {
+    return instance.get<IUserResponse>(`${TOKEN_API}/verify/`)
+  }
 }

@@ -1,26 +1,34 @@
-import styles from './ProfileHeader.module.scss'
+import ProfileDescription from 'components/shared/profileHeader/profileDescription/ProfileDescription'
 import ProfileBackground from 'components/shared/profileHeader/profileBackground/ProfileBackground'
 import ProfileInfo from 'components/shared/profileHeader/profileInfo/ProfileInfo'
-import ProfileDescription from 'components/shared/profileHeader/profileDescription/ProfileDescription'
 import { IUser } from 'shared/interfaces/user.interface'
 import cn from '@utils/classNames/classNames'
 
+import styles from './ProfileHeader.module.scss'
+
 interface IProfileHeader {
-	user: IUser
+  user: IUser
 }
 
 const ProfileHeader = ({ user }: IProfileHeader) => {
-	return (
-		<div className={styles.wrapper}>
-			<ProfileBackground background={user?.background}></ProfileBackground>
+  return (
+    <div className={styles.wrapper}>
+      <ProfileBackground background={user?.background}></ProfileBackground>
 
-			<ProfileInfo user={user}></ProfileInfo>
+      <ProfileInfo user={user}></ProfileInfo>
 
-			<div className={cn([styles.content], [user?.background, styles.content__relative])}>
-        <ProfileDescription description={user?.description}></ProfileDescription>
+      <div
+        className={cn(
+          [styles.content],
+          [user?.background, styles.content__relative]
+        )}
+      >
+        <ProfileDescription
+          description={user?.description}
+        ></ProfileDescription>
       </div>
-		</div>
-	)
+    </div>
+  )
 }
 
 export default ProfileHeader

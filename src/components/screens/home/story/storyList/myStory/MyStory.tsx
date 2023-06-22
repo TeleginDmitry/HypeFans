@@ -1,28 +1,29 @@
-import React from 'react'
-import styles from './MyStory.module.scss'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import { API_URL } from 'configs/api.config'
-import { useNavigate } from 'react-router-dom'
 import { CREATION_PAGE } from 'configs/index.config'
+import { useNavigate } from 'react-router-dom'
+import { API_URL } from 'configs/api.config'
+import React from 'react'
+
+import styles from './MyStory.module.scss'
 
 const MyStory = () => {
-	const user = useTypedSelector(state => state.auth.user)
+  const user = useTypedSelector((state) => state.auth.user)
 
-	const navigation = useNavigate()
+  const navigation = useNavigate()
 
-	function handlerClickStory() {
-		navigation(`/${CREATION_PAGE}`)
-	}
+  function handlerClickStory() {
+    navigation(`/${CREATION_PAGE}`)
+  }
 
-	return (
-		<div onClick={handlerClickStory} className={styles.wrapper}>
-			<div className={styles.avatar__container}>
-				<img className={styles.avatar} src={API_URL + user.avatar} alt='' />
-			</div>
+  return (
+    <div onClick={handlerClickStory} className={styles.wrapper}>
+      <div className={styles.avatar__container}>
+        <img src={API_URL + user.avatar} className={styles.avatar} alt='' />
+      </div>
 
-			<p className={styles.prefix}>Твоя истоия</p>
-		</div>
-	)
+      <p className={styles.prefix}>Твоя истоия</p>
+    </div>
+  )
 }
 
 export default MyStory

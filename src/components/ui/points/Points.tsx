@@ -1,20 +1,21 @@
-import React from 'react'
-import styles from './Points.module.scss'
 import cn from '@utils/classNames/classNames'
+import React from 'react'
+
+import styles from './Points.module.scss'
 
 interface IPoints {
-	onClick?: React.MouseEventHandler<HTMLDivElement>
-	className?: string
+  onClick?: React.MouseEventHandler<HTMLDivElement>
+  className?: string
 }
 
-const Points = ({ onClick, className }: IPoints) => {
-	return (
-		<div onClick={onClick} className={cn([styles.wrapper, className])}>
-			<div className={styles.point}></div>
-			<div className={styles.point}></div>
-			<div className={styles.point}></div>
-		</div>
-	)
+const Points = ({ className, onClick }: IPoints) => {
+  return (
+    <div className={cn([styles.wrapper, className])} onClick={onClick}>
+      <div className={styles.point}></div>
+      <div className={styles.point}></div>
+      <div className={styles.point}></div>
+    </div>
+  )
 }
 
 export default Points

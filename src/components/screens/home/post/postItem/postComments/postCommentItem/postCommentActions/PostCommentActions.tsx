@@ -1,61 +1,62 @@
-import React from 'react'
-import styles from './PostCommentActions.module.scss'
+import { IShortUser } from 'shared/interfaces/user.interface'
+import Delete from 'components/shared/actions/delete/Delete'
 import { PostService } from 'services/post/Post.service'
 import { useQueryClient } from '@tanstack/react-query'
-import { COMMENTS_KEY } from 'configs/index.config'
-import { IShortUser } from 'shared/interfaces/user.interface'
 import Like from 'components/shared/actions/like/Like'
-import Delete from 'components/shared/actions/delete/Delete'
+import { COMMENTS_KEY } from 'configs/index.config'
+import React from 'react'
+
+import styles from './PostCommentActions.module.scss'
 
 interface IPostCommentActions {
-	comment: number
-	post_id: number
-	user: IShortUser
-	likes: number
-	isLiked: boolean
+  isLiked: boolean
+  user: IShortUser
+  post_id: number
+  comment: number
+  likes: number
 }
 
 const PostCommentActions = (props: IPostCommentActions) => {
-	const { comment, post_id, user, likes, isLiked } = props
-	const queryClient = useQueryClient()
+  const { isLiked, post_id, comment, likes, user } = props
+  const queryClient = useQueryClient()
 
-	async function createLike() {
-		const data = {
-			comment,
-		}
-		PostService.createCommentLike(data)
-	}
+  async function createLike() {
+    const data = {
+      comment
+    }
+    PostService.createCommentLike(data)
+  }
 
-	async function deleteLike() {
-		const data = {
-			comment,
-		}
+  async function deleteLike() {
+    const data = {
+      comment
+    }
 
-		const response = await PostService.deleteCommentLike(data)
-		return response.data
-	}
+    const response = await PostService.deleteCommentLike(data)
+    return response.data
+  }
 
-	async function deleteComment() {
-		const response = await PostService.deleteComment(comment)
+  async function deleteComment() {
+    const response = await PostService.deleteComment(comment)
 
-		if (response.status === 204) {
-			queryClient.prefetchInfiniteQuery([COMMENTS_KEY, post_id])
-		}
-		return response.data
-	}
+    if (response.status === 204) {
+      queryClient.prefetchInfiniteQuery([COMMENTS_KEY, post_id])
+    }
+    return response.data
+  }
 
-	return (
-		<div className={styles.actions}>
-			<Delete size='low' onDelete={deleteComment} user_id={user.id}></Delete>
-			<Like
-				likes={likes}
-				isLiked={isLiked}
-				onDelete={deleteLike}
-				onCreate={createLike}
-				size='low'
-			></Like>
-		</div>
-	)
+  return (
+    <div className={styles.actions}>
+      <Delete onDelete={deleteComment} user_id={user.id} size='low'></Delete>
+      <Like
+        onCreate={createLike}
+        onDelete={deleteLike}
+        isLiked={isLiked}
+        likes={likes}
+        size='low'
+      ></Like>
+    </div>
+  )
 }
 
 export default PostCommentActions

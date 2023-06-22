@@ -1,25 +1,24 @@
 .wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 100%;
+
+  .content {
+    background-color: var(--background-white);
     display: flex;
-    justify-content: center;
-    flex: 1 1 100%;
+    flex-direction: column;
+    max-width: 1500px;
+    width: 100%;
+    border-radius: var(--border-radius-16);
 
-    .content {
-        background-color: var(--background-white);
-        display: flex;
-        flex-direction: column;
-        max-width: 1500px;
-        width: 100%;
-        border-radius: var(--border-radius-16);
+    .container {
+      display: flex;
+      flex: 1 1 100%;
 
-        .container {
-            display: flex;
-            flex: 1 1 100%;
-
-            .chat {
-                border-left: 1px solid rgba(0, 0, 0, 0.2);
-                flex: 1;
-
-            }
-        }
+      .chat {
+        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        flex: 1;
+      }
     }
+  }
 }

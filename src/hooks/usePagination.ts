@@ -1,41 +1,40 @@
-import { useState } from 'react'
-import { IPagination } from 'shared/interfaces/pagination.interface'
 import {
-	QueryFunctionContext,
-	useInfiniteQuery,
-	UseInfiniteQueryOptions,
+  UseInfiniteQueryOptions,
+  QueryFunctionContext,
+  useInfiniteQuery
 } from '@tanstack/react-query'
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
+import { IPagination } from 'shared/interfaces/pagination.interface'
 
 type ICallback<T> = (options: QueryFunctionContext) => Promise<IPagination<T[]>>
 
 interface IUsePagination<T>
-	extends Omit<
-		UseInfiniteQueryOptions<IPagination<T[]>>,
-		'getNextPageParam' | 'getPreviousPageParam' | 'keepPreviousData' | 'queryFn'
-	> {
-	nameParam?: string
-	queryFn: ICallback<T>
+  extends Omit<
+    UseInfiniteQueryOptions<IPagination<T[]>>,
+    'getPreviousPageParam' | 'keepPreviousData' | 'getNextPageParam' | 'queryFn'
+  > {
+  queryFn: ICallback<T>
+  nameParam?: string
 }
 
 const usePagination = <T>(options: IUsePagination<T>) => {
-	const { nameParam = 'offset', queryFn: callback, ...queryOptions } = options
+  const { nameParam = 'offset', queryFn: callback, ...queryOptions } = options
 
-	const { data, ...result } = useInfiniteQuery({
-		queryFn: async options => {
-			const response = await callback(options)
+  const { data, ...result } = useInfiniteQuery({
+    queryFn: async (options) => {
+      const response = await callback(options)
 
-			return response
-		},
-		getNextPageParam: lastPage =>
-			getValueParamFromQuery(lastPage.next, nameParam),
-		getPreviousPageParam: lastPage =>
-			getValueParamFromQuery(lastPage.previous, nameParam),
-		keepPreviousData: true,
-		...queryOptions,
-	})
+      return response
+    },
+    getPreviousPageParam: (lastPage) =>
+      getValueParamFromQuery(lastPage.previous, nameParam),
+    getNextPageParam: (lastPage) =>
+      getValueParamFromQuery(lastPage.next, nameParam),
+    keepPreviousData: true,
+    ...queryOptions
+  })
 
-	return { data: data ? data.pages.flat() : [], ...result }
+  return { data: data ? data.pages.flat() : [], ...result }
 }
 
 export default usePagination

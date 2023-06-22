@@ -1,17 +1,18 @@
-import React from 'react'
+import { CREATE_STORY_VALUE, CREATE_PARAM } from 'configs/index.config'
 import { useSearchParams } from 'react-router-dom'
-import { CREATE_PARAM, CREATE_STORY_VALUE } from 'configs/index.config'
+import React from 'react'
+
 import CreationStoryModal from './creationStoryModal/CreationStoryModal'
 
 const ModalsContainer = () => {
-	const [URLSearchParams, setURLSearchParams] = useSearchParams()
+  const [URLSearchParams, setURLSearchParams] = useSearchParams()
 
-	const createParam = URLSearchParams.get(CREATE_PARAM)
+  const createParam = URLSearchParams.get(CREATE_PARAM)
 
-	if (createParam === CREATE_STORY_VALUE)
-		return <CreationStoryModal></CreationStoryModal>
+  if (createParam === CREATE_STORY_VALUE)
+    return <CreationStoryModal></CreationStoryModal>
 
-	return null
+  return null
 }
 
 export default ModalsContainer

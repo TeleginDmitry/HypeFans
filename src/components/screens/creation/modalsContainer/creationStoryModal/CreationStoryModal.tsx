@@ -1,15 +1,16 @@
 import Modal from 'components/ui/modal/Modal'
-import styles from './CreationStoryModal.module.scss'
+
 import MediaRecorder from './mediaRecorder/MediaRecorder'
+import styles from './CreationStoryModal.module.scss'
 
 const CreationStoryModal = () => {
-	return (
-		<Modal opacity={1} handlerClose={null}>
-			<div className={styles.wrapper}>
-				<MediaRecorder></MediaRecorder>
-			</div>
-		</Modal>
-	)
+  return (
+    <Modal handlerClose={null} opacity={1}>
+      <div className={styles.wrapper}>
+        <MediaRecorder></MediaRecorder>
+      </div>
+    </Modal>
+  )
 }
 
 export default CreationStoryModal

@@ -1,45 +1,46 @@
 import React, { ChangeEvent } from 'react'
 import { useRef } from 'react'
+
 import styles from './UploadFile.module.scss'
 
 interface IUploadFile {
-	accept?: string
-	wrapperClass?: string
-	onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-	children: React.ReactNode
-	multiple?: boolean
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+  children: React.ReactNode
+  wrapperClass?: string
+  multiple?: boolean
+  accept?: string
 }
 
 const UploadFile = ({
-	accept = 'image/*, video/*',
-	wrapperClass,
-	onChange,
-	children,
-	multiple = false
+  accept = 'image/*, video/*',
+  multiple = false,
+  wrapperClass,
+  children,
+  onChange
 }: IUploadFile) => {
-	const inputFile = useRef<HTMLInputElement>(null)
+  const inputFile = useRef<HTMLInputElement>(null)
 
-	function clickContent() {
-		if (inputFile.current) {
-			inputFile.current.click()
-		}
-	}
+  function clickContent() {
+    if (inputFile.current) {
+      inputFile.current.click()
+    }
+  }
 
-	return (
-		<div className={wrapperClass ? wrapperClass : styles.wrapper}>
-			<input
-				ref={inputFile}
-				className={styles.file}
-				multiple={multiple}
-				type='file'
-				accept={accept}
-				onChange={onChange}
-			/>
-			<div onClick={clickContent} className={styles.content}>
-				{children}
-			</div>
-		</div>
-	)
+  return (
+    <div className={wrapperClass ? wrapperClass : styles.wrapper}>
+      <input
+        className={styles.file}
+        onChange={onChange}
+        multiple={multiple}
+        accept={accept}
+        ref={inputFile}
+        type='file'
+      />
+      <div className={styles.content} onClick={clickContent}>
+        {children}
+      </div>
+    </div>
+  )
 }
 
 export default UploadFile

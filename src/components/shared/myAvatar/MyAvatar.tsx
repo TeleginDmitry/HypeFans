@@ -1,29 +1,30 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import styles from './MyAvatar.module.scss'
-import { API_URL } from 'configs/api.config'
 import { PROFILE_PAGE } from 'configs/index.config'
+import { useNavigate } from 'react-router-dom'
+import { API_URL } from 'configs/api.config'
+import React from 'react'
+
+import styles from './MyAvatar.module.scss'
 
 const MyAvatar = () => {
-	const navigate = useNavigate()
+  const navigate = useNavigate()
 
-	const user = useTypedSelector(state => state.auth.user)
+  const user = useTypedSelector((state) => state.auth.user)
 
-	return (
-		<div
-			onClick={() => {
-				navigate(`/${PROFILE_PAGE}`)
-			}}
-			className={styles.wrapper}
-		>
-			<img
-				className={styles.avatar}
-				src={API_URL + user?.avatar}
-				alt='HypeFans'
-			/>
-		</div>
-	)
+  return (
+    <div
+      onClick={() => {
+        navigate(`/${PROFILE_PAGE}`)
+      }}
+      className={styles.wrapper}
+    >
+      <img
+        src={API_URL + user?.avatar}
+        className={styles.avatar}
+        alt='HypeFans'
+      />
+    </div>
+  )
 }
 
 export default MyAvatar

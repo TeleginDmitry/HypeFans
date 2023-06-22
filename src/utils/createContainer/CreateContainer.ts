@@ -1,19 +1,18 @@
 interface ICreateContainer {
-	id: string
-	mountNode?: HTMLElement
+  mountNode?: HTMLElement
+  id: string
 }
 
 const createContainer = ({
-	id,
-	mountNode = document.body,
+  mountNode = document.body,
+  id
 }: ICreateContainer) => {
-	if (document.getElementById(id)) return
+  if (document.getElementById(id)) return
 
-	const portalContainer = document.createElement('div')
+  const portalContainer = document.createElement('div')
 
-	portalContainer.setAttribute('id', id)
-	mountNode.appendChild(portalContainer)
+  portalContainer.setAttribute('id', id)
+  mountNode.appendChild(portalContainer)
 }
-
 
 export default createContainer

@@ -1,25 +1,23 @@
-import { IUser } from "./user.interface"
+import { IUser } from './user.interface'
 
 export interface IRegister {
-	email: string
-	username: string
-	password: string
+  password: string
+  username: string
+  email: string
 }
 
 export interface ILogin {
-	email: string
-	password: string
+  password: string
+  email: string
 }
-
-
 
 export interface IUserResponse {
-	user: IUser
+  user: IUser
 }
 
-export interface ITokens  {
-	access: string
-	refresh: string
+export interface ITokens {
+  refresh: string
+  access: string
 }
 
 export interface IResponse extends ITokens {

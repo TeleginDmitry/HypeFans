@@ -1,9 +1,7 @@
-$border__input: #FFFFFF;
-$color__input: #FFFFFF;
-$color__svg: #FFFFFF;
+$border__input: #ffffff;
+$color__input: #ffffff;
+$color__svg: #ffffff;
 $border__radius: 32px;
-
-
 
 .form {
   display: flex;
@@ -26,12 +24,9 @@ $border__radius: 32px;
       top: 50%;
       transform: translateY(-50%);
     }
-    
-
   }
 
   .form__button {
-   
     padding: 3px;
     background-color: transparent;
 

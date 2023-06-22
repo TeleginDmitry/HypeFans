@@ -1,22 +1,22 @@
-import { IShortUser } from "./user.interface"
+import { IShortUser } from './user.interface'
 
 export interface IStory {
-	id: number
-	user: IShortUser
-	date_joined: string
+  date_joined: string
+  user: IShortUser
+  id: number
 }
 
 export interface IStoryMedia {
-	id: number
-	date_joined: string
-	media: string
-	story: number
+  date_joined: string
+  story: number
+  media: string
+  id: number
 }
 
 export interface IModalStory {
-	story: {
-		medias: IStoryMedia[]
-	} & IStory
-	isNext: boolean
-	isPrevious: boolean
+  story: {
+    medias: IStoryMedia[]
+  } & IStory
+  isPrevious: boolean
+  isNext: boolean
 }

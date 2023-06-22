@@ -1,43 +1,43 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 interface IconProps {
-	src: string
-	alt?: string
-	className?: string
-	style?: React.CSSProperties
+  style?: React.CSSProperties
+  className?: string
+  alt?: string
+  src: string
 }
 
-const Icon = ({ src, alt, className, style }: IconProps) => {
-	const fileExtension = src.split('.').pop()?.toLowerCase()
+const Icon = ({ className, style, alt, src }: IconProps) => {
+  const fileExtension = src.split('.').pop()?.toLowerCase()
 
-	if (!src) return null
+  if (!src) return null
 
-	const imagePath = `../../../assets/images/TEST/${src}`
+  const imagePath = `../../../assets/images/TEST/${src}`
 
-	if (fileExtension === 'svg') {
-		// Если расширение файла svg, возвращаем компонент svg
-		return (
-			<svg
-				className={className}
-				style={style}
-				role='img'
-				aria-label={alt}
-				dangerouslySetInnerHTML={{
-					__html: require(imagePath).default,
-				}}
-			/>
-		)
-	}
+  if (fileExtension === 'svg') {
+    // Если расширение файла svg, возвращаем компонент svg
+    return (
+      <svg
+        dangerouslySetInnerHTML={{
+          __html: require(imagePath).default
+        }}
+        className={className}
+        aria-label={alt}
+        style={style}
+        role='img'
+      />
+    )
+  }
 
-	// Для других форматов используем тег img
-	return (
-		<img
-			className={className}
-			style={style}
-			src={require(imagePath).default}
-			alt={alt}
-		/>
-	)
+  // Для других форматов используем тег img
+  return (
+    <img
+      src={require(imagePath).default}
+      className={className}
+      style={style}
+      alt={alt}
+    />
+  )
 }
 
 export default Icon

@@ -1,12 +1,13 @@
-import React from "react";
-import styles from "./ErrorText.module.scss";
+import React from 'react'
+
+import styles from './ErrorText.module.scss'
 
 interface IErrorText {
-  children: string;
+  children: string
 }
 
 const ErrorText = ({ children }: IErrorText) => {
-  return <h2 className={styles.error}>{children}</h2>;
-};
+  return <h2 className={styles.error}>{children}</h2>
+}
 
-export default ErrorText;
+export default ErrorText

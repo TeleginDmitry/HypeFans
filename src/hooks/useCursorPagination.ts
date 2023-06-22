@@ -1,114 +1,109 @@
-import { useState, useEffect, useCallback } from 'react'
-import { IPagination } from 'shared/interfaces/pagination.interface'
-import { useInView, IntersectionOptions } from 'react-intersection-observer'
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
+import { IPagination } from 'shared/interfaces/pagination.interface'
+import { IntersectionOptions } from 'react-intersection-observer'
+import { useState } from 'react'
+
 import useFetching from './useFetching'
 
-interface ICursorPagination<T> {
-	queryParam?: {}
-	initialState?: T[]
-	isInfinity?: boolean
-	observerParams?: IntersectionOptions
-	condition?: boolean
+interface ICallbackParams {
+  cursor: string
 }
 
-type ICallback<T> = (params: any) => Promise<IPagination<T[]>>
+interface ICursorPagination<T, P extends ICallbackParams> {
+  observerParams?: IntersectionOptions
+  isInfinity?: boolean
+  condition?: boolean
+  initialState?: T[]
+  queryParam?: P
+}
 
-const useCursorPagination = <T>(
-	callback: ICallback<T>,
-	{
-		queryParam,
-		initialState = [],
-		isInfinity = false,
-		observerParams,
-		condition = true,
-	}: ICursorPagination<T> = {}
+type ICallback<T, P extends ICallbackParams> = (
+  params: P
+) => Promise<IPagination<T[]>>
+
+const useCursorPagination = <T, P extends ICallbackParams>(
+  callback: ICallback<T, P>,
+  {
+    isInfinity = false,
+    initialState = [],
+    condition = true,
+    queryParam
+  }: ICursorPagination<T, P> = {}
 ) => {
-	const [hasNextPage, setHasNextPage] = useState<boolean>()
-	const [hasPreviousPage, setHasPreviousPage] = useState<boolean>()
-	const [cursorNext, setCursorNext] = useState('')
-	const [cursorPrevious, setCursorPrevious] = useState('')
-	const [data, setData] = useState<T[]>(initialState)
-	const [isFirstQuery, setFirstQuery] = useState(true)
+  const [hasNextPage, setHasNextPage] = useState<boolean>()
+  const [hasPreviousPage, setHasPreviousPage] = useState<boolean>()
+  const [cursorNext, setCursorNext] = useState('')
+  const [cursorPrevious, setCursorPrevious] = useState('')
+  const [data, setData] = useState<T[]>(initialState)
+  const [isFirstQuery, setFirstQuery] = useState(true)
 
-	const { handlerQuery, ...otherQueryProps } = useFetching<T[]>({
-		condition,
-		onSuccess(data) {
-			if (isFirstQuery) {
-				setData(data)
-			} else {
-				if (isInfinity) {
-					setData(state => [...state, ...data])
-				} else {
-					setData(data)
-				}
-			}
-		},
-	})
+  const { handlerQuery, ...otherQueryProps } = useFetching<T[]>({
+    onSuccess(data) {
+      if (isFirstQuery) {
+        setData(data)
+      } else {
+        if (isInfinity) {
+          setData((state) => [...state, ...data])
+        } else {
+          setData(data)
+        }
+      }
+    },
+    condition
+  })
 
-	function saveNextPage(response: IPagination<T[]>) {
-		if (response.next) {
-			setHasNextPage(true)
-			setCursorNext(getValueParamFromQuery(response.next, 'cursor'))
-		} else setHasNextPage(false)
-	}
+  function saveNextPage(response: IPagination<T[]>) {
+    if (response.next) {
+      setHasNextPage(true)
+      setCursorNext(getValueParamFromQuery(response.next, 'cursor'))
+    } else setHasNextPage(false)
+  }
 
-	function savePreviousPage(response: IPagination<T[]>) {
-		if (response.previous) {
-			setHasPreviousPage(true)
-			setCursorPrevious(getValueParamFromQuery(response.previous, 'cursor'))
-		} else setHasPreviousPage(false)
-	}
+  function savePreviousPage(response: IPagination<T[]>) {
+    if (response.previous) {
+      setHasPreviousPage(true)
+      setCursorPrevious(getValueParamFromQuery(response.previous, 'cursor'))
+    } else setHasPreviousPage(false)
+  }
 
-	function savePage(response: IPagination<T[]>) {
-		saveNextPage(response)
-		savePreviousPage(response)
+  function savePage(response: IPagination<T[]>) {
+    saveNextPage(response)
+    savePreviousPage(response)
 
-		setFirstQuery(false)
-	}
+    setFirstQuery(false)
+  }
 
-	async function fetchQuery(cursor: string) {
-		const params = {
-			...queryParam,
-		}
-		if (cursor) {
-			params['cursor'] = cursor
-		}
-		const response = await callback(params)
-		
+  async function fetchQuery(cursor: string) {
+    const params = {
+      ...queryParam
+    }
+    if (cursor) {
+      params['cursor'] = cursor
+    }
+    const response = await callback(params)
 
-		savePage(response)
+    savePage(response)
 
-		return response.results
-	}
+    return response.results
+  }
 
-	async function fetchNextPage() {
-		await handlerQuery(() => fetchQuery(cursorNext))
-	}
+  async function fetchNextPage() {
+    await handlerQuery(() => fetchQuery(cursorNext))
+  }
 
-	async function fetchPreviousPage() {
-		await handlerQuery(() => fetchQuery(cursorPrevious))
-	}
+  async function fetchPreviousPage() {
+    await handlerQuery(() => fetchQuery(cursorPrevious))
+  }
 
-	// const { ref, inView } = useInView({
-	// 	...observerParams,
-	// })
-
-	// useEffect(() => {
-	// 	if (inView) {
-	// 		fetchQuery()
-	// 	}
-	// }, [inView])
-
-	return {
-		...otherQueryProps,
-		data,
-		fetchNextPage,
-		fetchPreviousPage,
-		fetchQuery,
-		hasNextPage,
-		hasPreviousPage,
-	}
+  return {
+    ...otherQueryProps,
+    fetchPreviousPage,
+    hasPreviousPage,
+    fetchNextPage,
+    hasNextPage,
+    fetchQuery,
+    data
+  }
 }
 
 export default useCursorPagination

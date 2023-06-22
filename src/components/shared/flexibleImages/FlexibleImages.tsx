@@ -1,46 +1,47 @@
-import React from 'react'
-import styles from './FlexibleImages.module.scss'
-import cn from '@utils/classNames/classNames'
 import Image from 'components/ui/image/Image'
+import cn from '@utils/classNames/classNames'
+import React from 'react'
+
+import styles from './FlexibleImages.module.scss'
 
 interface IImage {
-	id: number | string
-	media: string
+  id: number | string
+  media: string
 }
 
 interface IFlexibleImages {
-	images: IImage[]
-	alt?: string
-	handlerClickImage?(id: string | number): void
+  handlerClickImage?(id: string | number): void
+  images: IImage[]
+  alt?: string
 }
 
 const FlexibleImages = ({
-	images,
-	alt,
-	handlerClickImage,
+  handlerClickImage,
+  images,
+  alt
 }: IFlexibleImages) => {
-	const classNameImage = cn(
-		[styles.image],
-		[!!handlerClickImage, styles.image__click]
-	)
+  const classNameImage = cn(
+    [styles.image],
+    [!!handlerClickImage, styles.image__click]
+  )
 
-	if (!images.length) return null
+  if (!images.length) return null
 
-	return (
-		<div className={styles.container}>
-			{images.map(image => {
-				return (
-					<Image
-						key={image.id}
-						className={classNameImage}
-						src={image.media}
-						onClick={() => handlerClickImage(image.id)}
-						alt={alt}
-					></Image>
-				)
-			})}
-		</div>
-	)
+  return (
+    <div className={styles.container}>
+      {images.map((image) => {
+        return (
+          <Image
+            onClick={() => handlerClickImage(image.id)}
+            className={classNameImage}
+            src={image.media}
+            key={image.id}
+            alt={alt}
+          ></Image>
+        )
+      })}
+    </div>
+  )
 }
 
 export default FlexibleImages

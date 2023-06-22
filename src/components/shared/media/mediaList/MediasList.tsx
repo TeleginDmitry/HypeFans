@@ -1,19 +1,26 @@
-import styles from './MediasList.module.scss'
-import MediaItem from '../mediaItem/MediaItem'
-import { motion } from 'framer-motion'
 import { IResponseViewMedia } from 'hooks/useViewUploadMedias'
+import { motion } from 'framer-motion'
+
+import MediaItem from '../mediaItem/MediaItem'
+import styles from './MediasList.module.scss'
 
 interface IMediasList {
-	medias: IResponseViewMedia[]
-	deleteMedia: (id: number) => void
+  deleteMedia: (id: number) => void
+  medias: IResponseViewMedia[]
 }
 
-export default function MediasList({ medias, deleteMedia }: IMediasList) {
-	return (
-		<motion.ul className={styles.medias__container}>
-			{medias.map(media => {
-				return <MediaItem key={media.id} media={media} deleteMedia={deleteMedia}></MediaItem>
-			})}
-		</motion.ul>
-	)
+export default function MediasList({ deleteMedia, medias }: IMediasList) {
+  return (
+    <motion.ul className={styles.medias__container}>
+      {medias.map((media) => {
+        return (
+          <MediaItem
+            deleteMedia={deleteMedia}
+            key={media.id}
+            media={media}
+          ></MediaItem>
+        )
+      })}
+    </motion.ul>
+  )
 }

@@ -1,6 +1,6 @@
 export interface IInitialValues {
-  username: string;
-  prefix: string;
-  description: string;
-  site: string;
+  description: string
+  username: string
+  prefix: string
+  site: string
 }
