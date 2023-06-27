@@ -20,21 +20,21 @@ const Chat = () => {
       `ws://localhost:8000/ws/chat/${user_id}${token ? '?token=' + token : ''}`
     )
 
-    socket.current.onopen = () => {
-      console.log('Соединение установлено')
-    }
+    // socket.current.onopen = () => {
+    //   console.log('Соединение установлено')
+    // }
 
-    socket.current.onclose = () => {
-      console.log('Соединение закрыто')
-    }
+    // socket.current.onclose = () => {
+    //   console.log('Соединение закрыто')
+    // }
 
-    socket.current.onerror = (error) => {
-      console.error('Ошибка:', error.message)
-    }
+    // socket.current.onerror = (error) => {
+    //   console.error('Ошибка:', error.message)
+    // }
 
-    socket.current.onmessage = (event) => {
-      console.log('Получено сообщение:', event.data)
-    }
+    // socket.current.onmessage = (event) => {
+    //   console.log('Получено сообщение:', event.data)
+    // }
 
     // socket.current.send('Привет, сервер!')
   }, [user_id])

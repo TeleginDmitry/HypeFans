@@ -1,14 +1,14 @@
+import { IObjectSizeInput } from 'shared/styles/inputStyles/inputStyles'
 import TextareaInput from 'components/ui/textareaInput/TextareaInput'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { POST_LIST_KEY, COMMENTS_KEY } from 'configs/index.config'
-import { ReactComponent as Send } from '@assets/images/send.svg'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
 import { API_URL } from 'configs/api.config'
+import { Send } from 'icons-hypefans-lib'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
-import React from 'react'
 
 import styles from './PostCommentForm.module.scss'
 
@@ -16,7 +16,7 @@ interface IInitialValues {
   comment: string
 }
 
-interface IPostCommentForm {
+interface IPostCommentForm extends IObjectSizeInput {
   post_id: number
 }
 
@@ -30,7 +30,7 @@ const validate = (values: IInitialValues) => {
   return errors
 }
 
-const PostCommentForm = ({ post_id }: IPostCommentForm) => {
+const PostCommentForm = ({ post_id, size }: IPostCommentForm) => {
   const queryClient = useQueryClient()
 
   const user = useTypedSelector((state) => state.auth.user)
@@ -80,6 +80,7 @@ const PostCommentForm = ({ post_id }: IPostCommentForm) => {
           placeholder='Введите комментарий...'
           onChange={handleChange}
           maxRows={6}
+          size={size}
         ></TextareaInput>
 
         <button className={styles.button} type='submit'>

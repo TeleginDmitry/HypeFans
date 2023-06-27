@@ -27,8 +27,6 @@ const ConversationsList = () => {
   //   }
   // }, [user_id])
 
-  console.log(conversationList)
-
   return (
     <ul className={styles.conversations}>
       {conversationList?.map((item) => {

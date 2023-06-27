@@ -1,4 +1,4 @@
-import { ReactComponent as Back } from '@assets/images/newPost/arrow-left.svg'
+import { ArrowLeft } from 'icons-hypefans-lib'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
 
@@ -9,12 +9,12 @@ const CreationHeader = () => {
 
   return (
     <div className={styles.header}>
-      <Back
+      <ArrowLeft
         onClick={() => {
           navigate(-1)
         }}
         className={styles.back}
-      ></Back>
+      ></ArrowLeft>
 
       <div className={styles.title__container}>
         <h2 className={styles.title}>Создать</h2>

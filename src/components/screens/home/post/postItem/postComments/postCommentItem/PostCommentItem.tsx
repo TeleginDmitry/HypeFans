@@ -1,11 +1,13 @@
-import ConvertedDate from 'components/shared/convertedDate/ConvertedDate'
 import { IPostComment } from 'shared/interfaces/post.interface'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import Avatar from 'components/ui/avatars/avatar/Avatar'
 import { USER_PAGE } from 'configs/index.config'
-import { useNavigate } from 'react-router-dom'
 import { API_URL } from '@configs/api.config'
-import React from 'react'
+import { useState } from 'react'
 
+import PostCommentItemContent from './postCommentItemContent/PostCommentItemContent'
 import PostCommentActions from './postCommentActions/PostCommentActions'
+import PostCommentForm from '../postCommentForm/PostCommentForm'
 import styles from './PostCommentItem.module.scss'
 
 interface IPostCommentItem {
@@ -15,34 +17,46 @@ interface IPostCommentItem {
 const PostCommentItem = ({ comment }: IPostCommentItem) => {
   const { date_joined, isLiked, likes, post, user, text, id } = comment
 
-  const navigation = useNavigate()
+  const [isOpenInput, setOpenInput] = useState(false)
 
-  function getOverUser() {
-    navigation(`/${USER_PAGE}/${user.id}`, { preventScrollReset: true })
+  const myId = useTypedSelector((state) => state.auth.user?.id)
+
+  function onClickComment() {
+    setOpenInput((state) => !state)
   }
 
   return (
     <div className={styles.wrapper}>
+      <Avatar
+        to={`/${USER_PAGE}/${user.id}`}
+        avatar={API_URL + user.avatar}
+        size='low'
+      ></Avatar>
+
       <div className={styles.container}>
-        <div className={styles.avatar__container} onClick={getOverUser}>
-          <img src={API_URL + user.avatar} className={styles.avatar} alt='' />
+        <div className={styles.content} onClick={onClickComment}>
+          <PostCommentItemContent
+            date_joined={date_joined}
+            username={user.username}
+            description={text}
+            id={user.id}
+          ></PostCommentItemContent>
+          <div className={styles.postActions__container}>
+            <PostCommentActions
+              isLiked={isLiked}
+              post_id={post}
+              likes={likes}
+              comment={id}
+              user={user}
+            ></PostCommentActions>
+          </div>
         </div>
-        <div className={styles.content}>
-          <h2 className={styles.username} onClick={getOverUser}>
-            {user.username}
-          </h2>
-          <p className={styles.text}>{text}</p>
-          <ConvertedDate date={date_joined}></ConvertedDate>
-        </div>
-      </div>
-      <div className={styles.postActions__container}>
-        <PostCommentActions
-          isLiked={isLiked}
-          post_id={post}
-          likes={likes}
-          comment={id}
-          user={user}
-        ></PostCommentActions>
+
+        {isOpenInput && myId !== user.id && (
+          <div className={styles.postCommentForm}>
+            <PostCommentForm post_id={post} size='low'></PostCommentForm>
+          </div>
+        )}
       </div>
     </div>
   )

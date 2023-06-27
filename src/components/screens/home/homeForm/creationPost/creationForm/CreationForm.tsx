@@ -1,8 +1,5 @@
-import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
-import { ReactComponent as Image } from '@assets/images/newPost/image.svg'
-import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
 import MediasList from '@components/shared/media/mediaList/MediasList'
-import { ReactComponent as Send } from '@assets/images/send.svg'
+import { Search, Photo, Video, Send } from 'icons-hypefans-lib'
 import TextareaInput from '@ui/textareaInput/TextareaInput'
 import { AnimatePresence, motion } from 'framer-motion'
 import useViewMedia from '@hooks/useViewUploadMedias'
@@ -28,7 +25,7 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
     setValueInput(input.target.value)
   }
 
-  function handlerUploadviewMedias(input: React.ChangeEvent<HTMLInputElement>) {
+  function handlerUploadViewMedias(input: React.ChangeEvent<HTMLInputElement>) {
     handlerMedia(input.target.files)
   }
 
@@ -67,8 +64,8 @@ const CreationForm = ({ changeStateActive }: ICreationForm) => {
                 initial={{ opacity: 0 }}
                 exit={{ opacity: 0 }}
               >
-                <UploadFile onChange={handlerUploadviewMedias} multiple={true}>
-                  <Image />
+                <UploadFile onChange={handlerUploadViewMedias} multiple={true}>
+                  <Photo />
                 </UploadFile>
               </motion.div>
               <motion.div

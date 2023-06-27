@@ -1,6 +1,5 @@
-import UploadMedia from 'components/shared/actions/uploadMedia/UploadMedia'
 import RecordButton from 'components/shared/recordButton/RecordButton'
-import Camera from 'components/shared/actions/camera/Camera'
+import { CameraRotate, Photo } from 'icons-hypefans-lib'
 import UploadFile from '@ui/uploadFile/UploadFile'
 import React from 'react'
 
@@ -22,13 +21,13 @@ const RecordingActions = ({
   return (
     <div className={styles.actions}>
       <UploadFile accept='image/*,video/*' onChange={onUploadFile}>
-        <UploadMedia></UploadMedia>
+        <Photo></Photo>
       </UploadFile>
       <RecordButton
         onClick={onClickRecord}
         condition={condition}
       ></RecordButton>
-      <Camera onClick={onChangeCamera}></Camera>
+      <CameraRotate onClick={onChangeCamera}></CameraRotate>
     </div>
   )
 }

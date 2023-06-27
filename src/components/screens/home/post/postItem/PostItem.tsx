@@ -1,4 +1,3 @@
-import PostActions from 'components/shared/postActions/PostActions'
 import PostHeader from 'components/shared/postHeader/PostHeader'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { IPost } from 'shared/interfaces/post.interface'
@@ -7,6 +6,7 @@ import { motion } from 'framer-motion'
 
 import PostCommentForm from './postComments/postCommentForm/PostCommentForm'
 import PostComments from './postComments/PostComments'
+import PostActions from './postActions/PostActions'
 import PostContent from './postContent/PostContent'
 import styles from './PostItem.module.scss'
 
@@ -39,11 +39,11 @@ export default function PostItem({ post }: IPostItem) {
 
   return (
     <motion.div
-      // initial={{ opacity: 0 }}
-      // viewport={{ once: true }}
-      // whileInView={{ opacity: 1 }}
-      // transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5 }}
+      whileInView={{ opacity: 1 }}
       className={styles.wrapper}
+      viewport={{ once: true }}
+      initial={{ opacity: 0 }}
     >
       <div className={styles.container}>
         <PostHeader

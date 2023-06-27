@@ -1,12 +1,8 @@
 import { IShortUser } from 'shared/interfaces/user.interface'
-import Delete from 'components/shared/actions/delete/Delete'
-import { PostService } from 'services/post/Post.service'
-import { useQueryClient } from '@tanstack/react-query'
-import Like from 'components/shared/actions/like/Like'
-import { COMMENTS_KEY } from 'configs/index.config'
-import React from 'react'
 
+import DeleteAction from './deleteAction/DeleteAction'
 import styles from './PostCommentActions.module.scss'
+import LikeAction from './likeAction/LikeAction'
 
 interface IPostCommentActions {
   isLiked: boolean
@@ -18,43 +14,23 @@ interface IPostCommentActions {
 
 const PostCommentActions = (props: IPostCommentActions) => {
   const { isLiked, post_id, comment, likes, user } = props
-  const queryClient = useQueryClient()
 
-  async function createLike() {
-    const data = {
-      comment
-    }
-    PostService.createCommentLike(data)
-  }
-
-  async function deleteLike() {
-    const data = {
-      comment
-    }
-
-    const response = await PostService.deleteCommentLike(data)
-    return response.data
-  }
-
-  async function deleteComment() {
-    const response = await PostService.deleteComment(comment)
-
-    if (response.status === 204) {
-      queryClient.prefetchInfiniteQuery([COMMENTS_KEY, post_id])
-    }
-    return response.data
+  function onClickActions(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.stopPropagation()
   }
 
   return (
-    <div className={styles.actions}>
-      <Delete onDelete={deleteComment} user_id={user.id} size='low'></Delete>
-      <Like
-        onCreate={createLike}
-        onDelete={deleteLike}
+    <div className={styles.actions} onClick={onClickActions}>
+      <DeleteAction
+        comment={comment}
+        post_id={post_id}
+        user_id={user.id}
+      ></DeleteAction>
+      <LikeAction
+        comment={comment}
         isLiked={isLiked}
         likes={likes}
-        size='low'
-      ></Like>
+      ></LikeAction>
     </div>
   )
 }

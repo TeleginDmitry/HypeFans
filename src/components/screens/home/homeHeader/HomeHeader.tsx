@@ -1,8 +1,7 @@
-import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
-import { ReactComponent as Clear } from '@assets/images/homeHeader/clear.svg'
 import { AnimatePresence, motion } from 'framer-motion'
-import logo from '@assets/images/homeHeader/logo.png'
+import { Search, X } from 'icons-hypefans-lib'
 import cn from '@utils/classNames/classNames'
+import logo from '@assets/images/logo.png'
 import React, { useState } from 'react'
 
 import styles from './HomeHeader.module.scss'
@@ -40,10 +39,7 @@ export default function HomeHeader() {
               initial={{ opacity: 0 }}
               exit={{ opacity: 0 }}
             >
-              <Clear
-                className={styles.input__svg}
-                onClick={handlerClear}
-              ></Clear>
+              <X className={styles.input__svg} onClick={handlerClear}></X>
               <input
                 placeholder='Поиск профиля...'
                 onChange={handlerChangeInput}

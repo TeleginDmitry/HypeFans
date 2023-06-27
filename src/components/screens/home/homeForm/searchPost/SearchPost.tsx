@@ -1,9 +1,8 @@
-import { ReactComponent as Search } from '@assets/images/homeHeader/search.svg'
-import { ReactComponent as Cancel } from '@assets/images/homeHeader/clear.svg'
-import MyAvatar from 'components/shared/myAvatar/MyAvatar'
+import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { POST_PARAM } from 'configs/index.config'
 import React, { useState, useRef } from 'react'
+import { Search, X } from 'icons-hypefans-lib'
 import { useNavigate } from 'react-router-dom'
 import cn from '@utils/classNames/classNames'
 
@@ -55,7 +54,7 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
       </div>
       {isAuth ? (
         <div className={styles.icon__container} onClick={changeStateActive}>
-          <Cancel className={styles.icon}></Cancel>
+          <X className={styles.icon}></X>
         </div>
       ) : (
         <div className={styles.icon__container} onClick={focusInput}>

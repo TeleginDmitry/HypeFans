@@ -1,7 +1,6 @@
-import background from '@assets/images/auth/background.jpg'
-import logo from '@assets/images/auth/logo.png'
+import background from '@assets/images/background.jpg'
+import logo from '@assets/images/logoWhite.png'
 import { Outlet } from 'react-router-dom'
-import React from 'react'
 
 import styles from './AuthLayout.module.scss'
 

@@ -1,7 +1,6 @@
-import { ReactComponent as Send } from '@assets/images/send.svg'
 import ReactTextareaAutosize from 'react-textarea-autosize'
+import { Send } from 'icons-hypefans-lib'
 import { motion } from 'framer-motion'
-import React from 'react'
 
 import styles from './StoryModalForm.module.scss'
 

@@ -1,7 +1,4 @@
-import { ReactComponent as Exit } from '@assets/images/newPost/arrow-left.svg'
-import { ReactComponent as Users } from '@assets/images/messages/users.svg'
-import { ReactComponent as Plus } from '@assets/images/messages/plus.svg'
-import React from 'react'
+import { ArrowLeft, Plus } from 'icons-hypefans-lib'
 
 import styles from './Header.module.scss'
 
@@ -9,12 +6,11 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.header__flex}>
-        <Exit className={styles.header__svg}></Exit>
+        <ArrowLeft className={styles.header__svg}></ArrowLeft>
         <h2 className={styles.header__title}>Сообщения</h2>
       </div>
       <div className={styles.header__flex}>
         <Plus className={styles.header__svg}></Plus>
-        <Users className={styles.header__svg}></Users>
       </div>
     </div>
   )

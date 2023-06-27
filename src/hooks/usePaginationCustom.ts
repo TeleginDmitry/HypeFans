@@ -1,21 +1,29 @@
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
 import { IPagination } from 'shared/interfaces/pagination.interface'
 import { useState } from 'react'
+
 import useFetching from './useFetching'
 
-interface IPaginationCustom<T> {
+interface ICallbackParams {
+  offset: number
+  limit: number
+}
+
+interface IPaginationCustom<T, P> {
   initialOffset?: number
   initialLimit?: number
   isInfinity?: boolean
   condition?: boolean
   initialState?: T[]
-  queryParam?: {}
+  queryParam?: P
 }
 
-type ICallback<T> = (params: any) => Promise<IPagination<T[]>>
+type ICallback<T, P extends Partial<ICallbackParams>> = (
+  params: P
+) => Promise<IPagination<T[]>>
 
-const usePaginationCustom = <T>(
-  callback: ICallback<T>,
+const usePaginationCustom = <T, P>(
+  callback: ICallback<T, P>,
   {
     isInfinity = false,
     initialState = [],
@@ -23,7 +31,7 @@ const usePaginationCustom = <T>(
     initialOffset = 0,
     condition = true,
     queryParam
-  }: IPaginationCustom<T> = {}
+  }: IPaginationCustom<T, P> = {}
 ) => {
   const [limit, setLimit] = useState(initialLimit)
   const [offset, setOffset] = useState(initialOffset)

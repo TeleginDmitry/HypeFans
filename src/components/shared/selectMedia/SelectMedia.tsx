@@ -1,12 +1,7 @@
-import { ReactComponent as Paperclip } from '@assets/images/newPost/paperclip.svg'
-import { ReactComponent as Image } from '@assets/images/newPost/image.svg'
-import { ReactComponent as Clock } from '@assets/images/newPost/clock.svg'
-import { ReactComponent as Inbox } from '@assets/images/newPost/inbox.svg'
-import { ReactComponent as Video } from '@assets/images/newPost/video.svg'
-import { ReactComponent as Mic } from '@assets/images/newPost/mic.svg'
-import React, { ChangeEvent, useState } from 'react'
+import { Microphone, Paperclip, Photo, Clock, Video } from 'icons-hypefans-lib'
 import UploadFile from '@ui/uploadFile/UploadFile'
 import cn from '@utils/classNames/classNames'
+import { ChangeEvent, useState } from 'react'
 
 import styles from './SelectMedia.module.scss'
 
@@ -26,7 +21,7 @@ const SelectMedia = ({ onChange }: ISelectMedia) => {
           }}
           className={styles.svg__container}
         >
-          <Paperclip className={styles.select__svg}></Paperclip>
+          <Paperclip className={styles.paperclip} size='large'></Paperclip>
         </div>
         <div
           className={cn(
@@ -37,20 +32,18 @@ const SelectMedia = ({ onChange }: ISelectMedia) => {
           <div className={styles.select__content}>
             <div className={styles.select__item}>
               <UploadFile onChange={onChange} multiple={true}>
-                <Image className={styles.select__svg}></Image>
+                <Photo></Photo>
               </UploadFile>
             </div>
             <div className={styles.select__item}>
-              <Video className={styles.select__svg}></Video>
+              <Video></Video>
             </div>
             <div className={styles.select__item}>
-              <Mic className={styles.select__svg}></Mic>
+              <Microphone></Microphone>
             </div>
+
             <div className={styles.select__item}>
-              <Inbox className={styles.select__svg}></Inbox>
-            </div>
-            <div className={styles.select__item}>
-              <Clock className={styles.select__svg}></Clock>
+              <Clock></Clock>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import PostPointsActions from 'components/shared/postPointsActions/PostPointsActions'
-import { ReactComponent as ToBack } from '@assets/images/newPost/arrow-left.svg'
-import PointsContainer from 'components/shared/pointsContainer/PointsContainer'
+import PointsContainer from 'components/shared/postPoints/PostPoints'
 import { IPostUser } from 'shared/interfaces/post.interface'
+import { ArrowLeft } from 'icons-hypefans-lib'
 
 import styles from './PostModalHeader.module.scss'
 
@@ -15,7 +15,7 @@ const PostModalHeader = ({ handlerClose, post_id, user }: IPostModalHeader) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title__container}>
-        <ToBack onClick={handlerClose} className={styles.svg}></ToBack>
+        <ArrowLeft onClick={handlerClose}></ArrowLeft>
         <p className={styles.title}>Запись на стене</p>
       </div>
 

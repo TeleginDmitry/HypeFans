@@ -1,6 +1,4 @@
-import { ReactComponent as SettingsSvg } from '@assets/images/settings/settings.svg'
-import { ReactComponent as Back } from '@assets/images/newPost/arrow-left.svg'
-import React from 'react'
+import { Settings as SettingsSvg, ArrowLeft } from 'icons-hypefans-lib'
 
 import styles from './Settings.module.scss'
 
@@ -12,7 +10,7 @@ export default function Settings() {
           <div className={styles.choosing__first}>
             <div className={styles.choosing__navigation}>
               <div className={styles.choosing}>
-                <Back className={styles.choosing__back}></Back>
+                <ArrowLeft className={styles.choosing__back}></ArrowLeft>
                 <h2 className={styles.choosing__title}>Уведомления</h2>
               </div>
               <SettingsSvg className={styles.choosing__settings}></SettingsSvg>

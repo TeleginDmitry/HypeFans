@@ -101,6 +101,7 @@ function isLoadingAction(action: AnyAction) {
   return action.type.endsWith('pending')
 }
 
+// eslint-disable-next-line no-empty-pattern
 export const {} = AuthSlice.actions
 
 export default AuthSlice.reducer

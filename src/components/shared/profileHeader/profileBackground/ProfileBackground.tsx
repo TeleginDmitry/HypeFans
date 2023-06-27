@@ -1,9 +1,7 @@
-import { ReactComponent as Clear } from '@assets/images/newPost/arrow-left.svg'
-import { ReactComponent as Points } from '@assets/images/profile/points.svg'
+import { DotsVertical, ArrowLeft } from 'icons-hypefans-lib'
 import { SERVER_URL } from 'configs/api.config'
 import { useNavigate } from 'react-router-dom'
 import cn from '@utils/classNames/classNames'
-import React from 'react'
 
 import styles from './ProfileBackground.module.scss'
 
@@ -25,21 +23,14 @@ const ProfileBackground = ({ background }: IProfileBackground) => {
           />
         </div>
       )}
-      <Clear
-        className={cn(
-          [styles.background__back],
-          [!background, styles.background__back_color]
-        )}
-        onClick={() => {
-          navigate(-1)
-        }}
-      ></Clear>
-      <Points
-        className={cn(
-          [styles.background__points],
-          [!background, styles.background__points_color]
-        )}
-      ></Points>
+      <div className={styles.actions}>
+        <ArrowLeft
+          onClick={() => {
+            navigate(-1)
+          }}
+        ></ArrowLeft>
+        <DotsVertical></DotsVertical>
+      </div>
     </div>
   )
 }

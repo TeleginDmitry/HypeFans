@@ -1,12 +1,9 @@
-import { ReactComponent as Clear } from '@assets/images/newPost/arrow-left.svg'
-import { ReactComponent as Points } from '@assets/images/profile/points.svg'
-import { ReactComponent as Camera } from '@assets/images/edit/camera.svg'
+import { DotsVertical, ArrowLeft } from 'icons-hypefans-lib'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import UploadFile from '@ui/uploadFile/UploadFile'
 import { useNavigate } from 'react-router-dom'
 import { API_URL } from 'configs/api.config'
-import React from 'react'
 
 import EditForm from './editForm/EditForm'
 import styles from './Edit.module.scss'
@@ -37,18 +34,18 @@ const Edit = () => {
               />
             )}
 
-            <Clear
+            <ArrowLeft
               onClick={() => {
                 navigate(-1)
               }}
               className={styles.background__back}
-            ></Clear>
-            <Points className={styles.background__points}></Points>
+            ></ArrowLeft>
+            <DotsVertical className={styles.background__points}></DotsVertical>
             <UploadFile
               onChange={({ target }) => handlerMediaBackground(target.files)}
               wrapperClass={styles.wrapper__camera}
             >
-              <Camera className={styles.camera}></Camera>
+              {/* <Camera className={styles.camera}></Camera> */}
             </UploadFile>
           </div>
           <div className={styles.avatar__content}>
@@ -61,7 +58,7 @@ const Edit = () => {
               onChange={({ target }) => handlerMediaAvatar(target.files)}
               wrapperClass={styles.wrapper__camera}
             >
-              <Camera className={styles.camera}></Camera>
+              {/* <Camera className={styles.camera}></Camera> */}
             </UploadFile>
           </div>
         </div>

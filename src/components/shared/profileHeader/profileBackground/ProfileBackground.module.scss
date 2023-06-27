@@ -13,38 +13,12 @@
       }
     }
   }
-  .background__back {
+  .actions {
     position: absolute;
-    top: 16px;
-    left: 24px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 5;
-
-    * {
-      stroke: #ffffff;
-    }
-
-    &_color {
-      * {
-        stroke: #000000;
-      }
-    }
-  }
-  .background__points {
-    position: absolute;
-    top: 21px;
-    right: 24px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    z-index: 5;
-
-    &_color {
-      * {
-        stroke: #000000;
-      }
-    }
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
   }
 }

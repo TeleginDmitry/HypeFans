@@ -17,35 +17,20 @@
     bottom: 0;
   }
 
-  .header__item {
-    cursor: pointer;
-    max-width: 40px;
-    .active {
-      svg {
-        * {
-          stroke: var(--stroke-active);
-        }
-      }
+  svg {
+    stroke: var(--stroke);
+    stroke-width: 2px;
+
+    @media (max-width: 425px) {
+      padding: 3px;
+      stroke: #111111;
+      stroke-width: 1.5px;
     }
+  }
 
+  .active {
     svg {
-      height: 30px;
-
-      * {
-        transition: all 0.2s;
-        stroke: var(--stroke);
-        stroke-opacity: 1;
-        stroke-width: 4px;
-      }
-
-      @media (max-width: 425px) {
-        width: 100%;
-        padding: 3px;
-        * {
-          stroke: #111111;
-          stroke-width: 3px;
-        }
-      }
+      stroke: var(--stroke-active);
     }
   }
 }

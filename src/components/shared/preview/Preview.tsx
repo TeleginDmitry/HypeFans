@@ -1,7 +1,7 @@
 import { PREVIEW_CONTAINER_ID } from 'configs/index.config'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useOverflowBody } from 'hooks/useOverflowBody'
-import logo from '@assets/images/auth/logoBlack.png'
+import logo from '@assets/images/logoBlack.png'
 import { useEffect, useState } from 'react'
 
 import styles from './Preview.module.scss'

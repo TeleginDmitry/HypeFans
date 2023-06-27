@@ -11,9 +11,7 @@ import { SwiperSlide } from 'swiper/react'
 import StoryModalItem from './storyModalItem/StoryModalItem'
 import styles from './StoryModal.module.scss'
 
-interface IStoryModal {}
-
-const StoryModal = ({}: IStoryModal) => {
+const StoryModal = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const storyId = searchParams.get(STORY_PARAM)

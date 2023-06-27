@@ -1,9 +1,7 @@
-import { ReactComponent as Message } from '@assets/images/profile/message.svg'
-import { ReactComponent as Share } from '@assets/images/profile/share.svg'
-import { ReactComponent as Frame } from '@assets/images/profile/frame.svg'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { IUser } from 'shared/interfaces/user.interface'
 import { chatService } from 'services/chat/chat.service'
+import { Message, Share } from 'icons-hypefans-lib'
 import { SERVER_URL } from 'configs/api.config'
 import cn from '@utils/classNames/classNames'
 
@@ -53,15 +51,11 @@ const ProfileInfo = ({ isMyProfile = false, user }: IProfileInfo) => {
           {!isMyProfile && (
             <ul className={styles.actions__list}>
               <li className={styles.actions__item}>
-                <Share className={styles.actions__svg}></Share>
-              </li>
-              <li className={styles.actions__item}>
-                <Frame className={styles.actions__svg}></Frame>
+                <Share></Share>
               </li>
               <li className={styles.actions__item}>
                 <Message
                   onClick={() => createConversation(user.id, myId)}
-                  className={styles.actions__svg}
                 ></Message>
               </li>
             </ul>

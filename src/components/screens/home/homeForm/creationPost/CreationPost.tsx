@@ -1,5 +1,4 @@
-import MyAvatar from 'components/shared/myAvatar/MyAvatar'
-import React from 'react'
+import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
 
 import CreationForm from './creationForm/CreationForm'
 import styles from './CreationPost.module.scss'

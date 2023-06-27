@@ -1,11 +1,10 @@
-import PostActions from 'components/shared/postActions/PostActions'
 import PostHeader from 'components/shared/postHeader/PostHeader'
 import { IPostSearch } from 'shared/interfaces/post.interface'
 import { POST_PARAM } from 'configs/index.config'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import React from 'react'
 
+import SearchPostItemActions from './searchPostItemActions/SearchPostItemActions'
 import styles from './SearchPostItem.module.scss'
 
 interface ISearchPostItem {
@@ -45,13 +44,13 @@ const SearchPostItem = ({ onClickPost, index, post }: ISearchPostItem) => {
         <p onClick={() => onClickPost(id)} className={styles.description}>
           {descriptionLimit}
         </p>
-        <PostActions
+        <SearchPostItemActions
           handlerClickComment={handlerOpenModal}
           comments={comments}
           isLiked={is_liked}
           likes={likes}
           post_id={id}
-        ></PostActions>
+        ></SearchPostItemActions>
       </div>
     </motion.div>
   )

@@ -7,17 +7,10 @@ import React from 'react'
 
 import styles from './ConversationItem.module.scss'
 
-const ConversationItem = ({
-  last_message_date,
-  last_message,
-  membership,
-  avatar,
-  name,
-  id
-}: IConversation) => {
-  const navigate = useNavigate()
+const ConversationItem = (props: IConversation) => {
+  const { last_message_date, last_message, membership, avatar, name } = props
 
-  console.log(membership)
+  const navigate = useNavigate()
 
   const formattedDate = ConvertDate(last_message_date)
 

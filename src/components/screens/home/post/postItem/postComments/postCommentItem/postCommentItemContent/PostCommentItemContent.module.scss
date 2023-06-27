@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  .username {
+    cursor: pointer;
+    color: #ffa703;
+  }
+  .description {
+  }
+}

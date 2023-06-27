@@ -7,9 +7,15 @@
     "plugin:perfectionist/recommended-line-length",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "unused-imports", "jsx-a11y", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports",
+    "jsx-a11y",
+    "react-hooks"
+  ],
   "rules": {
-    "no-console": "error",
-    "unused-imports/no-unused-imports": "error"
+    "no-console": "warn",
+    "prettier/prettier": "warn",
+    "unused-imports/no-unused-imports": "warn"
   }
 }

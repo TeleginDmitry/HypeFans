@@ -1,6 +1,6 @@
-import instagram from '@assets/images/auth/Instagram.png'
-import facebook from '@assets/images/auth/Facebook.png'
-import google from '@assets/images/auth/Google.png'
+import instagram from '@assets/images/Instagram.png'
+import facebook from '@assets/images/Facebook.png'
+import google from '@assets/images/Google.png'
 import React from 'react'
 
 import styles from './Networks.module.scss'

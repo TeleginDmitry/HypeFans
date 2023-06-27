@@ -1,54 +1,51 @@
 .wrapper {
   position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: end;
+  align-items: flex-start;
   border-bottom: 1px solid var(--under-line-color);
-  padding-bottom: 6px;
+  padding: 5px 20px 8px 20px;
+  gap: 15px;
 
   &:last-child {
     border-bottom: none;
-    padding-bottom: 0px;
+    padding: 5px 20px 0px 20px;
+  }
+
+  &:has(.postCommentForm) {
+    border-bottom: none;
   }
 
   .container {
+    position: relative;
+    flex: 1;
     display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    .avatar__container {
-      cursor: pointer;
-      .avatar {
-        width: 35px;
-        height: 35px;
-        object-fit: cover;
-        border-radius: 50%;
-      }
+    flex-direction: column;
+    gap: 15px;
+    padding-bottom: 8px;
+
+    &:hover .postActions__container {
+      opacity: 1;
     }
+
+    &:has(.postCommentForm) {
+      border-bottom: 1px solid var(--under-line-color);
+    }
+
+    .postActions__container {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
     .content {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-
-      .username {
-        cursor: pointer;
-        color: #ffa703;
-      }
-      .text {
-      }
-
-      .date {
-        opacity: 0.6;
-        font-size: 14px;
-      }
+      position: relative;
+      cursor: pointer;
     }
-  }
 
-  .postActions__container {
-    opacity: 0;
-    transition: opacity 0.5s;
-  }
-
-  &:hover .postActions__container {
-    opacity: 1;
+    .postCommentForm {
+      position: relative;
+    }
   }
 }

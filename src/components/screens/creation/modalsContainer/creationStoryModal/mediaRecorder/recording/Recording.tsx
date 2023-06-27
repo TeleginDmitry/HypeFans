@@ -45,7 +45,7 @@ const Recording = ({
         mediaRecorderRef.current.start()
       }
     } catch (error) {
-      console.error('Error accessing camera:', error)
+      throw new Error(error)
     }
   }
 

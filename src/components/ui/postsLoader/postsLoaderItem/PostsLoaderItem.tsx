@@ -1,7 +1,4 @@
-import { ReactComponent as Bookmark } from '@assets/images/post/bookmark.svg'
-import { ReactComponent as Comment } from '@assets/images/post/comments.svg'
-import { ReactComponent as Like } from '@assets/images/post/like.svg'
-import React from 'react'
+import { Bookmark, Comment, Like } from 'icons-hypefans-lib'
 
 import styles from './PostsLoaderItem.module.scss'
 

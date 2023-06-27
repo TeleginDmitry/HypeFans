@@ -1,6 +1,4 @@
-import Download from 'components/shared/actions/download/Download'
-import Redact from 'components/shared/actions/redact/Redact'
-import Close from 'components/shared/actions/close/Close'
+import { Download, LetterT, X } from 'icons-hypefans-lib'
 import React, { useCallback } from 'react'
 
 import styles from './ShowingActions.module.scss'
@@ -56,10 +54,10 @@ const ShowingActions = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.close}>
-        <Close onClick={handleDeleteVideo}></Close>
+        <X onClick={handleDeleteVideo}></X>
       </div>
       <div className={styles.other}>
-        <Redact></Redact>
+        <LetterT></LetterT>
         <Download onClick={handleDownload}></Download>
       </div>
     </div>

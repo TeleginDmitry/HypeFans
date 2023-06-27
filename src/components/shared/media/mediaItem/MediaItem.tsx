@@ -1,5 +1,5 @@
-import { ReactComponent as Circle } from '@assets/images/newPost/x-circle.svg'
 import { IResponseViewMedia } from 'hooks/useViewUploadMedias'
+import { CirclePlus } from 'icons-hypefans-lib'
 import { motion } from 'framer-motion'
 import React from 'react'
 
@@ -22,10 +22,10 @@ export default function MediaItem({ deleteMedia, media }: IMediaItem) {
       layout
     >
       <motion.img className={styles.media} src={media.view} alt='HypeFans' />
-      <Circle
+      <CirclePlus
         onClick={() => deleteMedia(media.id)}
-        className={styles.media__delete}
-      ></Circle>
+        className={styles.icon__delete}
+      ></CirclePlus>
     </motion.li>
   )
 }

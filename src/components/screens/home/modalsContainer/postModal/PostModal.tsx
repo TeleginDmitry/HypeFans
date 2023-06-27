@@ -9,9 +9,7 @@ import PostModalHeader from './postModalHeader/PostModalHeader'
 import PostItem from '../../post/postItem/PostItem'
 import styles from './PostModal.module.scss'
 
-interface IPostModal {}
-
-const PostModal = ({}: IPostModal) => {
+const PostModal = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const post_id = searchParams.get(POST_PARAM)
