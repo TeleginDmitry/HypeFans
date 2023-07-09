@@ -1,5 +1,5 @@
 import PostPointsActions from 'components/shared/postPointsActions/PostPointsActions'
-import PointsContainer from 'components/shared/postPoints/PostPoints'
+import PointsContainer from 'components/shared/points/Points'
 import { IPostUser } from 'shared/interfaces/post.interface'
 import { ArrowLeft } from 'icons-hypefans-lib'
 

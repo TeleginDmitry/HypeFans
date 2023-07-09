@@ -1,7 +1,6 @@
 import ValidateField from 'components/shared/validateField/ValidateField'
-import TextareaInput from '@ui/textareaInput/TextareaInput'
 import { useTypedSelector } from 'hooks/useTypedSelector'
-import { Input } from 'ui-hypefans-lib'
+import { Textarea, Input } from 'ui-hypefans-lib'
 import { FormikProps } from 'formik'
 import React from 'react'
 
@@ -48,16 +47,15 @@ const EditFields = ({ formik }: IEditFields) => {
         ></ValidateField>
       </div>
       <div className={styles.container}>
-        <label htmlFor='description'>Био</label>
-        <TextareaInput
+        <Textarea
           isWrong={!!(formik.touched.description && formik.errors.description)}
-          // lab='Имя'
           placeholder={user?.description || 'Запишите свою биографию...'}
           onChange={formik.handleChange}
+          label='Биография'
           id='description'
           minRows={4}
           {...formik.getFieldProps('description')}
-        ></TextareaInput>
+        ></Textarea>
         <ValidateField
           isTouched={formik.touched.description}
           error={formik.errors.description}

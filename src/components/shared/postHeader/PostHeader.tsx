@@ -1,7 +1,7 @@
 import PostPointsActions from 'components/shared/postPointsActions/PostPointsActions'
 import ShortUserInfo from 'components/shared/shortUserInfo/ShortUserInfo'
-import PointsContainer from 'components/shared/postPoints/PostPoints'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import PointsContainer from 'components/shared/points/Points'
 import { IPostUser } from 'shared/interfaces/post.interface'
 import { POST_PARAM, USER_PAGE } from 'configs/index.config'
 import React, { memo } from 'react'

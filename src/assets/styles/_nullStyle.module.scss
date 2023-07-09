@@ -53,6 +53,7 @@ textarea::placeholder {
 }
 button {
   cursor: pointer;
+  background-color: transparent;
 }
 button::-moz-focus-inner {
   padding: 0;
@@ -70,6 +71,10 @@ ul li {
 }
 img {
   vertical-align: top;
+}
+
+img, video {
+  width: 100%;
 }
 h1,
 h2,

@@ -8,25 +8,29 @@ export interface IPostUser {
 }
 
 export interface IPostMediaShort {
+  type: 'image' | 'video'
   date_joined: string
   media: string
   id: number
 }
 
 export interface IPostMedia {
+  type: 'image' | 'video'
   date_joined: string
   user: IShortUser
   media: string
+  post: number
   id: number
 }
 
 export interface IPostComment {
+  reply?: IPostComment[]
   date_joined: string
-  isLiked: boolean
   user: IShortUser
+  isLiked: boolean
   likes: number
-  post: number
   text: string
+  post: number
   id: number
 }
 

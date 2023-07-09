@@ -1,99 +1,110 @@
-import MediasList from '@components/shared/media/mediaList/MediasList'
-import { Search, Photo, Video, Send } from 'icons-hypefans-lib'
-import TextareaInput from '@ui/textareaInput/TextareaInput'
-import { AnimatePresence, motion } from 'framer-motion'
-import useViewMedia from '@hooks/useViewUploadMedias'
-import UploadFile from '@ui/uploadFile/UploadFile'
+import { useQueryClient, useMutation } from '@tanstack/react-query'
+import useViewUploadMedias from 'hooks/useViewUploadMedias'
+import { useTypedSelector } from 'hooks/useTypedSelector'
+import { PostService } from 'services/post/Post.service'
+import { POST_LIST_KEY } from 'configs/index.config'
 import React, { useEffect, useState } from 'react'
-import cn from '@utils/classNames/classNames'
+import { Textarea } from 'ui-hypefans-lib'
 
+import CreationFormActions from './creationFormActions/CreationFormActions'
+import CreationFormMedias from './creationFormMedias/CreationFormMedias'
 import styles from './CreationForm.module.scss'
 
-interface ICreationForm {
-  changeStateActive: () => void
-}
+const CreationForm = () => {
+  const [inputValue, setInputValue] = useState('')
+  const [isSmallText, setIsSmallText] = useState(false)
 
-const CreationForm = ({ changeStateActive }: ICreationForm) => {
-  const [valueInput, setValueInput] = useState('')
-  const [isVisible, setIsVisible] = useState(false)
+  const queryClient = useQueryClient()
 
-  const [viewMedias, setViewMedias, handlerMedia] = useViewMedia({
+  const userId = useTypedSelector((state) => state.auth.user?.id)
+
+  const [medias, setMedias, handlerMedia] = useViewUploadMedias({
     isInfinity: true
   })
 
+  const { mutate: createMedia } = useMutation(
+    async (post_id: number) => {
+      medias.forEach(async (media) => {
+        const formData = new FormData()
+        formData.append('media', media.upload)
+        formData.append('type', media.type)
+        formData.append('post', post_id.toString())
+
+        await PostService.createMedia(formData)
+      })
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(POST_LIST_KEY)
+        setMedias([])
+      }
+    }
+  )
+
+  const { mutate: createPost } = useMutation(
+    async (description: string) => {
+      const data = {
+        user_id: userId,
+        description
+      }
+      const response = await PostService.createPost(data)
+
+      return response.data
+    },
+    {
+      onSuccess: async ({ id }) => {
+        if (medias.length) {
+          createMedia(id)
+        } else {
+          queryClient.invalidateQueries(POST_LIST_KEY)
+        }
+
+        setInputValue('')
+      }
+    }
+  )
+
   function handlerInputChange(input: React.ChangeEvent<HTMLTextAreaElement>) {
-    setValueInput(input.target.value)
+    setInputValue(input.target.value)
   }
 
-  function handlerUploadViewMedias(input: React.ChangeEvent<HTMLInputElement>) {
-    handlerMedia(input.target.files)
-  }
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
 
-  function deleteMedia(id: number) {
-    setViewMedias((state) => state.filter((media) => media.id !== id))
+    if (inputValue || medias.length) {
+      createPost(inputValue)
+    }
   }
 
   useEffect(() => {
-    if (valueInput) setIsVisible(true)
-    else setIsVisible(false)
-  }, [valueInput])
+    if (inputValue.length > 100) {
+      setIsSmallText(true)
+    } else {
+      setIsSmallText(false)
+    }
+  }, [inputValue])
 
   return (
-    <form className={styles.form}>
-      <div
-        className={cn(
-          [styles.creation],
-          [valueInput, styles.creation__padding]
-        )}
-      >
-        <TextareaInput
+    <form className={styles.form} onSubmit={onSubmit}>
+      <div className={styles.creation}>
+        <Textarea
+          style={{ fontSize: isSmallText ? '14px' : '19px' }}
           placeholder='Хей, о чем ты думаешь?'
           className={styles.creation__input}
           onChange={handlerInputChange}
-          value={valueInput}
-          minRows={1}
-        ></TextareaInput>
+          value={inputValue}
+          size='small'
+        ></Textarea>
+        <CreationFormMedias
+          setMedias={setMedias}
+          medias={medias}
+        ></CreationFormMedias>
 
-        <AnimatePresence>
-          {(isVisible || !!viewMedias.length) && (
-            <div className={styles.actions}>
-              <motion.div
-                transition={{ delay: 0 * 0.1 }}
-                className={styles.action}
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-              >
-                <UploadFile onChange={handlerUploadViewMedias} multiple={true}>
-                  <Photo />
-                </UploadFile>
-              </motion.div>
-              <motion.div
-                transition={{ delay: 1 * 0.1 }}
-                className={styles.action}
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-              >
-                <Video />
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
-
-        {!!viewMedias.length && (
-          <MediasList
-            deleteMedia={deleteMedia}
-            medias={viewMedias}
-          ></MediasList>
-        )}
-      </div>
-      <div className={styles.icon__container}>
-        {isVisible ? (
-          <Send className={styles.icon}></Send>
-        ) : (
-          <Search onClick={changeStateActive} className={styles.icon}></Search>
-        )}
+        <CreationFormActions
+          mediasLength={medias.length}
+          handlerMedia={handlerMedia}
+          inputValue={inputValue}
+        ></CreationFormActions>
       </div>
     </form>
   )

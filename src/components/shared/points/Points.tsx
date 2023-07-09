@@ -1,13 +1,13 @@
 import { DotsVertical } from 'icons-hypefans-lib'
 import React, { useState } from 'react'
 
-import styles from './PostPoints.module.scss'
+import styles from './Points.module.scss'
 
-interface IPostPoints {
+interface IPoints {
   children: React.ReactNode
 }
 
-const PostPoints = ({ children }: IPostPoints) => {
+const Points = ({ children }: IPoints) => {
   const [isVisibleActions, setIsVisibleActions] = useState(false)
 
   function changeStateActions() {
@@ -22,4 +22,4 @@ const PostPoints = ({ children }: IPostPoints) => {
   )
 }
 
-export default PostPoints
+export default Points

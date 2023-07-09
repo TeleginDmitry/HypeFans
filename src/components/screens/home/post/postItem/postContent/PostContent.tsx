@@ -21,12 +21,14 @@ const PostContent = ({ description, post_id, medias }: IPostContent) => {
 
   return (
     <div className={styles.content}>
-      <div
-        className={styles.description__container}
-        onClick={handlerOpenPostModal}
-      >
-        <p className={styles.description}>{description}</p>
-      </div>
+      {!!description.length && (
+        <div
+          className={styles.description__container}
+          onClick={handlerOpenPostModal}
+        >
+          <p className={styles.description}>{description}</p>
+        </div>
+      )}
       <PostVariablesImages medias={medias}></PostVariablesImages>
     </div>
   )

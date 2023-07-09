@@ -19,7 +19,7 @@ const Loader = ({ className }: ILoader) => {
       <svg className={cn([styles.spinner, className])} viewBox='0 0 50 50'>
         <circle
           className={styles.path}
-          stroke-width='5'
+          strokeWidth='5'
           fill='none'
           cy='25'
           cx='25'

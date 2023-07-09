@@ -15,7 +15,7 @@ const Image = ({ src, ...imageProps }: IImage) => {
     triggerOnce: true
   })
 
-  return <img {...imageProps} src={inView && src} ref={ref} />
+  return <img {...imageProps} src={inView ? src : ''} ref={ref} />
 }
 
 export default Image

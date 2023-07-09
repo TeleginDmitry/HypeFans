@@ -13,10 +13,10 @@ const Preview = () => {
   const { appendClass, deleteClass } = useOverflowBody()
 
   useEffect(() => {
-    // appendClass()
+    appendClass()
     const timeout = setTimeout(() => {
       setIsVisible(false)
-      // deleteClass()
+      deleteClass()
     }, 3000)
 
     return () => {

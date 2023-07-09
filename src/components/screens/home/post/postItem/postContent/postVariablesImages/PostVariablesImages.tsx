@@ -1,9 +1,9 @@
-import FlexibleImages from 'components/shared/flexibleImages/FlexibleImages'
 import { IPostMediaShort } from 'shared/interfaces/post.interface'
 import useLocalStorage from 'hooks/useLocalStorage'
 import { IS_SLIDER } from 'configs/index.config'
 
-import PostSwiperMedias from '../postSwiperMedias/PostSwiperMedias'
+import PostSwiperMedias from './postSwiperMedias/PostSwiperMedias'
+import PostMedias from './postMedias/PostMedias'
 
 interface IPostVariablesImages {
   medias: IPostMediaShort[]
@@ -15,7 +15,7 @@ const PostVariablesImages = ({ medias }: IPostVariablesImages) => {
   return value ? (
     <PostSwiperMedias medias={medias}></PostSwiperMedias>
   ) : (
-    <FlexibleImages images={medias}></FlexibleImages>
+    <PostMedias medias={medias}></PostMedias>
   )
 }
 

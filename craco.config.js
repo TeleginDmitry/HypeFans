@@ -6,17 +6,17 @@ module.exports = {
   webpack: {
     alias: {
       '@components': resolvePath('src/components'),
-      '@assets': resolvePath('src/assets'),
-      '@hooks': resolvePath('src/hooks'),
-      '@configs': resolvePath('src/configs'),
-      '@services': resolvePath('src/services'),
-      '@shared': resolvePath('src/shared'),
-      '@store': resolvePath('src/store'),
-      '@utils': resolvePath('src/utils'),
-      '@ui': resolvePath('src/components/ui'),
-      '@fonts': resolvePath('src/fonts'),
       '@providers': resolvePath('src/providers'),
-      '@router': resolvePath('src/router')
+      '@services': resolvePath('src/services'),
+      '@ui': resolvePath('src/components/ui'),
+      '@configs': resolvePath('src/configs'),
+      '@router': resolvePath('src/router'),
+      '@shared': resolvePath('src/shared'),
+      '@assets': resolvePath('src/assets'),
+      '@fonts': resolvePath('src/fonts'),
+      '@utils': resolvePath('src/utils'),
+      '@store': resolvePath('src/store'),
+      '@hooks': resolvePath('src/hooks')
     }
   }
 }

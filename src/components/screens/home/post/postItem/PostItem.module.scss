@@ -20,5 +20,13 @@
         padding-left: var(--padding-left-post);
       }
     }
+
+    .form__container {
+      position: relative;
+
+      @media (max-width: 425px) {
+        padding: 0px 14px;
+      }
+    }
   }
 }

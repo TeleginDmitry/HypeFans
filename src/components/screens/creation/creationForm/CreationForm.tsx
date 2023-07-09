@@ -1,36 +1,17 @@
-import TextareaInput from 'components/ui/textareaInput/TextareaInput'
-import MediasList from 'components/shared/media/mediaList/MediasList'
 import SelectMedia from 'components/shared/selectMedia/SelectMedia'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
 import { useMutation } from '@tanstack/react-query'
-import cn from '@utils/classNames/classNames'
-import { Button } from 'ui-hypefans-lib'
-import { useFormik } from 'formik'
-import React from 'react'
+import { Textarea, Button } from 'ui-hypefans-lib'
+import React, { useState } from 'react'
 
+import CreationFormMedias from './creationFormMedias/CreationFormMedias'
 import styles from './CreationForm.module.scss'
 
-interface IInitialValues {
-  description: string
-}
-
-const initialValues: IInitialValues = {
-  description: ''
-}
-
-const validate = (values: IInitialValues) => {
-  const errors: Partial<IInitialValues> = {}
-
-  if (!values.description) {
-    errors.description = 'Это поле обязательно для заполнения'
-  }
-
-  return errors
-}
-
 const CreationForm = () => {
+  const [inputValue, setInputValue] = useState('')
+
   const userId = useTypedSelector((state) => state.auth.user?.id)
 
   const [medias, setMedias, handlerMedia] = useViewUploadMedias({
@@ -42,7 +23,8 @@ const CreationForm = () => {
       medias.forEach(async (media) => {
         const formData = new FormData()
         formData.append('media', media.upload)
-        formData.append('post_id', post_id.toString())
+        formData.append('type', media.type)
+        formData.append('post', post_id.toString())
 
         await PostService.createMedia(formData)
       })
@@ -65,35 +47,26 @@ const CreationForm = () => {
       return response.data
     },
     {
-      onSuccess: ({ id }) => {
-        createMedia(id)
-        resetForm()
+      onSuccess: async ({ id }) => {
+        if (medias.length) {
+          createMedia(id)
+        }
+
+        setInputValue('')
       }
     }
   )
 
-  const {
-    getFieldProps,
-    isSubmitting,
-    handleSubmit,
-    resetForm,
-    touched,
-    errors
-  } = useFormik({
-    onSubmit(values) {
-      try {
-        const { description } = values
-        createPost(description)
-      } catch (error) {
-        throw new Error('Возникла ошибка при создании поста.', error)
-      }
-    },
-    initialValues,
-    validate
-  })
+  function handlerInputChange(input: React.ChangeEvent<HTMLTextAreaElement>) {
+    setInputValue(input.target.value)
+  }
 
-  function deleteMedia(id: number) {
-    setMedias((state) => state.filter((media) => media.id !== id))
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    if (inputValue || medias.length) {
+      createPost(inputValue)
+    }
   }
 
   function handlerUploadMedias({
@@ -103,22 +76,21 @@ const CreationForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <TextareaInput
-        {...getFieldProps('description')}
-        className={cn(
-          [styles.input],
-          [errors.description && touched.description, styles.input__wrong]
-        )}
+    <form className={styles.form} onSubmit={onSubmit}>
+      <Textarea
         placeholder='Поделитесь своими мыслями...'
-        minRows={6}
-      ></TextareaInput>
-      <MediasList deleteMedia={deleteMedia} medias={medias}></MediasList>
+        onChange={handlerInputChange}
+        className={styles.input}
+        value={inputValue}
+        minRows={7}
+      ></Textarea>
+      <CreationFormMedias
+        setMedias={setMedias}
+        medias={medias}
+      ></CreationFormMedias>
       <SelectMedia onChange={handlerUploadMedias}></SelectMedia>
       <div className={styles.button__container}>
-        <Button disabled={isSubmitting} type='submit'>
-          Опубликовать
-        </Button>
+        <Button type='submit'>Опубликовать</Button>
       </div>
     </form>
   )

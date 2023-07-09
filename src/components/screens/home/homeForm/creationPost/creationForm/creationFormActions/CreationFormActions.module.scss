@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+
+  .block {
+    display: flex;
+    gap: 10px;
+  }
+}

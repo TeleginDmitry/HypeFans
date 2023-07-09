@@ -24,18 +24,6 @@
     font-size: 16px;
     line-height: 20px;
     border: none;
-
-    &::placeholder {
-      position: relative;
-      transform: none;
-      top: 0;
-    }
-
-    &__wrong {
-      &::placeholder {
-        color: var(--wrong-color);
-      }
-    }
   }
 
   .button__container {

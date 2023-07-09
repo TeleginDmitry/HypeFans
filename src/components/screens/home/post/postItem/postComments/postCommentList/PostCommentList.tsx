@@ -1,6 +1,6 @@
 import { IPagination } from 'shared/interfaces/pagination.interface'
 import { IPostComment } from 'shared/interfaces/post.interface'
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 
 import PostCommentItem from '../postCommentItem/PostCommentItem'
 import styles from './PostCommentList.module.scss'

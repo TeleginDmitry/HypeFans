@@ -68,10 +68,14 @@ export default function PostItem({ post }: IPostItem) {
 
         <PostComments
           lastComment={lastComment}
-          countComments={comments}
+          comments={comments}
           post_id={id}
         ></PostComments>
-        {isShowForm && <PostCommentForm post_id={id}></PostCommentForm>}
+        {isShowForm && (
+          <div className={styles.form__container}>
+            <PostCommentForm post_id={id}></PostCommentForm>
+          </div>
+        )}
       </div>
     </motion.div>
   )

@@ -1,7 +1,6 @@
 import { MutationFunction, useMutation } from '@tanstack/react-query'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { IconProps, Like } from 'icons-hypefans-lib'
-import cn from 'utils/classNames/classNames'
 import { useState } from 'react'
 
 import styles from './LikeAction.module.scss'
@@ -22,7 +21,7 @@ const LikeAction = (props: ILikeAction) => {
     isLiked,
     likes
   } = props
-  
+
   const isAuth = useTypedSelector((state) => state.auth.isAuth)
 
   const [likesState, setLikes] = useState(likes)
@@ -58,7 +57,7 @@ const LikeAction = (props: ILikeAction) => {
   return (
     <div onClick={handlerClickLike} className={styles.wrapper}>
       <Like
-        className={cn([], [isLikedState, styles.liked])}
+        className={isLikedState && styles.liked}
         strokeWidth={strokeWidth}
         size={size}
       ></Like>

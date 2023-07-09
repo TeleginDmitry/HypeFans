@@ -11,17 +11,14 @@ import styles from './PostComments.module.scss'
 
 interface IPostComments {
   lastComment: IPostComment | null
-  countComments: number
+  comments: number
   post_id: number
 }
 
-const PostComments = ({
-  countComments,
-  lastComment,
-  post_id
-}: IPostComments) => {
+const PostComments = ({ lastComment, comments, post_id }: IPostComments) => {
   const {
     data: paginatedComments,
+    countElements,
     fetchNextPage,
     hasNextPage,
     isFetching
@@ -50,10 +47,9 @@ const PostComments = ({
   }
 
   const isHasNextPage =
-    hasNextPage ||
-    (!!lastComment && countComments > paginatedComments.length * 2 + 1)
+    hasNextPage || (!!lastComment && comments > countElements * 2 + 1)
 
-  if (!lastComment && !paginatedComments.length) return null
+  if (!lastComment && !countElements) return null
 
   return (
     <div className={styles.wrapper}>
@@ -63,7 +59,7 @@ const PostComments = ({
             paginatedComments={paginatedComments}
           ></PostCommentList>
 
-          {lastComment && !paginatedComments.length && (
+          {lastComment && !countElements && (
             <PostCommentItem comment={lastComment}></PostCommentItem>
           )}
         </div>

@@ -29,6 +29,7 @@ export interface IPostMediaData {
 }
 
 export interface ICreateCommentData {
+  reply_to?: number
   post_id: number
   text: string
 }

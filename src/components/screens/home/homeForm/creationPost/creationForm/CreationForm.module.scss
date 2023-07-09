@@ -3,51 +3,22 @@ $placeholderColor: #000000d7;
 
 // Styles
 .form {
-  display: flex;
-  align-items: center;
+  position: relative;
   width: 100%;
-  gap: 15px;
-
   .creation {
-    flex: 1;
+    width: 100%;
     background-color: var(--wrapper-color);
     border-radius: var(--border-radius-32);
-    padding: 0 16px;
-    transition: 0.2s;
+    padding: 13px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-    &__padding {
-      padding: 0 16px 16px 16px;
-    }
-
-    .creation__input {
-      background-color: transparent;
+    &__input {
       border: none;
-      border-radius: var(--border-radius-32);
-      padding: 13px 7px;
-      line-height: 20px;
-    }
-
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      .action {
-        width: 35px;
-        height: 35px;
-        cursor: pointer;
-        padding: 3px;
-      }
-    }
-  }
-
-  .icon__container {
-    cursor: pointer;
-    padding: 5px;
-
-    .icon {
-      width: 27px;
-      height: 27px;
+      background-color: transparent;
+      line-height: 23px;
+      padding: 0;
     }
   }
 }

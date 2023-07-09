@@ -6,8 +6,9 @@ interface IViewMedia {
 }
 
 export interface IResponseViewMedia {
-  upload: File
+  type: 'image' | 'video'
   view: string
+  upload: File
   id: number
 }
 
@@ -16,13 +17,15 @@ const useViewUploadMedias = ({ isInfinity = false }: IViewMedia = {}) => {
 
   const handlerMedia = (mediasList: FileList) => {
     const arrayMedias = [...mediasList]
-    arrayMedias.forEach((file, index) => {
+    arrayMedias.forEach((file) => {
       const reader = new FileReader()
       reader.onload = () => {
-        const result = {
+        const id = generateId(file.length)
+        const result: IResponseViewMedia = {
+          type: file.type.split('/')[0] as 'image' | 'video',
           view: reader.result.toString(),
-          id: generateId(index),
-          upload: file
+          upload: file,
+          id
         }
         setMedias((state) => (isInfinity ? [...state, result] : [result]))
       }

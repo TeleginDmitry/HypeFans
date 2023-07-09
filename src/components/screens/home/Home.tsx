@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ModalsContainer from './modalsContainer/ModalsContainer'
 import StoryList from './story/storyList/StoryList'
 import PostsList from './post/postList/PostsList'

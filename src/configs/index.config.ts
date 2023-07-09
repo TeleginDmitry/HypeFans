@@ -32,6 +32,7 @@ export const STORY_LIST_KEY = ['stories']
 export const POST_MEDIAS_KEY = ['post_medias']
 export const POST_MODAL_KEY = 'post_modal' // ['post_modal', (post_id)]
 export const COMMENTS_KEY = 'comments' // ['comments', (post_id)]
+export const REPLY_KEY = 'reply' // ['reply', (comment_id)]
 
 export const STORIES_LIMIT = 10
 export const POSTS_LIMIT = 15

@@ -1,4 +1,5 @@
 import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
+import { Search } from 'icons-hypefans-lib'
 
 import CreationForm from './creationForm/CreationForm'
 import styles from './CreationPost.module.scss'
@@ -12,7 +13,9 @@ const CreationPost = ({ changeStateActive }: ICreationPost) => {
     <div className={styles.wrapper}>
       <MyAvatar />
 
-      <CreationForm changeStateActive={changeStateActive}></CreationForm>
+      <CreationForm></CreationForm>
+
+      <Search onClick={changeStateActive} className={styles.icon}></Search>
     </div>
   )
 }

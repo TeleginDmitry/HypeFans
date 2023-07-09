@@ -20,7 +20,6 @@ export default function PostsList({ user_id }: IPostsList) {
     data: postsList,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isLoading,
     isError
   } = usePagination<IPost>({

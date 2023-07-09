@@ -1,36 +1,30 @@
-import { IObjectSizeInput } from 'shared/styles/inputStyles/inputStyles'
-import TextareaInput from 'components/ui/textareaInput/TextareaInput'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
-import { POST_LIST_KEY, COMMENTS_KEY } from 'configs/index.config'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
+import { InputProps, Textarea } from 'ui-hypefans-lib'
+import { COMMENTS_KEY } from 'configs/index.config'
 import { API_URL } from 'configs/api.config'
 import { Send } from 'icons-hypefans-lib'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useFormik } from 'formik'
+import { useState } from 'react'
 
 import styles from './PostCommentForm.module.scss'
 
-interface IInitialValues {
-  comment: string
-}
-
-interface IPostCommentForm extends IObjectSizeInput {
+interface IPostCommentForm extends InputProps {
+  username?: string
+  reply_id?: number
   post_id: number
 }
 
-const validate = (values: IInitialValues) => {
-  const errors: Partial<IInitialValues> = {}
+const PostCommentForm = ({
+  reply_id,
+  username,
+  post_id,
+  size
+}: IPostCommentForm) => {
+  const [inputValue, setInputValue] = useState('')
 
-  if (!values.comment) {
-    errors.comment = 'Это поле не должно быть пустым...'
-  }
-
-  return errors
-}
-
-const PostCommentForm = ({ post_id, size }: IPostCommentForm) => {
   const queryClient = useQueryClient()
 
   const user = useTypedSelector((state) => state.auth.user)
@@ -41,27 +35,32 @@ const PostCommentForm = ({ post_id, size }: IPostCommentForm) => {
         post_id: post_id,
         text: comment
       }
+
+      if (reply_id) {
+        data['reply_to'] = reply_id
+      }
+
       const response = await PostService.createComment(data)
       return response.data
     },
     {
       onSuccess: () => {
-        resetForm()
+        setInputValue('')
         queryClient.prefetchInfiniteQuery([COMMENTS_KEY, post_id])
-        queryClient.invalidateQueries(POST_LIST_KEY)
       }
     }
   )
 
-  const { getFieldProps, handleChange, handleSubmit, resetForm } = useFormik({
-    onSubmit: async (values) => {
-      mutate(values.comment)
-    },
-    initialValues: {
-      comment: ''
-    },
-    validate
-  })
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (inputValue) {
+      mutate(inputValue)
+    }
+  }
+
+  function onChangeInput(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    setInputValue(event.target.value)
+  }
 
   return (
     <motion.div
@@ -70,18 +69,20 @@ const PostCommentForm = ({ post_id, size }: IPostCommentForm) => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
-      <Link to={'/profile'}>
+      <Link className={styles.link} to={'/profile'}>
         <img src={API_URL + user.avatar} className={styles.avatar} />
       </Link>
 
       <form onSubmit={handleSubmit} className={styles.form}>
-        <TextareaInput
-          {...getFieldProps('comment')}
-          placeholder='Введите комментарий...'
-          onChange={handleChange}
-          maxRows={6}
-          size={size}
-        ></TextareaInput>
+        <div className={styles.input__container}>
+          <Textarea
+            placeholder='Введите комментарий...'
+            onChange={onChangeInput}
+            value={inputValue}
+            maxRows={6}
+            size={size}
+          ></Textarea>
+        </div>
 
         <button className={styles.button} type='submit'>
           <Send className={styles.button__svg}></Send>

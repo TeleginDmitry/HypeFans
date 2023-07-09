@@ -1,8 +1,8 @@
 import { IPostMediaShort } from 'shared/interfaces/post.interface'
 import Slider from 'components/shared/slider/Slider'
+import Image from 'components/ui/image/Image'
 import { SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper'
-import React from 'react'
 
 import styles from './PostSwiperMedias.module.scss'
 
@@ -30,7 +30,7 @@ const PostSwiperMedias = ({ medias }: IPostSwiperMedias) => {
         return (
           <SwiperSlide className={styles.slide} key={id}>
             <div className={styles.media__container}>
-              <img className={styles.media} loading={'lazy'} src={media} />
+              <Image className={styles.media} src={media}></Image>
             </div>
           </SwiperSlide>
         )

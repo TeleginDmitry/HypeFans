@@ -31,13 +31,16 @@ const SelectMedia = ({ onChange }: ISelectMedia) => {
         >
           <div className={styles.select__content}>
             <div className={styles.select__item}>
-              <UploadFile onChange={onChange} multiple={true}>
+              <UploadFile onChange={onChange} accept='image/*' multiple={true}>
                 <Photo></Photo>
               </UploadFile>
             </div>
             <div className={styles.select__item}>
-              <Video></Video>
+              <UploadFile onChange={onChange} accept='video/*' multiple={true}>
+                <Video></Video>
+              </UploadFile>
             </div>
+
             <div className={styles.select__item}>
               <Microphone></Microphone>
             </div>
