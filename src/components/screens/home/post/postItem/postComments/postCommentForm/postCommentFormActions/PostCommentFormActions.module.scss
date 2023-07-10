@@ -1,0 +1,15 @@
+.wrapper {
+  position: relative;
+  z-index: 1;
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .emojis {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    right: -10px;
+  }
+}

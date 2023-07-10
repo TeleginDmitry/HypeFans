@@ -1,3 +1,4 @@
+import { useInView } from 'react-intersection-observer'
 import React from 'react'
 
 import styles from './Video.module.scss'
@@ -7,19 +8,21 @@ interface IVideo
     React.VideoHTMLAttributes<HTMLVideoElement>,
     HTMLVideoElement
   > {
-  classVideo?: string
   src: string
 }
 
 const Video = (props: IVideo) => {
-  const { classVideo, src, ...videoProps } = props
+  const { src, ...videoProps } = props
+
+  const { inView, ref } = useInView({
+    rootMargin: '0px 0px 200px 0px',
+    triggerOnce: true
+  })
 
   if (!src) return null
 
-  const completeClass = styles.video + ' ' + classVideo
-
   return (
-    <video className={completeClass} autoPlay loop {...videoProps}>
+    <video {...videoProps} src={inView ? src : ''} ref={ref}>
       <source type='video/webm' src={src} />
     </video>
   )

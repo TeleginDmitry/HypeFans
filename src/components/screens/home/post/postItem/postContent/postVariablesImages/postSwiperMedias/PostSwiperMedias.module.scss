@@ -7,22 +7,17 @@
 
     .slide {
       height: 100%;
-      width: 100% !important;
+      max-height: 400px;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .media__container {
-        display: flex;
-        justify-content: center;
-
-        .media {
-          max-width: 100%;
-          max-height: 400px;
-          object-fit: cover;
-          user-select: none;
-          border-radius: var(--border-radius-16);
-        }
+      .media {
+        max-width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        user-select: none;
+        border-radius: var(--border-radius-16);
       }
     }
   }

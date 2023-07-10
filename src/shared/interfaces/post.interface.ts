@@ -23,14 +23,24 @@ export interface IPostMedia {
   id: number
 }
 
-export interface IPostComment {
-  reply?: IPostComment[]
+export interface ICommentMedia {
+  type: 'image' | 'video'
   date_joined: string
   user: IShortUser
-  isLiked: boolean
-  likes: number
-  text: string
+  media: string
   post: number
+  id: number
+}
+
+export interface IPostComment {
+  medias: ICommentMedia[]
+  reply?: IPostComment[]
+  date_joined: string
+  isLiked: boolean
+  user: IShortUser
+  likes: number
+  post: number
+  text: string
   id: number
 }
 

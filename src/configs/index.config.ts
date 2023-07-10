@@ -40,3 +40,7 @@ export const POSTS_LIMIT = 15
 // LOCAL STORAGE
 
 export const IS_SLIDER = 'is_slider'
+
+// OTHER
+
+export const MAX_LENGTH_LETTER_FOR_INPUT = 150

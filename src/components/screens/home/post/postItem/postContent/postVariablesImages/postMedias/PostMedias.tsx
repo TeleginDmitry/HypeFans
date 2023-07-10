@@ -16,7 +16,7 @@ const PostMedias = ({ medias }: IPostMedias) => {
         return (
           <Media
             mediaProps={{
-              className: styles.media,
+              className: styles.meida,
               media,
               type
             }}

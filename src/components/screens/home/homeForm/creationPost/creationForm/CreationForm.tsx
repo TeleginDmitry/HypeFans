@@ -1,9 +1,13 @@
+import {
+  MAX_LENGTH_LETTER_FOR_INPUT,
+  POST_LIST_KEY
+} from 'configs/index.config'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
-import { POST_LIST_KEY } from 'configs/index.config'
 import React, { useEffect, useState } from 'react'
+import cn from 'utils/classNames/classNames'
 import { Textarea } from 'ui-hypefans-lib'
 
 import CreationFormActions from './creationFormActions/CreationFormActions'
@@ -84,16 +88,20 @@ const CreationForm = () => {
     }
   }, [inputValue])
 
+  const classTextarea = cn(
+    [styles.textarea],
+    [inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT, styles.textarea__font]
+  )
+
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.creation}>
         <Textarea
-          style={{ fontSize: isSmallText ? '14px' : '19px' }}
           placeholder='Хей, о чем ты думаешь?'
-          className={styles.creation__input}
           onChange={handlerInputChange}
+          className={classTextarea}
           value={inputValue}
-          size='small'
+          size='large'
         ></Textarea>
         <CreationFormMedias
           setMedias={setMedias}

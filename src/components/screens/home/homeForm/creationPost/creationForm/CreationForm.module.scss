@@ -14,11 +14,15 @@ $placeholderColor: #000000d7;
     flex-direction: column;
     gap: 10px;
 
-    &__input {
+    .textarea {
       border: none;
       background-color: transparent;
       line-height: 23px;
       padding: 0;
+
+      &__font {
+        font-size: 15px;
+      }
     }
   }
 }

@@ -73,7 +73,7 @@ export default function PostItem({ post }: IPostItem) {
         ></PostComments>
         {isShowForm && (
           <div className={styles.form__container}>
-            <PostCommentForm post_id={id}></PostCommentForm>
+            <PostCommentForm size='large' post_id={id}></PostCommentForm>
           </div>
         )}
       </div>

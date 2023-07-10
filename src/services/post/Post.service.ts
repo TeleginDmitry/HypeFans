@@ -1,4 +1,5 @@
 import {
+  ICommentMedia,
   IPostComment,
   IPostSearch,
   IPostMedia,
@@ -47,6 +48,12 @@ export const PostService = {
       params
     })
   },
+  // ): Promise<AxiosResponse<IPostMedia[]>> => {
+  createCommentMedia: async (
+    data: FormData
+  ): Promise<AxiosResponse<ICommentMedia[]>> => {
+    return instance.post(`post/comment/medias/`, data)
+  },
   createComment: async (
     data: ICreateCommentData
   ): Promise<AxiosResponse<IPostComment>> => {
@@ -58,20 +65,20 @@ export const PostService = {
     return instance.get(`post/medias/`, { params })
   },
 
-  createLike: async (post_id: number): Promise<AxiosResponse<IPostLike>> => {
-    return instance.post(`post/likes/`, { post: post_id })
-  },
   deleteComment: async (comment_id: number): Promise<AxiosResponse<void>> => {
     return instance.delete(`post/comment/${comment_id}/`)
+  },
+  createLike: async (post_id: number): Promise<AxiosResponse<IPostLike>> => {
+    return instance.post(`post/likes/`, { post: post_id })
   },
   deleteMedia: async (post_id: number): Promise<AxiosResponse<void>> => {
     return instance.delete(`post/media/${post_id}/`)
   },
-  uploadMedia: async (data: IUploadMedia): Promise<AxiosResponse<IPost>> => {
-    return instance.post(`posts/medias/`, data)
-  },
   createMedia: async (data: FormData): Promise<AxiosResponse<IPostMedia>> => {
     return instance.post(`post/medias/`, data)
+  },
+  uploadMedia: async (data: IUploadMedia): Promise<AxiosResponse<IPost>> => {
+    return instance.post(`posts/medias/`, data)
   },
   deleteLike: async (post_id: number): Promise<AxiosResponse<void>> => {
     return instance.delete(`post/like/${post_id}/`)
@@ -83,15 +90,14 @@ export const PostService = {
   // TEST
   // getMedias: async (
   // 	params: IGetMediasParams
-  // ): Promise<AxiosResponse<IPostMedia[]>> => {
   // 	return instanceSimple.get(`post/medias/`, { params })
   deletePost: async (post_id: number): Promise<AxiosResponse<void>> => {
     return instance.delete(`post/${post_id}/`)
   },
-  createPost: async (data: ICreatePost): Promise<AxiosResponse<IPost>> => {
-    return instance.post(`posts/`, data)
-  },
   createCommentLike: async (data: ICreateCommentLikeData) => {
     return instance.post('post/comment/likes/', data)
+  },
+  createPost: async (data: ICreatePost): Promise<AxiosResponse<IPost>> => {
+    return instance.post(`posts/`, data)
   }
 }
