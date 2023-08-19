@@ -1,5 +1,4 @@
 .wrapper {
-  padding: 13px 0;
   position: relative;
   width: 100%;
 
@@ -18,14 +17,6 @@
 
       @media (max-width: 425px) {
         padding-left: var(--padding-left-post);
-      }
-    }
-
-    .form__container {
-      position: relative;
-
-      @media (max-width: 425px) {
-        padding: 0px 14px;
       }
     }
   }

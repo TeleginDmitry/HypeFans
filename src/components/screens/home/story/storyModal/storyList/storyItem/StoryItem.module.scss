@@ -1,0 +1,17 @@
+.wrapper {
+  position: relative;
+  background-color: #0c65da;
+  padding: 20px 15px 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+}

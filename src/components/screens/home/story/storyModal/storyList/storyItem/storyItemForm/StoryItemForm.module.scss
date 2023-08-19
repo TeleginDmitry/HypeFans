@@ -1,0 +1,26 @@
+.form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  .form__input {
+    border: 1px solid #ffffff;
+    border-radius: 32px;
+    background-color: transparent;
+    color: #ffffff;
+
+    &::placeholder {
+      color: #FFFFFFB2;
+    }
+  }
+
+  .form__button {
+    padding: 3px;
+    background-color: transparent;
+
+    svg {
+      stroke: #ffffff;
+    }
+  }
+}

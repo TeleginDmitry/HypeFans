@@ -1,0 +1,33 @@
+.list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+
+  .item {
+    position: relative;
+    max-width: 23.7%;
+    width: 100%;
+
+    &:hover .delete {
+      opacity: 1;
+    }
+
+    .media {
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .delete {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      transform: rotate(45deg);
+      stroke: #ffffff;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+  }
+}

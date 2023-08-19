@@ -1,5 +1,5 @@
 import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
-import { Search } from 'icons-hypefans-lib'
+import { useState } from 'react'
 
 import CreationForm from './creationForm/CreationForm'
 import styles from './CreationPost.module.scss'
@@ -9,13 +9,21 @@ interface ICreationPost {
 }
 
 const CreationPost = ({ changeStateActive }: ICreationPost) => {
+  const [inputValue, setInputValue] = useState('')
+
+  function changeInputValue(value: string) {
+    setInputValue(value)
+  }
+
   return (
     <div className={styles.wrapper}>
       <MyAvatar />
 
-      <CreationForm></CreationForm>
-
-      <Search onClick={changeStateActive} className={styles.icon}></Search>
+      <CreationForm
+        changeStateActive={changeStateActive}
+        changeInputValue={changeInputValue}
+        inputValue={inputValue}
+      ></CreationForm>
     </div>
   )
 }

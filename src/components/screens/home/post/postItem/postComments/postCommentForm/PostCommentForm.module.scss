@@ -41,20 +41,17 @@
         border: 1px solid rgba(0, 0, 0, 0.3);
         border-radius: 8px;
         padding: 5px 10px;
-        .label {
-          justify-content: center;
-          .textarea {
-            border: none;
-            padding: 5px 0px;
-            line-height: 20px;
+        .textarea {
+          border: none;
+          padding: 5px 0px;
+          line-height: 20px;
 
-            &__font {
-              font-size: 15px;
-            }
+          &__font {
+            font-size: 15px;
+          }
 
-            &::-webkit-scrollbar {
-              width: 10px;
-            }
+          &::-webkit-scrollbar {
+            width: 10px;
           }
         }
       }

@@ -1,8 +1,9 @@
 // LINK PARAMS
 export const STORY_PARAM = 'story'
 export const POST_PARAM = 'post'
-export const MEDIAS_PARAM = 'media'
+export const COMMENT_PARAM = 'comment'
 export const CREATE_PARAM = 'create'
+export const MEDIA_PARAM = 'media'
 
 // LINK PARAMS VALUES
 
@@ -30,6 +31,7 @@ export const PREVIEW_CONTAINER_ID = 'preview-container'
 export const POST_LIST_KEY = ['posts']
 export const STORY_LIST_KEY = ['stories']
 export const POST_MEDIAS_KEY = ['post_medias']
+export const STORY_MODAL_KEY = ['stories_modal']
 export const POST_MODAL_KEY = 'post_modal' // ['post_modal', (post_id)]
 export const COMMENTS_KEY = 'comments' // ['comments', (post_id)]
 export const REPLY_KEY = 'reply' // ['reply', (comment_id)]

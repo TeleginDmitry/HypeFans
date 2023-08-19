@@ -4,10 +4,6 @@
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 2;
 
   @media (max-width: 425px) {
     border-radius: 24px 24px 0px 0px;
@@ -15,6 +11,9 @@
     gap: 5px;
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
   }
 
   svg {
@@ -23,7 +22,6 @@
 
     @media (max-width: 425px) {
       padding: 3px;
-      stroke: #111111;
       stroke-width: 1.5px;
     }
   }

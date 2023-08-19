@@ -4,12 +4,6 @@
   width: 100%;
   gap: 20px;
   position: relative;
-  box-shadow: 0 1px 0 0 var(--wrapper-color);
-  padding-bottom: 10px;
-
-  &__active {
-    box-shadow: none;
-  }
 
   .searching {
     flex: 1 1 100%;
@@ -20,12 +14,8 @@
       border: none;
     }
   }
-  .icon__container {
-    cursor: pointer;
-    padding: 5px;
-    .icon {
-      width: 28px;
-      height: 28px;
-    }
+  .icon {
+    width: 28px;
+    height: 28px;
   }
 }

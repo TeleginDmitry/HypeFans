@@ -2,18 +2,19 @@ import {
   ObjectSizeAvatarSize,
   objectSizeAvatar
 } from 'shared/styles/avatarStyles/avatarStyles'
+import { IImageMotion } from 'shared/interfaces/media.interface'
 import { useNavigate } from 'react-router-dom'
+import Image from 'components/ui/image/Image'
 import cn from 'utils/classNames/classNames'
 
 import styles from './Avatar.module.scss'
 
-interface IAvatar extends ObjectSizeAvatarSize {
-  avatar: string
+interface IAvatar extends IImageMotion, ObjectSizeAvatarSize {
   to?: string
 }
 
 const Avatar = (props: IAvatar) => {
-  const { size = 'medium', avatar, to } = props
+  const { size = 'medium', className, src, to, ...allImageProps } = props
 
   const navigate = useNavigate()
 
@@ -23,18 +24,19 @@ const Avatar = (props: IAvatar) => {
     }
   }
 
-  if (!avatar) return null
+  if (!src) return null
 
   return (
-    <div
-      className={cn([styles.wrapper], [!!to, styles.wrapper__cursor])}
+    <Image
+      {...allImageProps}
+      className={cn(
+        [styles.avatar, objectSizeAvatar[size]],
+        [!!to, styles.avatar__active],
+        [!!className, className]
+      )}
       onClick={onClickAvatar}
-    >
-      <img
-        className={cn([styles.avatar, objectSizeAvatar[size]])}
-        src={avatar}
-      />
-    </div>
+      src={src}
+    />
   )
 }
 

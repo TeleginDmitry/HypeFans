@@ -1,3 +1,4 @@
+import { ITypeMedia } from './media.interface'
 import { IShortUser } from './user.interface'
 
 export interface IStory {
@@ -8,15 +9,15 @@ export interface IStory {
 
 export interface IStoryMedia {
   date_joined: string
-  story: number
+  type: ITypeMedia
   media: string
+  story: number
   id: number
 }
 
-export interface IModalStory {
-  story: {
-    medias: IStoryMedia[]
-  } & IStory
-  isPrevious: boolean
-  isNext: boolean
+export interface IStoryWithMedia {
+  medias: IStoryMedia[]
+  date_joined: string
+  user: IShortUser
+  id: number
 }

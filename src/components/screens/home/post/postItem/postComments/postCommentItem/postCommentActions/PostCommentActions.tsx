@@ -1,7 +1,10 @@
+import { ComponentWithAuthorized } from 'hocs/ComponentWithAuthorized'
+import ComponentWithEqualUser from 'hocs/ComponentWithEqualUser'
 import { IShortUser } from 'shared/interfaces/user.interface'
 
 import DeleteAction from './deleteAction/DeleteAction'
 import styles from './PostCommentActions.module.scss'
+import EditAction from './editAction/EditAction'
 import LikeAction from './likeAction/LikeAction'
 
 interface IPostCommentActions {
@@ -21,11 +24,18 @@ const PostCommentActions = (props: IPostCommentActions) => {
 
   return (
     <div className={styles.actions} onClick={onClickActions}>
-      <DeleteAction
-        comment={comment}
-        post_id={post_id}
-        user_id={user.id}
-      ></DeleteAction>
+      <ComponentWithAuthorized>
+        <ComponentWithEqualUser user={user.id}>
+          <DeleteAction comment={comment} post_id={post_id}></DeleteAction>
+        </ComponentWithEqualUser>
+      </ComponentWithAuthorized>
+
+      <ComponentWithAuthorized>
+        <ComponentWithEqualUser user={user.id}>
+          <EditAction comment={comment} post_id={post_id}></EditAction>
+        </ComponentWithEqualUser>
+      </ComponentWithAuthorized>
+
       <LikeAction
         comment={comment}
         isLiked={isLiked}

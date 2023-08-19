@@ -5,20 +5,19 @@ import Loader from 'components/ui/loader/Loader'
 import usePagination from 'hooks/usePagination'
 import React from 'react'
 
-import PostCommentItem from './postCommentItem/PostCommentItem'
+import PostCommentMediasModal from './postCommentMediasModal/PostCommentMediasModal'
 import PostCommentList from './postCommentList/PostCommentList'
+import PostCommentItem from './postCommentItem/PostCommentItem'
 import styles from './PostComments.module.scss'
 
 interface IPostComments {
   lastComment: IPostComment | null
-  comments: number
   post_id: number
 }
 
-const PostComments = ({ lastComment, comments, post_id }: IPostComments) => {
+const PostComments = ({ lastComment, post_id }: IPostComments) => {
   const {
-    data: paginatedComments,
-    countElements,
+    data: commentsList,
     fetchNextPage,
     hasNextPage,
     isFetching
@@ -46,20 +45,17 @@ const PostComments = ({ lastComment, comments, post_id }: IPostComments) => {
     fetchNextPage()
   }
 
-  const isHasNextPage =
-    hasNextPage || (!!lastComment && comments > countElements * 2 + 1)
+  const isHasNextPage = hasNextPage || !!lastComment
 
-  if (!lastComment && !countElements) return null
+  if (!lastComment) return null
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.comments}>
-          <PostCommentList
-            paginatedComments={paginatedComments}
-          ></PostCommentList>
+          <PostCommentList commentsList={commentsList}></PostCommentList>
 
-          {lastComment && !countElements && (
+          {lastComment && !commentsList.length && (
             <PostCommentItem comment={lastComment}></PostCommentItem>
           )}
         </div>
@@ -71,6 +67,7 @@ const PostComments = ({ lastComment, comments, post_id }: IPostComments) => {
           </button>
         )}
       </div>
+      <PostCommentMediasModal></PostCommentMediasModal>
     </div>
   )
 }

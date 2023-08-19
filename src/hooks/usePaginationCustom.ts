@@ -1,5 +1,5 @@
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
-import { IPagination } from 'shared/interfaces/pagination.interface'
+import { ICursorPagination } from 'shared/interfaces/pagination.interface'
 import { useState } from 'react'
 
 import useFetching from './useFetching'
@@ -20,7 +20,7 @@ interface IPaginationCustom<T, P> {
 
 type ICallback<T, P extends Partial<ICallbackParams>> = (
   params: P
-) => Promise<IPagination<T[]>>
+) => Promise<ICursorPagination<T[]>>
 
 const usePaginationCustom = <T, P>(
   callback: ICallback<T, P>,
@@ -56,7 +56,7 @@ const usePaginationCustom = <T, P>(
     condition
   })
 
-  function saveNextPage(response: IPagination<T[]>) {
+  function saveNextPage(response: ICursorPagination<T[]>) {
     if (response.next) {
       setOffset(+getValueParamFromQuery(response.next, 'offset'))
       setHasNextPage(true)
@@ -65,7 +65,7 @@ const usePaginationCustom = <T, P>(
     }
   }
 
-  function savePreviousPage(response: IPagination<T[]>) {
+  function savePreviousPage(response: ICursorPagination<T[]>) {
     if (response.previous) {
       setOffset(+getValueParamFromQuery(response.previous, 'offset'))
       setHasPreviousPage(true)
@@ -74,7 +74,9 @@ const usePaginationCustom = <T, P>(
     }
   }
 
-  async function fetchQuery(savePage: (response: IPagination<T[]>) => void) {
+  async function fetchQuery(
+    savePage: (response: ICursorPagination<T[]>) => void
+  ) {
     const params = {
       offset,
       limit,

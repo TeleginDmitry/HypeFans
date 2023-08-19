@@ -1,0 +1,9 @@
+.content {
+  background-color: var(--background-white);
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 16px;
+  gap: 30px;
+}

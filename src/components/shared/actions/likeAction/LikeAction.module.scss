@@ -4,8 +4,17 @@
   gap: 8px;
   cursor: pointer;
 
+  svg {
+    stroke: #00000099;
+  }
+  .count {
+    color: #00000099;
+    font-size: 17px;
+  }
+
   .liked {
     stroke: #ff485c;
     fill: #ff485c;
+    stroke-width: 3;
   }
 }

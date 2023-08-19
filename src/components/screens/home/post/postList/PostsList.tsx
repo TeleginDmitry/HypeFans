@@ -1,13 +1,12 @@
+import ObserverElement from 'components/shared/observerElement/ObserverElement'
 import { POST_LIST_KEY, POSTS_LIMIT } from 'configs/index.config'
 import ErrorText from 'components/ui/errorText/ErrorText'
-import { PostService } from 'services/post/Post.service'
 import { IPost } from 'shared/interfaces/post.interface'
-import { useInView } from 'react-intersection-observer'
+import { PostService } from 'services/post/Post.service'
 import PostsLoader from '@ui/postsLoader/PostsLoader'
 import usePagination from 'hooks/usePagination'
-import { useEffect } from 'react'
-import { Fragment } from 'react'
 
+import PostModal from '../postModal/PostModal'
 import styles from './PostsList.module.scss'
 import PostItem from '../postItem/PostItem'
 
@@ -35,30 +34,19 @@ export default function PostsList({ user_id }: IPostsList) {
     queryKey: POST_LIST_KEY
   })
 
-  const { inView, ref } = useInView({
-    rootMargin: '0px 0px 200px 0px',
-    skip: !hasNextPage
-  })
-
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage()
-    }
-  }, [inView])
-
   if (isError)
     return <ErrorText>При загрузке постов, произошла ошибка!</ErrorText>
 
   return (
-    <div className={styles.posts__list}>
-      {postsList.map(({ results }, index) => (
-        <Fragment key={index}>
-          {results.map((post) => {
-            return <PostItem key={post.id} post={post}></PostItem>
-          })}
-        </Fragment>
-      ))}
-      <div className={styles.posts__observer} ref={ref}></div>
+    <div className={styles.wrapper}>
+      {postsList.map((post) => {
+        return <PostItem key={post.id} post={post}></PostItem>
+      })}
+      <ObserverElement
+        rootMargin={'0px 0px 200px 0px'}
+        onVisible={fetchNextPage}
+        skip={!hasNextPage}
+      ></ObserverElement>
       {isLoading && <PostsLoader />}
 
       {!isLoading && !postsList.length && (
@@ -66,6 +54,8 @@ export default function PostsList({ user_id }: IPostsList) {
           У пользователя не существует ни одного поста!
         </h2>
       )}
+
+      <PostModal></PostModal>
     </div>
   )
 }

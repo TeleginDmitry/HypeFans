@@ -1,4 +1,4 @@
-import { useTypedSelector } from 'hooks/useTypedSelector'
+import { ComponentWithAuthorized } from 'hocs/ComponentWithAuthorized'
 import React, { useState } from 'react'
 
 import CreationPost from './creationPost/CreationPost'
@@ -7,7 +7,6 @@ import styles from './HomeForm.module.scss'
 
 const HomeForm = () => {
   const [isActive, setIsActive] = useState(false)
-  const isAuth = useTypedSelector((state) => state.auth.isAuth)
 
   function changeStateActive() {
     setIsActive((state) => (state = !state))
@@ -15,7 +14,11 @@ const HomeForm = () => {
 
   return (
     <div className={styles.wrapper}>
-      {isAuth ? (
+      <ComponentWithAuthorized
+        Component={
+          <SearchPost changeStateActive={changeStateActive}></SearchPost>
+        }
+      >
         <>
           {isActive ? (
             <SearchPost changeStateActive={changeStateActive}></SearchPost>
@@ -23,9 +26,7 @@ const HomeForm = () => {
             <CreationPost changeStateActive={changeStateActive}></CreationPost>
           )}
         </>
-      ) : (
-        <SearchPost changeStateActive={changeStateActive}></SearchPost>
-      )}
+      </ComponentWithAuthorized>
     </div>
   )
 }

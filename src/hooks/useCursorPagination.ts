@@ -1,5 +1,5 @@
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
-import { IPagination } from 'shared/interfaces/pagination.interface'
+import { ICursorPagination } from 'shared/interfaces/pagination.interface'
 import { IntersectionOptions } from 'react-intersection-observer'
 import { useState } from 'react'
 
@@ -9,7 +9,7 @@ interface ICallbackParams {
   cursor: string
 }
 
-interface ICursorPagination<T, P extends ICallbackParams> {
+interface IUseCursorPagination<T, P extends ICallbackParams> {
   observerParams?: IntersectionOptions
   isInfinity?: boolean
   condition?: boolean
@@ -19,7 +19,7 @@ interface ICursorPagination<T, P extends ICallbackParams> {
 
 type ICallback<T, P extends ICallbackParams> = (
   params: P
-) => Promise<IPagination<T[]>>
+) => Promise<ICursorPagination<T[]>>
 
 const useCursorPagination = <T, P extends ICallbackParams>(
   callback: ICallback<T, P>,
@@ -28,7 +28,7 @@ const useCursorPagination = <T, P extends ICallbackParams>(
     initialState = [],
     condition = true,
     queryParam
-  }: ICursorPagination<T, P> = {}
+  }: IUseCursorPagination<T, P> = {}
 ) => {
   const [hasNextPage, setHasNextPage] = useState<boolean>()
   const [hasPreviousPage, setHasPreviousPage] = useState<boolean>()
@@ -52,21 +52,21 @@ const useCursorPagination = <T, P extends ICallbackParams>(
     condition
   })
 
-  function saveNextPage(response: IPagination<T[]>) {
+  function saveNextPage(response: ICursorPagination<T[]>) {
     if (response.next) {
       setHasNextPage(true)
       setCursorNext(getValueParamFromQuery(response.next, 'cursor'))
     } else setHasNextPage(false)
   }
 
-  function savePreviousPage(response: IPagination<T[]>) {
+  function savePreviousPage(response: ICursorPagination<T[]>) {
     if (response.previous) {
       setHasPreviousPage(true)
       setCursorPrevious(getValueParamFromQuery(response.previous, 'cursor'))
     } else setHasPreviousPage(false)
   }
 
-  function savePage(response: IPagination<T[]>) {
+  function savePage(response: ICursorPagination<T[]>) {
     saveNextPage(response)
     savePreviousPage(response)
 

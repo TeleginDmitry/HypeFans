@@ -11,7 +11,7 @@ export function Layout() {
       <div className={styles.content}>
         <Outlet />
       </div>
-      <Preview></Preview>
+      {/* <Preview></Preview> */}
     </div>
   )
 }

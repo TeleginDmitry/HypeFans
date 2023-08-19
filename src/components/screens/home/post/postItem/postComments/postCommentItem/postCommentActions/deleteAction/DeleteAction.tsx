@@ -1,18 +1,14 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query'
-import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
 import { COMMENTS_KEY } from 'configs/index.config'
 import { Trash } from 'icons-hypefans-lib'
 
 interface IDeleteAction {
-  user_id: number
   post_id: number
   comment: number
 }
 
-const DeleteAction = ({ user_id, comment, post_id }: IDeleteAction) => {
-  const { isAuth, user } = useTypedSelector((state) => state.auth)
-
+const DeleteAction = ({ comment, post_id }: IDeleteAction) => {
   const queryClient = useQueryClient()
 
   const { mutate } = useMutation(async () => {
@@ -24,13 +20,7 @@ const DeleteAction = ({ user_id, comment, post_id }: IDeleteAction) => {
     return response.data
   })
 
-  return (
-    <>
-      {isAuth && user.id === user_id && (
-        <Trash onClick={() => mutate()} size={'small'}></Trash>
-      )}
-    </>
-  )
+  return <Trash onClick={() => mutate()} size={'small'}></Trash>
 }
 
 export default DeleteAction

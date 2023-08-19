@@ -5,6 +5,10 @@
   align-items: center;
   cursor: pointer;
 
+  &__active {
+    border: 1px solid #111;
+  }
+
   .avatar__container {
     position: relative;
     padding: 3px;
@@ -23,7 +27,7 @@
     }
 
     .avatar {
-      width: 94px;
+      // width: 94px;
       height: 94px;
       border-radius: 50%;
       object-fit: cover;

@@ -1,17 +1,16 @@
-.posts__list {
+.wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 30px;
+  padding: 0 20px;
 
-  .posts__observer {
-    width: 100%;
+  @media (max-width: 425px) {
+    padding: 0;
   }
+
   .title__exist {
     padding: 10px 0;
     font-size: 17px;
   }
-}
-
-h1 {
-  color: #fff;
 }

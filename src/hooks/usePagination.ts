@@ -4,14 +4,16 @@ import {
   useInfiniteQuery
 } from '@tanstack/react-query'
 import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
-import { IPagination } from 'shared/interfaces/pagination.interface'
-import { useState } from 'react'
+import { ICursorPagination } from 'shared/interfaces/pagination.interface'
+import { useMemo } from 'react'
 
-type ICallback<T> = (options: QueryFunctionContext) => Promise<IPagination<T[]>>
+type ICallback<T> = (
+  options: QueryFunctionContext
+) => Promise<ICursorPagination<T[]>>
 
 interface IUsePagination<T>
   extends Omit<
-    UseInfiniteQueryOptions<IPagination<T[]>>,
+    UseInfiniteQueryOptions<ICursorPagination<T[]>>,
     'getPreviousPageParam' | 'keepPreviousData' | 'getNextPageParam' | 'queryFn'
   > {
   queryFn: ICallback<T>
@@ -21,18 +23,13 @@ interface IUsePagination<T>
 const usePagination = <T>(options: IUsePagination<T>) => {
   const { nameParam = 'offset', queryFn: callback, ...queryOptions } = options
 
-  const [countElements, setCountElements] = useState<number | null>(null)
-
-  const { data, ...result } = useInfiniteQuery({
+  const { data, ...allInfiniteQuery } = useInfiniteQuery({
     queryFn: async (options) => {
       const response = await callback(options)
 
       return response
     },
-    onSuccess(data) {
-      const lastPage = data.pages.at(-1)
-      setCountElements(lastPage.count)
-    },
+
     getPreviousPageParam: (lastPage) =>
       getValueParamFromQuery(lastPage.previous, nameParam),
     getNextPageParam: (lastPage) =>
@@ -41,7 +38,17 @@ const usePagination = <T>(options: IUsePagination<T>) => {
     ...queryOptions
   })
 
-  return { data: data ? data.pages.flat() : [], countElements, ...result }
+  const result: T[] = useMemo(() => {
+    return data?.pages.reduce((acc, page) => {
+      page.results.forEach((element) => {
+        acc.push(element)
+      })
+
+      return acc
+    }, [])
+  }, [data])
+
+  return { data: Array.isArray(result) ? result : [], ...allInfiniteQuery }
 }
 
 export default usePagination

@@ -5,8 +5,8 @@ import {
   ITokens,
   ILogin
 } from 'shared/interfaces/auth.interface'
-import instance, { instanceSimple } from 'api/api.interceptor'
 import { TOKEN_API } from '@configs/api.config'
+import instance from 'api/api.interceptor'
 import { AxiosResponse } from 'axios'
 
 import { getRefreshToken } from './Auth.helper'
@@ -27,7 +27,7 @@ export const AuthService = {
   refresh: async (): Promise<AxiosResponse<ITokens>> => {
     const refreshToken = getRefreshToken()
 
-    return await instanceSimple.post<ITokens>(`${TOKEN_API}/refresh/`, {
+    return await instance.post<ITokens>(`${TOKEN_API}/refresh/`, {
       refresh: refreshToken
     })
   },

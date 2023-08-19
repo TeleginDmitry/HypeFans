@@ -9,8 +9,8 @@ import {
   saveTokensStorage
 } from '@services/auth/Auth.helper'
 import { IChangeUser, IUser } from 'shared/interfaces/user.interface'
-import { AuthService } from '@services/auth/Auth.service'
-import { UserService } from '@services/user/User.service'
+import { AuthService } from 'services/auth/Auth.service'
+import { UserService } from 'services/user/User.service'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const login = createAsyncThunk<IResponse, ILogin>(

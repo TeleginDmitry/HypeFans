@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios, { isAxiosError } from 'axios'
 
-import { saveTokensStorage, getAccessToken } from '../services/auth/Auth.helper'
+import {
+  removeTokensStorage,
+  saveTokensStorage,
+  getAccessToken
+} from '../services/auth/Auth.helper'
 import { AuthService } from '../services/auth/Auth.service'
 import { API_URL } from '../configs/api.config'
-
-export const instanceSimple = axios.create({
-  baseURL: API_URL
-})
 
 const instance = axios.create({
   // withCredentials: true,
@@ -42,8 +42,10 @@ instance.interceptors.response.use(
           return instance.request(error.config)
         }
       } catch (error) {
-        // if (errorCatch(error) === 'token_not_valid')
-        // 	return removeTokensStorage()
+        if (isAxiosError(error)) {
+          if (error.response.data?.code === 'token_not_valid')
+            return removeTokensStorage()
+        }
       }
     }
     throw error

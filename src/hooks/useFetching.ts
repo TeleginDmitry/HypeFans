@@ -20,6 +20,7 @@ const useFetching = <T>({
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setSuccess] = useState(false)
   const [error, setError] = useState<AxiosError | undefined>(undefined)
+  const [isError, setIsError] = useState(false)
   const latestQueryArgsRef = useRef<ICallback<T>>()
 
   async function handlerQuery(queryFunc: ICallback<T>) {
@@ -32,11 +33,13 @@ const useFetching = <T>({
       onSuccess?.(response)
       latestQueryArgsRef.current = queryFunc
       setSuccess(true)
+      setIsError(false)
     } catch (error) {
       if (error instanceof AxiosError) {
         setError(error)
         onError?.(error)
         setSuccess(false)
+        setIsError(true)
       }
     } finally {
       setIsLoading(false)
@@ -59,6 +62,7 @@ const useFetching = <T>({
     isSuccess,
     isLoading,
     refetch,
+    isError,
     error
   }
 }

@@ -4,14 +4,12 @@
   gap: 8px;
   cursor: pointer;
 
-  .comment {
+  svg {
+    stroke: #00000099;
   }
 
   .count {
-    font-weight: 500;
-    font-size: 16px;
-    color: #000000;
-    opacity: 0.6;
-    user-select: none;
+    color: #00000099;
+    font-size: 17px;
   }
 }

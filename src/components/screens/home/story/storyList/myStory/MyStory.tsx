@@ -1,6 +1,7 @@
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { CREATION_PAGE } from 'configs/index.config'
 import { useNavigate } from 'react-router-dom'
+import Image from 'components/ui/image/Image'
 import { API_URL } from 'configs/api.config'
 import React from 'react'
 
@@ -18,7 +19,7 @@ const MyStory = () => {
   return (
     <div onClick={handlerClickStory} className={styles.wrapper}>
       <div className={styles.avatar__container}>
-        <img src={API_URL + user.avatar} className={styles.avatar} alt='' />
+        <Image src={API_URL + user?.avatar} className={styles.avatar} />
       </div>
 
       <p className={styles.prefix}>Твоя истоия</p>

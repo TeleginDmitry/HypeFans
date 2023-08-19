@@ -1,7 +1,7 @@
+import BookmarkAction from 'components/shared/actions/bookmarkAction/BookmarkAction'
 import CommentAction from 'components/shared/actions/commentAction/CommentAction'
 import LikeAction from 'components/shared/actions/likeAction/LikeAction'
 import { PostService } from 'services/post/Post.service'
-import { Bookmark } from 'icons-hypefans-lib'
 
 import styles from './SearchPostItemActions.module.scss'
 
@@ -33,16 +33,18 @@ const SearchPostItemActions = ({
   return (
     <div className={styles.wrapper}>
       <LikeAction
-        onCreate={createLike}
         onDelete={deleteLike}
+        onCreate={createLike}
+        strokeWidth={1.5}
         isLiked={isLiked}
         likes={likes}
       ></LikeAction>
       <CommentAction
         onClick={handlerClickComment}
         comments={comments}
+        strokeWidth={1.5}
       ></CommentAction>
-      <Bookmark></Bookmark>
+      <BookmarkAction strokeWidth={1.5}></BookmarkAction>
     </div>
   )
 }

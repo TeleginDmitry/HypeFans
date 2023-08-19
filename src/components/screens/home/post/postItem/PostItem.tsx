@@ -1,13 +1,12 @@
 import PostHeader from 'components/shared/postHeader/PostHeader'
-import { useTypedSelector } from 'hooks/useTypedSelector'
 import { IPost } from 'shared/interfaces/post.interface'
-import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import React from 'react'
 
-import PostCommentForm from './postComments/postCommentForm/PostCommentForm'
+import PostCommentFormLayout from './postCommentFormLayout/PostCommentFormLayout'
 import PostComments from './postComments/PostComments'
-import PostActions from './postActions/PostActions'
 import PostContent from './postContent/PostContent'
+import PostActions from './postActions/PostActions'
 import styles from './PostItem.module.scss'
 
 interface IPostItem {
@@ -26,16 +25,6 @@ export default function PostItem({ post }: IPostItem) {
     user,
     id
   } = post
-
-  const isAuth = useTypedSelector((state) => state.auth.isAuth)
-
-  const [isClickComment, setClickComment] = useState(false)
-
-  function handlerClickComment() {
-    setClickComment((state) => (state = !state))
-  }
-
-  const isShowForm = isAuth && (lastComment || isClickComment)
 
   return (
     <motion.div
@@ -58,7 +47,6 @@ export default function PostItem({ post }: IPostItem) {
         ></PostContent>
         <div className={styles.actions__container}>
           <PostActions
-            handlerClickComment={handlerClickComment}
             comments={comments}
             isLiked={isLiked}
             likes={likes}
@@ -66,16 +54,8 @@ export default function PostItem({ post }: IPostItem) {
           ></PostActions>
         </div>
 
-        <PostComments
-          lastComment={lastComment}
-          comments={comments}
-          post_id={id}
-        ></PostComments>
-        {isShowForm && (
-          <div className={styles.form__container}>
-            <PostCommentForm size='large' post_id={id}></PostCommentForm>
-          </div>
-        )}
+        <PostComments lastComment={lastComment} post_id={id}></PostComments>
+        <PostCommentFormLayout post_id={id}></PostCommentFormLayout>
       </div>
     </motion.div>
   )

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice, AnyAction } from '@reduxjs/toolkit'
 
-import { changeUser, register, verify, logout, login } from './auth.actions'
+import { changeUser, register, logout, verify, login } from './auth.actions'
 import { IUser } from '../../shared/interfaces/user.interface'
 
 type IInitialState = {
@@ -100,8 +100,5 @@ const AuthSlice = createSlice({
 function isLoadingAction(action: AnyAction) {
   return action.type.endsWith('pending')
 }
-
-// eslint-disable-next-line no-empty-pattern
-export const {} = AuthSlice.actions
 
 export default AuthSlice.reducer

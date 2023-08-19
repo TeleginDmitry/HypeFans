@@ -1,6 +1,6 @@
-import { IQueryPagination } from 'shared/interfaces/pagination.interface'
+import { ILimitOffsetPagination } from 'shared/interfaces/pagination.interface'
 
-export interface IGetPostsParams extends IQueryPagination {
+export interface IGetPostsParams extends ILimitOffsetPagination {
   user_id?: number | string
 }
 

@@ -1,0 +1,24 @@
+.slide {
+  width: 100% !important;
+  height: 100dvh;
+}
+
+.swiper {
+  max-width: 550px;
+}
+
+.swiper_button_prev, .swiper_button_next {
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 7;
+}
+
+.swiper_button_prev {
+  left: 5px;
+}
+
+.swiper_button_next {
+  right: 5px;
+}

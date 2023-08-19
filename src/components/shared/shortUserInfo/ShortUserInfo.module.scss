@@ -3,15 +3,15 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
 
-  .avatar__container {
-    .avatar {
-      width: 40px;
-      height: 40px;
-      user-select: none;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    user-select: none;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .user__container {

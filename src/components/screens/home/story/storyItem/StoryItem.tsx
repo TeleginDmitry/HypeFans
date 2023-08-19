@@ -23,7 +23,7 @@ export const StoryItem = ({ story }: IStoryItem) => {
 
   return (
     <motion.div
-      onClick={() => handlerClickStory(id)}
+      // onClick={() => handlerClickStory(id)}
       transition={{ duration: 0.5 }}
       className={styles.story}
       animate={{ opacity: 1 }}

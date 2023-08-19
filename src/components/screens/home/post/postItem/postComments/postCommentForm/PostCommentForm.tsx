@@ -1,18 +1,24 @@
-import { MAX_LENGTH_LETTER_FOR_INPUT, COMMENTS_KEY } from 'configs/index.config'
+import {
+  MAX_LENGTH_LETTER_FOR_INPUT,
+  COMMENTS_KEY,
+  PROFILE_PAGE
+} from 'configs/index.config'
+import MediasAnimatedList from 'components/shared/mediasAnimatedList/MediasAnimatedList'
+import { ComponentWithAuthorized } from 'hocs/ComponentWithAuthorized'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useTypedSelector } from 'hooks/useTypedSelector'
 import { PostService } from 'services/post/Post.service'
 import { InputProps, Textarea } from 'ui-hypefans-lib'
-import cn from 'utils/classNames/classNames'
+import Image from 'components/ui/image/Image'
 import { API_URL } from 'configs/api.config'
+import cn from 'utils/classNames/classNames'
 import { Send } from 'icons-hypefans-lib'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 import PostCommentFormActions from './postCommentFormActions/PostCommentFormActions'
-import PostCommentFormMedias from './postCommentFormMedias/PostCommentFormMedias'
 import styles from './PostCommentForm.module.scss'
 
 interface IPostCommentForm extends InputProps {
@@ -98,6 +104,10 @@ const PostCommentForm = ({
     setInputValue((state) => state + target.innerText)
   }
 
+  function deleteMedia(id: number) {
+    setMedias((state) => state.filter((item) => item.id !== id))
+  }
+
   const classTextarea = cn(
     [styles.textarea],
     [inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT, styles.textarea__font]
@@ -110,16 +120,17 @@ const PostCommentForm = ({
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
     >
-      <Link className={styles.link} to={'/profile'}>
-        <img src={API_URL + user.avatar} className={styles.avatar} />
-      </Link>
+      <ComponentWithAuthorized>
+        <Link className={styles.link} to={PROFILE_PAGE}>
+          <Image src={API_URL + user?.avatar} className={styles.avatar} />
+        </Link>
+      </ComponentWithAuthorized>
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.content}>
           <div className={styles.input__container}>
             <Textarea
               placeholder='Введите комментарий...'
-              labelClassName={styles.label}
               className={classTextarea}
               onChange={onChangeInput}
               value={inputValue}
@@ -132,10 +143,11 @@ const PostCommentForm = ({
             ></PostCommentFormActions>
           </div>
 
-          <PostCommentFormMedias
-            setMedias={setMedias}
+          <MediasAnimatedList
+            deleteMedia={deleteMedia}
             medias={medias}
-          ></PostCommentFormMedias>
+            isCanToDelete
+          ></MediasAnimatedList>
         </div>
 
         <button className={styles.button} type='submit'>

@@ -1,0 +1,26 @@
+.wrapper {
+  width: 100%;
+  position: relative;
+  .background {
+    max-height: 210px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-16);
+
+    @media (max-width: 425px) {
+      border-radius: 0px 0px var(--border-radius-16) var(--border-radius-16);
+    }
+  }
+  .actions {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    svg {
+      stroke: #ffffff;
+    }
+  }
+}

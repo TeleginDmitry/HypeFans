@@ -11,20 +11,19 @@ const PostMedias = ({ medias }: IPostMedias) => {
   if (!medias.length) return null
 
   return (
-    <div className={styles.container}>
+    <ul className={styles.list}>
       {medias.map(({ media, type, id }) => {
         return (
           <Media
-            mediaProps={{
-              className: styles.meida,
-              media,
-              type
-            }}
+            imageProps={{ className: styles.media }}
+            videoProps={{ className: styles.media }}
+            src={media}
+            type={type}
             key={id}
           ></Media>
         )
       })}
-    </div>
+    </ul>
   )
 }
 

@@ -1,21 +1,8 @@
-import { useInView } from 'react-intersection-observer'
-import React from 'react'
+import { IImageMotion } from 'shared/interfaces/media.interface'
+import { motion } from 'framer-motion'
 
-interface IImage
-  extends React.DetailedHTMLProps<
-    React.ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
-  > {
-  src: string
-}
-
-const Image = ({ src, ...imageProps }: IImage) => {
-  const { inView, ref } = useInView({
-    rootMargin: '0px 0px 200px 0px',
-    triggerOnce: true
-  })
-
-  return <img {...imageProps} src={inView ? src : ''} ref={ref} />
+const Image = (props: IImageMotion) => {
+  return <motion.img {...props} />
 }
 
 export default Image

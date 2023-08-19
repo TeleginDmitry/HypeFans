@@ -1,4 +1,4 @@
-import { API_URL } from 'configs/api.config'
+import Image from 'components/ui/image/Image'
 import React, { memo } from 'react'
 
 import styles from './ShortUserInfo.module.scss'
@@ -18,14 +18,7 @@ const ShortUserInfo = ({
 }: IShortUserInfo) => {
   return (
     <div className={styles.short} onClick={onClick}>
-      <div className={styles.avatar__container}>
-        <img
-          className={styles.avatar}
-          src={API_URL + avatar}
-          draggable={false}
-          alt='HypeFans'
-        />
-      </div>
+      <Image className={styles.avatar} draggable={false} src={avatar} />
       <div className={styles.user__container}>
         <h2 className={styles.user__username}>{username}</h2>
         <span className={styles.user__prefix}>{prefix}</span>

@@ -1,3 +1,4 @@
+import { ITypeMedia } from './media.interface'
 import { IShortUser } from './user.interface'
 
 export interface IPostUser {
@@ -8,25 +9,25 @@ export interface IPostUser {
 }
 
 export interface IPostMediaShort {
-  type: 'image' | 'video'
   date_joined: string
+  type: ITypeMedia
   media: string
   id: number
 }
 
 export interface IPostMedia {
-  type: 'image' | 'video'
   date_joined: string
   user: IShortUser
+  type: ITypeMedia
   media: string
   post: number
   id: number
 }
 
 export interface ICommentMedia {
-  type: 'image' | 'video'
   date_joined: string
   user: IShortUser
+  type: ITypeMedia
   media: string
   post: number
   id: number

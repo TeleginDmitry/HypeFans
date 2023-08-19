@@ -1,4 +1,3 @@
-import ModalsContainer from './modalsContainer/ModalsContainer'
 import StoryList from './story/storyList/StoryList'
 import PostsList from './post/postList/PostsList'
 import HomeHeader from './homeHeader/HomeHeader'
@@ -14,7 +13,6 @@ export default function Home() {
         <HomeForm></HomeForm>
         <PostsList></PostsList>
       </div>
-      <ModalsContainer></ModalsContainer>
     </div>
   )
 }

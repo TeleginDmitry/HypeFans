@@ -24,7 +24,7 @@ const PostCommentFormActions = ({
     const medias = event.target.files
     handlerMedia(medias)
   }
-  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.actions}>

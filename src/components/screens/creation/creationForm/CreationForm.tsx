@@ -1,3 +1,4 @@
+import MediasAnimatedList from 'components/shared/mediasAnimatedList/MediasAnimatedList'
 import SelectMedia from 'components/shared/selectMedia/SelectMedia'
 import useViewUploadMedias from 'hooks/useViewUploadMedias'
 import { useTypedSelector } from 'hooks/useTypedSelector'
@@ -6,7 +7,6 @@ import { useMutation } from '@tanstack/react-query'
 import { Textarea, Button } from 'ui-hypefans-lib'
 import React, { useState } from 'react'
 
-import CreationFormMedias from './creationFormMedias/CreationFormMedias'
 import styles from './CreationForm.module.scss'
 
 const CreationForm = () => {
@@ -75,6 +75,10 @@ const CreationForm = () => {
     handlerMedia(target.files)
   }
 
+  function deleteMedia(id: number) {
+    setMedias((state) => state.filter((media) => media.id !== id))
+  }
+
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <Textarea
@@ -84,10 +88,11 @@ const CreationForm = () => {
         value={inputValue}
         minRows={7}
       ></Textarea>
-      <CreationFormMedias
-        setMedias={setMedias}
+      <MediasAnimatedList
+        deleteMedia={deleteMedia}
         medias={medias}
-      ></CreationFormMedias>
+        isCanToDelete
+      ></MediasAnimatedList>
       <SelectMedia onChange={handlerUploadMedias}></SelectMedia>
       <div className={styles.button__container}>
         <Button type='submit'>Опубликовать</Button>

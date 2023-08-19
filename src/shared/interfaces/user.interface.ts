@@ -1,14 +1,15 @@
 export interface IUser {
   background: string | null
   avatar: string | null
-  site: string | null
-  date_joined: string
+  last_active: string
   description: string
+  date_joined: string
+  site: string | null
   username: string
   status: boolean
   prefix: string
-  posts: number
   email: string
+  posts: number
   id: number
 }
 

@@ -13,8 +13,11 @@ interface IModal {
 }
 
 const Modal = ({ opacity = 0.8, handlerClose, children }: IModal) => {
+  const contentRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
+
   const [isMounted, setMounted] = useState(false)
+  const [isNeedScroll, setIsNeedScroll] = useState(false)
 
   const { appendClass, deleteClass } = useOverflowBody()
 
@@ -27,13 +30,6 @@ const Modal = ({ opacity = 0.8, handlerClose, children }: IModal) => {
       handlerClose()
     }
   }
-
-  useEffect(() => {
-    appendClass()
-    return () => {
-      deleteClass()
-    }
-  }, [])
 
   useEffect(() => {
     createContainer({ id: MODAL_CONTAINER_ID })
@@ -57,26 +53,37 @@ const Modal = ({ opacity = 0.8, handlerClose, children }: IModal) => {
   }, [handlerClose])
 
   useEffect(() => {
-    if (!isMounted) return
+    if (!contentRef.current || !isMounted) return
 
-    const modalElement = wrapperRef.current
+    appendClass()
 
-    if (modalElement.scrollHeight > window.innerHeight) {
-      modalElement.classList.add(styles.scrollable)
-    } else {
-      modalElement.classList.remove(styles.scrollable)
+    const handleResize = () => {
+      setIsNeedScroll(contentRef.current.offsetHeight > window.innerHeight)
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
+    return () => {
+      deleteClass()
+      window.removeEventListener('resize', handleResize)
     }
   }, [isMounted])
 
   return isMounted ? (
     <Portal element={document.getElementById(MODAL_CONTAINER_ID)}>
       <div
-        style={{ backgroundColor: `rgb(65, 65, 65, ${opacity})` }}
-        onClick={handleModalClick}
+        style={{
+          alignItems: isNeedScroll ? 'flex-start' : 'center',
+          backgroundColor: `rgb(65, 65, 65, ${opacity})`
+        }}
+        onMouseUp={handleModalClick}
         className={styles.modal}
         ref={wrapperRef}
       >
-        {children}
+        <div className={styles.content} ref={contentRef}>
+          {children}
+        </div>
       </div>
     </Portal>
   ) : null

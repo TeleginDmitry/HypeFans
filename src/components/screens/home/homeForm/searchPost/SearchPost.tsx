@@ -1,10 +1,9 @@
+import { ComponentWithAuthorized } from 'hocs/ComponentWithAuthorized'
 import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
-import { useTypedSelector } from 'hooks/useTypedSelector'
 import { POST_PARAM } from 'configs/index.config'
 import React, { useState, useRef } from 'react'
-import { Search, X } from 'icons-hypefans-lib'
 import { useNavigate } from 'react-router-dom'
-import cn from '@utils/classNames/classNames'
+import { Search, X } from 'icons-hypefans-lib'
 
 import SearchPostList from './searchPostList/SearchPostList'
 import styles from './SearchPost.module.scss'
@@ -15,8 +14,6 @@ interface ISearchPost {
 
 const SearchPost = ({ changeStateActive }: ISearchPost) => {
   const navigate = useNavigate()
-
-  const isAuth = useTypedSelector((state) => state.auth.isAuth)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -39,8 +36,10 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
   }
 
   return (
-    <div className={cn([styles.wrapper], [valueInput, styles.wrapper__active])}>
-      {isAuth && <MyAvatar />}
+    <div className={styles.wrapper}>
+      <ComponentWithAuthorized>
+        <MyAvatar />
+      </ComponentWithAuthorized>
 
       <div className={styles.searching}>
         <input
@@ -52,15 +51,22 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
           type='text'
         />
       </div>
-      {isAuth ? (
-        <div className={styles.icon__container} onClick={changeStateActive}>
-          <X className={styles.icon}></X>
-        </div>
-      ) : (
-        <div className={styles.icon__container} onClick={focusInput}>
-          <Search className={styles.icon}></Search>
-        </div>
-      )}
+
+      <ComponentWithAuthorized
+        Component={
+          <Search
+            className={styles.icon}
+            onClick={focusInput}
+            strokeWidth={2}
+          ></Search>
+        }
+      >
+        <X
+          onClick={changeStateActive}
+          className={styles.icon}
+          strokeWidth={2}
+        ></X>
+      </ComponentWithAuthorized>
 
       {valueInput && (
         <SearchPostList

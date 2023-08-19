@@ -1,9 +1,9 @@
-.container {
+.list {
   gap: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  .meida {
+  .media {
     height: 100%;
     max-height: 250px;
     object-fit: cover;

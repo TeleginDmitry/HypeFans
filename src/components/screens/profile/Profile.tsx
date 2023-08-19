@@ -7,12 +7,14 @@ import styles from './Profile.module.scss'
 const Profile = () => {
   const user = useTypedSelector((state) => state.auth.user)
 
+  if (!user) return null
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <ProfileHeader></ProfileHeader>
+        <ProfileHeader user={user}></ProfileHeader>
         <div className={styles.posts__container}>
-          {user?.id && <PostsList user_id={user.id}></PostsList>}
+          <PostsList user_id={user.id}></PostsList>
         </div>
       </div>
     </div>

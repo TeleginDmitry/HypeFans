@@ -21,20 +21,19 @@ const PostSwiperMedias = ({ medias }: IPostSwiperMedias) => {
         },
         wrapperClass: styles.swiper__container,
         className: styles.swiper,
+        slidesPerView: 'auto',
         modules: [Pagination],
-        spaceBetween: 10,
-        slidesPerView: 1
+        spaceBetween: 10
       }}
     >
       {medias.map(({ media, type, id }) => {
         return (
           <SwiperSlide className={styles.slide} key={id}>
             <Media
-              mediaProps={{
-                className: styles.media,
-                media,
-                type
-              }}
+              imageProps={{ className: styles.media }}
+              videoProps={{ className: styles.media }}
+              src={media}
+              type={type}
             ></Media>
           </SwiperSlide>
         )

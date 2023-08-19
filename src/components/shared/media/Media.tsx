@@ -1,30 +1,28 @@
-import { ImageOrVideoProps } from 'components/shared/imageOrVideo/ImageOrVideo.interface'
-import ImageOrVideo from 'components/shared/imageOrVideo/ImageOrVideo'
-import { MotionProps, motion } from 'framer-motion'
-import cn from 'utils/classNames/classNames'
-
-import styles from './Media.module.scss'
+import {
+  IImageMotion,
+  IVideoMotion,
+  ITypeMedia
+} from 'shared/interfaces/media.interface'
+import Video from 'components/ui/video/Video'
+import Image from 'components/ui/image/Image'
 
 interface IMedia {
-  mediaProps: ImageOrVideoProps
-  children?: React.ReactElement
-  motionProps?: MotionProps
-  classWrapper?: string
+  imageProps?: IImageMotion
+  videoProps?: IVideoMotion
+  type: ITypeMedia
+  src: string
 }
 
-export default function Media({
-  classWrapper,
-  motionProps,
-  mediaProps,
-  children
-}: IMedia) {
+export default function Media({ imageProps, videoProps, type, src }: IMedia) {
+  if (!src) return null
+
   return (
-    <motion.div
-      {...motionProps}
-      className={cn([styles.item], [!!classWrapper, classWrapper])}
-    >
-      <ImageOrVideo {...mediaProps}></ImageOrVideo>
-      {children}
-    </motion.div>
+    <>
+      {type === 'video' ? (
+        <Video {...videoProps} src={src} />
+      ) : (
+        <Image {...imageProps} src={src} />
+      )}
+    </>
   )
 }
