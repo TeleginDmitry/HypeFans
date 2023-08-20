@@ -40,7 +40,7 @@ const PostCommentItem = ({ comment, isReply }: IPostCommentItem) => {
   }
 
   return (
-    <div className={cn([styles.wrapper], [isReply, styles.reply])}>
+    <div className={cn([styles.wrapper], { [styles.reply]: isReply })}>
       <div className={styles.container}>
         <Avatar
           to={`/${USER_PAGE}/${user.id}`}

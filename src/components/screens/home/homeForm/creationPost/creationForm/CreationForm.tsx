@@ -58,10 +58,9 @@ const CreationForm = ({
     }
   }
 
-  const classTextarea = cn(
-    [styles.textarea],
-    [inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT, styles.textarea__font]
-  )
+  const classTextarea = cn([styles.textarea], {
+    [styles.textarea__font]: inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT
+  })
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>

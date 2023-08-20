@@ -1,6 +1,6 @@
-import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
 import { ICursorPagination } from 'shared/interfaces/pagination.interface'
 import { IntersectionOptions } from 'react-intersection-observer'
+import getParams from 'utils/getParams/getParams'
 import { useState } from 'react'
 
 import useFetching from './useFetching'
@@ -55,14 +55,14 @@ const useCursorPagination = <T, P extends ICallbackParams>(
   function saveNextPage(response: ICursorPagination<T[]>) {
     if (response.next) {
       setHasNextPage(true)
-      setCursorNext(getValueParamFromQuery(response.next, 'cursor'))
+      setCursorNext(getParams(response.next)?.['cursor'])
     } else setHasNextPage(false)
   }
 
   function savePreviousPage(response: ICursorPagination<T[]>) {
     if (response.previous) {
       setHasPreviousPage(true)
-      setCursorPrevious(getValueParamFromQuery(response.previous, 'cursor'))
+      setCursorPrevious(getParams(response.previous)?.['cursor'])
     } else setHasPreviousPage(false)
   }
 

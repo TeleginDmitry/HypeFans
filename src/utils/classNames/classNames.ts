@@ -1,17 +1,24 @@
+type IConditions = { [key: string]: boolean | string }
+
 export default function cn(
   defaultClasses?: string[],
-  ...conditions: [boolean, string][]
+  conditions?: IConditions
 ) {
-  if (!defaultClasses) return
+  if (!defaultClasses) return ''
 
-  const result: string[] = []
+  const result = [...defaultClasses]
 
-  defaultClasses.forEach((item) => {
-    result.push(item)
-  })
+  if (!conditions) return result.join(' ')
 
-  conditions.forEach((item) => {
-    if (item[0]) result.push(item[1])
+  const conditionsKeys = Object.keys(conditions)
+
+  if (!conditionsKeys.length) return result.join(' ')
+
+  conditionsKeys.forEach((cls) => {
+    const value = conditions[cls]
+    if (value) {
+      result.push(cls)
+    }
   })
 
   return result.join(' ')

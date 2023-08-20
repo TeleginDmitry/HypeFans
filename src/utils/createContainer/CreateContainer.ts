@@ -7,6 +7,8 @@ const createContainer = ({
   mountNode = document.body,
   id
 }: ICreateContainer) => {
+  if (!mountNode) return
+
   if (document.getElementById(id)) return
 
   const portalContainer = document.createElement('div')

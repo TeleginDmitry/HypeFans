@@ -1,5 +1,5 @@
-import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
 import { ICursorPagination } from 'shared/interfaces/pagination.interface'
+import getParams from 'utils/getParams/getParams'
 import { useState } from 'react'
 
 import useFetching from './useFetching'
@@ -58,7 +58,7 @@ const usePaginationCustom = <T, P>(
 
   function saveNextPage(response: ICursorPagination<T[]>) {
     if (response.next) {
-      setOffset(+getValueParamFromQuery(response.next, 'offset'))
+      setOffset(+getParams(response.next)?.['offset'])
       setHasNextPage(true)
     } else {
       setHasNextPage(false)
@@ -67,7 +67,7 @@ const usePaginationCustom = <T, P>(
 
   function savePreviousPage(response: ICursorPagination<T[]>) {
     if (response.previous) {
-      setOffset(+getValueParamFromQuery(response.previous, 'offset'))
+      setOffset(+getParams(response.previous)?.['offset'])
       setHasPreviousPage(true)
     } else {
       setHasPreviousPage(false)

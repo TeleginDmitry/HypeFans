@@ -1,4 +1,4 @@
-import createContainer from 'utils/createContainer/CreateContainer'
+import createContainer from 'utils/createContainer/createContainer'
 import React, { useEffect, useState, useRef } from 'react'
 import { MODAL_CONTAINER_ID } from 'configs/index.config'
 import { useOverflowBody } from 'hooks/useOverflowBody'

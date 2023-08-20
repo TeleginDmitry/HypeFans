@@ -17,7 +17,11 @@ const SelectEmojis = ({ onClickEmoji }: ISelectEmojis) => {
             <ul className={styles.list}>
               {emojis.map((emoji) => {
                 return (
-                  <li className={styles.emoji} onClick={onClickEmoji}>
+                  <li
+                    className={styles.emoji}
+                    onClick={onClickEmoji}
+                    key={emoji}
+                  >
                     {emoji}
                   </li>
                 )

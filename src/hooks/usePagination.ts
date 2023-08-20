@@ -3,8 +3,8 @@ import {
   QueryFunctionContext,
   useInfiniteQuery
 } from '@tanstack/react-query'
-import getValueParamFromQuery from 'utils/getValueParamFromQuery/getValueParamFromQuery'
 import { ICursorPagination } from 'shared/interfaces/pagination.interface'
+import getParams from 'utils/getParams/getParams'
 import { useMemo } from 'react'
 
 type ICallback<T> = (
@@ -31,9 +31,8 @@ const usePagination = <T>(options: IUsePagination<T>) => {
     },
 
     getPreviousPageParam: (lastPage) =>
-      getValueParamFromQuery(lastPage.previous, nameParam),
-    getNextPageParam: (lastPage) =>
-      getValueParamFromQuery(lastPage.next, nameParam),
+      getParams(lastPage.previous)?.[nameParam],
+    getNextPageParam: (lastPage) => getParams(lastPage.next)?.[nameParam],
     keepPreviousData: true,
     ...queryOptions
   })

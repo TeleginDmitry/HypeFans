@@ -1,9 +1,9 @@
 import { ComponentWithAuthorized } from 'hocs/ComponentWithAuthorized'
 import MyAvatar from 'components/ui/avatars/myAvatar/MyAvatar'
+import React, { useCallback, useState, useRef } from 'react'
 import { POST_PARAM } from 'configs/index.config'
-import React, { useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Search, X } from 'icons-hypefans-lib'
+import { useNavigate } from 'react-router-dom'
 
 import SearchPostList from './searchPostList/SearchPostList'
 import styles from './SearchPost.module.scss'
@@ -29,11 +29,11 @@ const SearchPost = ({ changeStateActive }: ISearchPost) => {
     }
   }
 
-  function onClickPost(post_id: number) {
+  const onClickPost = useCallback((post_id: number) => {
     setValueInput('')
 
     navigate(`/?${POST_PARAM}=${post_id}`)
-  }
+  }, [])
 
   return (
     <div className={styles.wrapper}>

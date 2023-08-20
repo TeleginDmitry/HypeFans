@@ -195,11 +195,10 @@ const Swiper = <T,>({
 
           return (
             <div
-              className={cn(
-                [styles.swiper__item],
-                [!!elementClass, elementClass],
-                [isActive, styles.swiper__item_active]
-              )}
+              className={cn([styles.swiper__item], {
+                [styles.swiper__item_active]: isActive,
+                elementClass: elementClass
+              })}
               style={{ flex: `1 0 ${widthElement}px` }}
               ref={ref}
             >

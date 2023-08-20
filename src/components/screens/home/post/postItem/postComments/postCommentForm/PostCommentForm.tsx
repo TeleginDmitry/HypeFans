@@ -108,10 +108,9 @@ const PostCommentForm = ({
     setMedias((state) => state.filter((item) => item.id !== id))
   }
 
-  const classTextarea = cn(
-    [styles.textarea],
-    [inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT, styles.textarea__font]
-  )
+  const classTextarea = cn([styles.textarea], {
+    [styles.textarea__font]: inputValue.length > MAX_LENGTH_LETTER_FOR_INPUT
+  })
 
   return (
     <motion.div

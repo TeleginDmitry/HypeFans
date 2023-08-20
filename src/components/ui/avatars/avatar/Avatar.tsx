@@ -29,11 +29,10 @@ const Avatar = (props: IAvatar) => {
   return (
     <Image
       {...allImageProps}
-      className={cn(
-        [styles.avatar, objectSizeAvatar[size]],
-        [!!to, styles.avatar__active],
-        [!!className, className]
-      )}
+      className={cn([styles.avatar, objectSizeAvatar[size]], {
+        [styles.avatar__active]: to,
+        className: className
+      })}
       onClick={onClickAvatar}
       src={src}
     />
