@@ -5,5 +5,5 @@ HypeFans это социальная сеть, которая представл
 # Как установить 
 
 1. git clone https://github.com/TeleginDmitry/HypeFans.git
-2. npm i
+2. npm install
 
